@@ -7,8 +7,8 @@ let getHome = (req, res) => {
         function (err, results, fields) {
             //console.log(results);
             //for mobile
-            //return res.json(results)
-            return res.render('index.ejs', { dataUser: JSON.stringify(results) })
+            return res.json(results)
+            //return res.render('index.ejs', { dataUser: JSON.stringify(results) })
         }
     );
 }
