@@ -5,14 +5,22 @@ const express = require('express');
 const app = express();
 const http = require('http');
 import configViewengine from './config/viewengine.js';
+import initWebRoute from './route/web.js';
+//connect2MYSQL
+import connection from './config/connect2MySQL.js';
 
-app.use(express.static('public'));
-configViewengine(app);
-app.get('/', (req, res) => {
-    res.render('index.ejs')
-})
 
+//Chay server
 const PORT = process.env.PORT;
 app.listen(PORT || 9000, () => {
     console.log(`Server is running on PORT: ${PORT}`);
 })
+
+//Khai bao cac file static 
+app.use(express.static('public'));
+//Thiet lap view
+configViewengine(app);
+//Cai dat duong dan cho web
+initWebRoute(app);
+
+
