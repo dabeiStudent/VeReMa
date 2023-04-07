@@ -16,7 +16,7 @@ app.listen(PORT || 9000, () => {
     console.log(`Server is running on PORT: ${PORT}`);
 })
 
-//Khai bao cac file static 
+//Khai bao su dung cac file static 
 app.use(express.static('public'));
 //Thiet lap view
 configViewengine(app);
