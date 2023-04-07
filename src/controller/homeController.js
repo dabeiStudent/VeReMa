@@ -6,7 +6,7 @@ let getHome = (req, res) => {
 }
 let getAbout = (req, res) => {
     connection.query(
-        'SELECT * FROM `user`',
+        'SELECT * FROM `nhan_vien`',
         function (err, results, fields) {
             //console.log(results);
             //for mobile
