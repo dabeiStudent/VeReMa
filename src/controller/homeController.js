@@ -2,10 +2,10 @@ import connection from "../config/connect2MySQL";
 
 //Trang chu
 let getHome = async (req, res) => {
-    return await res.render('index.ejs');
+    return res.render('index.ejs');
 }
 let getAbout = async (req, res) => {
-    await connection.query(
+    connection.query(
         'SELECT * FROM nhan_vien',
         function (err, results, fields) {
             //console.log(results);
@@ -16,17 +16,17 @@ let getAbout = async (req, res) => {
     );
 }
 let getContact = async (req, res) => {
-    return await res.render('contact.ejs');
+    return res.render('contact.ejs');
 }
 let getFurni = async (req, res) => {
-    return await res.render('furnitures.ejs');
+    return res.render('furnitures.ejs');
 }
 let getTesti = async (req, res) => {
-    return await res.render('testimonial.ejs');
+    return res.render('testimonial.ejs');
 }
 let getProfile = async (req, res) => {
     const id = req.params.userid;
-    await connection.query(
+    connection.query(
         `SELECT * FROM nhan_vien WHERE ma_nv=  ${id}`,
         function (err, results, fields) {
             console.log(results);
