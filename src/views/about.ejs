@@ -98,22 +98,40 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="titlepage">
-                        <h2>About Our Car Service </h2>
+                        <h2>STAFFS: </h2>
                     </div>
                 </div>
             </div>
             <div class="container">
                 <div class="row">
                     <div class="col-md-10 offset-md-1">
-                        <div class="about_img">
-                            <div class="about_box">
-                                <h3>DATA USERS IN SQLDB: </h3>
-                                <p>
-                                    <%= dataUser %>>
-                                </p>
-                                <a class="read_more">Read More</a>
-                            </div>
-                        </div>
+                        <table id="customers">
+                            <tr>
+                                <th>Mã NV</th>
+                                <th>Tên NV</th>
+                                <th>Giới tính</th>
+                                <th>Action</th>
+                            </tr>
+                            <% for(var i=0; i< dataUser.length;i++) {%>
+                                <tr>
+                                    <td>
+                                        <%= dataUser[i].ma_nv %>
+                                    </td>
+                                    <td>
+                                        <%= dataUser[i].ten_nv %>
+                                    </td>
+                                    <td>
+                                        <%= dataUser[i].gioi_tinh %>
+                                    </td>
+                                    <td>
+                                        <a href="/detail/user/<%= dataUser[i].ma_nv %>" target="_self">Detail</a>
+                                        <button type="button">Update</button>
+                                        <button type="button">Remove</button>
+                                    </td>
+                                </tr>
+                                <% } %>
+                        </table><br><br>
+                        <a class="read_more">Read More</a>
                     </div>
                 </div>
             </div>

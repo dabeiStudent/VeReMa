@@ -1,5 +1,5 @@
 const express = require('express');
-import { getHome, getAbout, getContact, getFurni, getTesti } from '../controller/homeController';
+import { getHome, getAbout, getContact, getFurni, getTesti, getProfile } from '../controller/homeController';
 let router = express.Router();
 
 const initWebRoute = (app) => {
@@ -9,6 +9,7 @@ const initWebRoute = (app) => {
     router.get('/contact.ejs', getContact);
     router.get('/furnitures.ejs', getFurni);
     router.get('/testimonial.ejs', getTesti);
+    router.get('/detail/user/:userid', getProfile);
     return app.use('/', router);
 }
 
