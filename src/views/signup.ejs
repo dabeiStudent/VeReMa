@@ -1,0 +1,65 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+</head>
+
+<body>
+    <form action="/signup.ejs" method="post">
+        <div class="signup-container">
+            <div>SIGNUP HERE</div>
+            <div>
+                <label>Username: </label>
+                <input type="text" name="userName" />
+            </div>
+            <div>
+                <label>Password: </label>
+                <input type="password" name="passWord" />
+            </div>
+            <div>
+                <button type="submit" class="btnSubmit">Submit</button>
+            </div>
+        </div>
+    </form>
+    <div>
+        ALL account here
+    </div>
+    <div>
+        <table id="account">
+            <tr>
+                <th>Mã TK</th>
+                <th>Tên TK</th>
+                <th>Mật khẩu</th>
+                <th>Hình</th>
+                <th>Role</th>
+            </tr>
+            <% for(var i=0; i< allAccounts.length;i++) {%>
+                <tr>
+                    <td>
+                        <%= allAccounts[i].ma_tk %>
+                    </td>
+                    <td>
+                        <%= allAccounts[i].ten_tk %>
+                    </td>
+                    <td>
+                        <%= allAccounts[i].mat_khau %>
+                    </td>
+                    <td>
+                        <%= allAccounts[i].image %>
+                    </td>
+                    <td>
+                        <%= allAccounts[i].quyen %>
+                    </td>
+                </tr>
+                <% } %>
+        </table>
+    </div>
+    <div>
+
+    </div>
+</body>
+
+</html>

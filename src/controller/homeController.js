@@ -34,7 +34,32 @@ let getProfile = async (req, res) => {
         }
     )
 }
+let getSignup = async (req, res) => {
+    connection.query(
+        `SELECT * FROM ds_tai_khoan`,
+        function (err, results, fields) {
+            console.log(results);
+            return res.render('signup.ejs', { allAccounts: results });
+        }
+    )
+}
+let postSignup = async (req, res) => {
+    console.log(req.body);
+    const username = req.body.userName;
+    const password = req.body.passWord;
+    connection.query(
+        'Insert into ds_tai_khoan (ten_tk, mat_khau, image, quyen) values (?,?,?,?)', [username, password, "", 'admin'],
+        function (err, results, fields) {
+            if (results) {
+                return res.redirect('/signup.ejs');
+            }
+            else {
+                return res.send(err);
+            }
+        }
+    )
 
+}
 module.exports = {
-    getHome, getAbout, getContact, getFurni, getTesti, getProfile
+    getHome, getAbout, getContact, getFurni, getTesti, getProfile, getSignup, postSignup
 }
