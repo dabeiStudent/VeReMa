@@ -176,7 +176,7 @@ let getSignin = async (req, res) => {
         `SELECT * FROM ds_tai_khoan`,
         function (err, results, fields) {
             //console.log(results);
-            return res.render('signin.ejs', { allAccounts: results });
+            return res.render('signin.ejs', { allAccounts: results, err: null });
         }
     )
 }
@@ -211,10 +211,10 @@ let postSignin = async (req, res, next) => {
     if (!username || !password)
         return res.status(400).send({ success: false, message: 'Missing username or password' });
     try {
-        const validUser = connection.query(
+        connection.query(
             'Select ma_tk, ten_tk, mat_khau from ds_tai_khoan where ten_tk = ?', [username],
             async function (err, results, fields) {
-                if (results != null) {
+                if (results.length > 0) {
                     const validPassword = await argon2.verify(results[0].mat_khau, password);
                     if (validPassword) {
                         const token = jwt.sign({ id: results[0].ma_tk, name: results[0].ten_tk }, 'mk');
@@ -227,15 +227,15 @@ let postSignin = async (req, res, next) => {
                         //return res.json("dn thanh cong")
                         return res.redirect('/index.ejs');
                     } else {
-                        return res.send("MK khong dung")
+                        return res.render("signin.ejs", { err: "Password sai" });
                     }
                 } else {
-                    return res.send("TK khong ton tai");
+                    return res.render("signin.ejs", { err: "Tai khoan khong ton tai" });
                 }
             }
         )
     } catch (err) {
-        return res.status(500).send({ success: false, message: err.message });
+        return res.render("signin.ejs", { err: "Loi server" });
     }
 }
 let postLogout = async (req, res, next) => {
