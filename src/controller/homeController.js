@@ -217,10 +217,10 @@ let postSignin = async (req, res, next) => {
                 if (results != null) {
                     const validPassword = await argon2.verify(results[0].mat_khau, password);
                     if (validPassword) {
-                        const token = jwt.sign({ id: results[0].ma_tk }, 'mk');
+                        const token = jwt.sign({ id: results[0].ma_tk, name: results[0].ten_tk }, 'mk');
                         //check token co luu id tk chua
                         //const rs = jwt.verify(token, 'mk')
-                        //console.log(rs.id);
+                        //console.log(rs.name, rs.id);
                         res.cookie("token", token, {
                             httpOnly: true, expires: new Date(Date.now() + 1000 * 60 * 15)
                         })
