@@ -23,7 +23,6 @@
 @import url(font-awesome.min.css);
 @import url(meanmenu.css);
 @import url(owl.carousel.min.css);
-@import url(swiper.min.css);
 @import url(slick.css);
 @import url(jquery.fancybox.min.css);
 @import url(jquery-ui.css);
@@ -1029,7 +1028,6 @@ ul.social_icon li a:hover {
 body {
      background-color: #e8f5ff;
      font-family: Arial;
-     overflow: hidden;
 }
 
 /* NavbarTop */
@@ -1214,6 +1212,90 @@ hr {
 
 .fa-snapchat:hover {
      color: #fffb01 !important;
+}
+
+
+.signup-box {
+     width: 360px;
+     height: 620px;
+     margin-top: 120px;
+     margin-left: auto;
+     margin-right: auto;
+     background-color: #04AA6D;
+     border-radius: 30px;
+}
+
+.signup-box h1 {
+     font-family: cursive;
+     text-align: center;
+     padding-top: 15px;
+}
+
+.signup-box h4 {
+     margin-top: 20px;
+     margin-left: 10px;
+}
+
+.signup-box form {
+     width: 300px;
+     margin-left: 20px;
+}
+
+.signup-box form input[type="text"] {
+     width: 100%;
+     padding: 7px;
+     margin-left: 10px;
+     border: none;
+     border: 1px solid rgb(20, 16, 16);
+     border-radius: 6px;
+     outline: none
+}
+
+.signup-box form input[type="password"] {
+     width: 100%;
+     padding: 7px;
+     margin-left: 10px;
+     border: none;
+     border: 1px solid rgb(20, 16, 16);
+     border-radius: 6px;
+     outline: none
+}
+
+.signup-box form input[type="submit"] {
+     width: 200px;
+     height: 35px;
+     margin-left: 60px;
+     border: none;
+     background-color: black;
+     color: white;
+     font-size: 18px;
+}
+
+.signup-box a {
+     font-size: 28px;
+     margin-left: 6px;
+     margin-top: 6px;
+}
+
+.signup-box p {
+     text-align: center;
+     padding-top: 20px;
+     font-size: 15px;
+}
+
+.signup-box .text {
+     text-align: center;
+     margin-left: 20px;
+}
+
+.signup-box .text a {
+     text-align: center;
+     margin-left: auto;
+     font-size: 20px;
+}
+
+.signup-box .input-box-signin {
+     margin-top: 3px;
 }
 
 

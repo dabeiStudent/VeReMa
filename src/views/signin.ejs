@@ -13,8 +13,8 @@
 <body>
     <div class="signup-box">
         <a class="fa fa-home" href="/index.ejs"></a>
-        <h1>Registration</h1>
-        <form action="/signup.ejs" method="post">
+        <h1>Sign in</h1>
+        <form action="/signin.ejs" method="post">
             <div>
                 <h4><strong>Enter your username</strong></h4>
             </div>
@@ -22,25 +22,22 @@
                 <input type="text" name="userName" required>
             </div><br>
             <div>
-                <h4><strong>Set your password</strong></h4>
+                <h4><strong>Enter your password</strong></h4>
             </div>
             <div class="input-box">
                 <input type="password" name="passWord" required>
-            </div><br>
-            <div>
-                <h4><strong>Confirm your password</strong></h4>
-            </div>
-            <div class="input-box">
-                <input type="password" name="repassWord" required>
-            </div><br><br><br>
-            <div class="input-box button">
-                <input type="submit" value="Register Now">
+            </div><br><br><br><br><br><br><br>
+            <div class="input-box-signin">
+                <input type="submit" value="Login">
             </div><br>
             <div class="text">
-                <h3>Already have an account?</h3>
-                <strong><a href="/signin.ejs">Login now</a></strong>
+                <h3>Dont have account?</h3>
+                <strong><a href="/signup.ejs">Signup now</a></strong>
             </div>
         </form>
+    </div>
+    <div>
+        <img src="../public/images/logoN12.png">
     </div>
 </body>
 

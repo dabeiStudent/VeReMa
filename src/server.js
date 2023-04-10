@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const http = require('http');
+const cookieParser = require('cookie-parser')
 import configViewengine from './config/viewengine.js';
 import initWebRoute from './route/web.js';
 //connect2MYSQL
