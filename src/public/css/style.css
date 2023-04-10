@@ -1297,6 +1297,12 @@ hr {
      margin-top: 3px;
 }
 
+.signup-box .error {
+     margin-left: 30px;
+     margin-right: 30px;
+     font-size: 20px;
+     background-color: rgb(254, 168, 46);
+}
 
 /* End */
 

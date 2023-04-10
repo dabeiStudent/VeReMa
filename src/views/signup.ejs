@@ -14,6 +14,11 @@
     <div class="signup-box">
         <a class="fa fa-home" href="/index.ejs"></a>
         <h1>Registration</h1>
+        <div class="error">
+            <% if(err !=null) {%>
+                <%= err %>
+                    <%}%>
+        </div>
         <form action="/signup.ejs" method="post">
             <div>
                 <h4><strong>Enter your username</strong></h4>
@@ -32,9 +37,9 @@
             </div>
             <div class="input-box">
                 <input type="password" name="repassWord" required>
-            </div><br><br><br>
+            </div><br><br>
             <div class="input-box button">
-                <input type="submit" value="Register Now">
+                <input type="submit" value="Next">
             </div><br>
             <div class="text">
                 <h3>Already have an account?</h3>

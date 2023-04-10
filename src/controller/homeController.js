@@ -161,13 +161,8 @@ let getSignup = async (req, res) => {
     connection.query(
         `SELECT * FROM ds_tai_khoan`,
         function (err, results, fields) {
-            if (results) {
-                //console.log(results);
-                return res.render('signup.ejs', { allAccounts: results });
-            }
-            else {
-                return res.send(err);
-            }
+            //console.log(results);
+            return res.render('signup.ejs', { allAccounts: results, err: null });
         }
     )
 }
@@ -196,12 +191,12 @@ let postSignup = async (req, res) => {
                     return res.redirect('/signin.ejs');
                 }
                 else {
-                    return res.send(err);
+                    return res.render("signup.ejs", { err: "Tai khoan da ton tai" });
                 }
             }
         )
     } else {
-        return res.send("Mật khẩu không khớp");
+        return res.render("signup.ejs", { err: "Mat khau khong khop" });
     }
 }
 /* xu li signup dien luon thong tin ca nhan cua user luon */
