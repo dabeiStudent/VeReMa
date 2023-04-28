@@ -13,6 +13,7 @@ let getHome = async (req, res) => {
                 if (results) {
                     var name = results[0].ten_tk;
                     var role = results[0].quyen;
+                    //console.log(role);
                     return res.render('index.ejs', { token: token, name: name, role: role });
                 } else {
                     return res.send(err);
@@ -128,17 +129,24 @@ let accountProfile = async (req, res) => {
     var token = req.cookies["token"];
     if (token) {
         const rs = jwt.verify(token, 'mk');
-        connection.query(
-            'Select * from nhan_vien where nhan_vien.id_account = ?', [rs.id],
-            function (err, results, fields) {
-                if (results) {
-                    return res.render('detail.ejs', { detailUser: results });
+        const role = rs.role;
+        console.log('role: ', role);
+        if (role == "kh") {
+            connection.query(
+                'Select * from khach_hang where khach_hang.ten_tk = ?', [rs.name],
+                function (err, results, fields) {
+                    if (results) {
+                        return res.render('detail.ejs', { detailUser: results });
+                    }
+                    else {
+                        return res.render('detail.ejs', { detailUser: null });
+                    }
                 }
-                else {
-                    return res.render('detail.ejs', { detailUser: null });
-                }
-            }
-        )
+            )
+        }
+        if (role == "admin") {
+            return res.redirect('/index.ejs');
+        }
     } else {
         return res.send('Da DN dau ma doi xem profile');
     }
@@ -178,6 +186,9 @@ let getSignin = async (req, res) => {
 
 let postSignup = async (req, res) => {
     console.log(req.body);
+    const fullname = req.body.fullName;
+    const address = req.body.adDress;
+    const phonenumber = req.body.phoneNumber;
     const username = req.body.userName;
     const password = req.body.passWord;
     const repassword = req.body.repassWord;
@@ -188,13 +199,23 @@ let postSignup = async (req, res) => {
             'Insert into ds_tai_khoan (ten_tk, mat_khau, image, quyen) values (?,?,?,?)', [username, hashpass, "", 'kh'],
             function (err, results, fields) {
                 if (results) {
-                    return res.redirect('/signin.ejs');
+                    connection.query(
+                        'Insert into khach_hang (ten_kh,dia_chi,sdt, ten_tk) values(?,?,?,?)', [fullname, address, phonenumber, username],
+                        function (err, results, fields) {
+                            if (results) {
+                                return res.redirect('/signin.ejs');
+                            } else {
+                                return res.render("signup.ejs", { err: "Tai khoan da ton tai 21" });
+                            }
+                        }
+                    )
                 }
                 else {
-                    return res.render("signup.ejs", { err: "Tai khoan da ton tai" });
+                    return res.send(err);
                 }
             }
         )
+
     } else {
         return res.render("signup.ejs", { err: "Mat khau khong khop" });
     }
@@ -207,15 +228,15 @@ let postSignin = async (req, res, next) => {
         return res.status(400).send({ success: false, message: 'Missing username or password' });
     try {
         connection.query(
-            'Select ma_tk, ten_tk, mat_khau from ds_tai_khoan where ten_tk = ?', [username],
+            'Select ma_tk, ten_tk,mat_khau, quyen from ds_tai_khoan where ten_tk = ?', [username],
             async function (err, results, fields) {
                 if (results.length > 0) {
                     const validPassword = await argon2.verify(results[0].mat_khau, password);
                     if (validPassword) {
-                        const token = jwt.sign({ id: results[0].ma_tk, name: results[0].ten_tk }, 'mk');
+                        const token = jwt.sign({ id: results[0].ma_tk, name: results[0].ten_tk, role: results[0].quyen }, 'mk');
                         //check token co luu id tk chua
-                        //const rs = jwt.verify(token, 'mk')
-                        //console.log(rs.name, rs.id);
+                        const rs = jwt.verify(token, 'mk')
+                        console.log(rs.name, rs.id, rs.role);
                         res.cookie("token", token, {
                             httpOnly: true, expires: new Date(Date.now() + 1000 * 60 * 15)
                         })
