@@ -67,30 +67,33 @@
                                     <li class="nav-item active">
                                         <a class="nav-link" href="furnitures.ejs">Furnitures</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="testimonial.ejs">Testimonial</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="contact.ejs">Contact Us</a>
-                                    </li>
-                                    <%if(token !=null ){%>
-                                        <li class="nav-item d_none">
-                                            <a class="nav-link" href="logout.ejs"><i
-                                                    class="fa fa-user-circle padd_right"
-                                                    aria-hidden="true"></i>Logout</a>
-                                            <a class="nav-link" href="/profile.ejs"><i>Hello, <%=name%> (<%=role%>)</a>
+                                    <%if(role=="admin"){%>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="manager.ejs">Manager</a>
                                         </li>
-                                        <%}else{%>
-                                            <li class="nav-item d_none">
-                                                <a class="nav-link" href="signin.ejs"><i
-                                                        class="fa fa-user-circle padd_right"
-                                                        aria-hidden="true"></i>Login</a>
+                                        <%}%>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="contact.ejs">Contact Us</a>
                                             </li>
-                                            <%}%>
+                                            <%if(token !=null ){%>
                                                 <li class="nav-item d_none">
-                                                    <a class="nav-link" href="#"><i class="fa fa-search"
-                                                            aria-hidden="true"></i></a>
+                                                    <a class="nav-link" href="logout.ejs"><i
+                                                            class="fa fa-user-circle padd_right"
+                                                            aria-hidden="true"></i>Logout</a>
+                                                    <a class="nav-link" href="/yourprofile.ejs"><i>Hello, <%=name%> (
+                                                                <%=role%>)</a>
                                                 </li>
+                                                <%}else{%>
+                                                    <li class="nav-item d_none">
+                                                        <a class="nav-link" href="signin.ejs"><i
+                                                                class="fa fa-user-circle padd_right"
+                                                                aria-hidden="true"></i>Login</a>
+                                                    </li>
+                                                    <%}%>
+                                                        <li class="nav-item d_none">
+                                                            <a class="nav-link" href="#"><i class="fa fa-search"
+                                                                    aria-hidden="true"></i></a>
+                                                        </li>
                                 </ul>
                             </div>
                         </nav>

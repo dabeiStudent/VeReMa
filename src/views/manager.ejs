@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>About</title>
+    <title>Manager</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -61,14 +61,14 @@
                                     <li class="nav-item ">
                                         <a class="nav-link" href="index.ejs"> Home </a>
                                     </li>
-                                    <li class="nav-item active">
+                                    <li class="nav-item">
                                         <a class="nav-link" href="about.ejs">About</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="furnitures.ejs">Furnitures</a>
                                     </li>
                                     <%if(role=="admin"){%>
-                                        <li class="nav-item">
+                                        <li class="nav-item active">
                                             <a class="nav-link" href="manager.ejs">Manager</a>
                                         </li>
                                         <%}%>
@@ -104,83 +104,74 @@
     </header>
     <!-- end header inner -->
     <!-- end header -->
-    <!-- banner -->
-
-
-
-    <!--  footer -->
-    <footer id="contact">
-        <div class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="titlepage">
-                            <h2>Contact Us</h2>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <ul class="location_icon">
-                            <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a> Locatins</li>
-                            <li><a href="#"><i class="fa fa-volume-control-phone" aria-hidden="true"></i></a> +71
-                                9087654321</li>
-                            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>demo@gmail.com</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <form id="request" class="main_form">
-                            <div class="row">
-                                <div class="col-md-12 ">
-                                    <input class="contactus" placeholder="Full Name" type="type" name="Full Name">
-                                </div>
-                                <div class="col-md-12">
-                                    <input class="contactus" placeholder="Email" type="type" name="Email">
-                                </div>
-                                <div class="col-md-12">
-                                    <input class="contactus" placeholder="Phone Number" type="type" name="Phone Number">
-                                </div>
-                                <div class="col-md-12">
-                                    <textarea class="textarea" placeholder="Message" type="type"
-                                        Message="Name">Message </textarea>
-                                </div>
-                                <div class="col-sm-col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <button class="send_btn">Send</button>
-                                </div>
-                                <div class="col-sm-col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <ul class="social_icon">
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="map">
-                            <figure><img src="images/map.jpg" alt="#" /></figure>
-                        </div>
-                        <form class="bottom_form">
-                            <h3>Newsletter</h3>
-                            <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
-                            <button class="sub_btn">subscribe</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="copyright">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p>Copyright 2019 All Right Reserved By <a href="https://html.design/"> Free html
-                                    Templates</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- All account -->
+    <br>
+    <div class="classify">
+        <h1>TÀI KHOẢN NHÂN VIÊN</h1>
+        <table id="customers">
+            <tr>
+                <th>Mã TK</th>
+                <th>Tên TK</th>
+                <th>Mật Khẩu</th>
+                <th>Quyền</th>
+                <th>Xử Lí</th>
+            </tr>
+            <% for(var i=0; i< dataUser.length;i++) {%>
+                <%if(dataUser[i].quyen=="admin" ){%>
+                    <tr>
+                        <td>
+                            <%= dataUser[i].ma_tk %>
+                        </td>
+                        <td>
+                            <%= dataUser[i].ten_tk %>
+                        </td>
+                        <td>
+                            <%= dataUser[i].mat_khau %>
+                        </td>
+                        <td>
+                            <%= dataUser[i].quyen %>
+                        </td>
+                        <td>
+                            <a href="/detail/user/'<%= dataUser[i].ten_tk %>'" target="_self">Detail</a>
+                            <button type="button">Update</button>
+                            <button type="button">Remove</button>
+                        </td>
+                    </tr>
+                    <% }} %>
+        </table><br><br>
+        <h1>TÀI KHOẢN KHÁCH</h1>>
+        <table id="customers">
+            <tr>
+                <th>Mã TK</th>
+                <th>Tên TK</th>
+                <th>Mật Khẩu</th>
+                <th>Quyền</th>
+                <th>Xử Lí</th>
+            </tr>
+            <% for(var i=0; i< dataUser.length;i++) {%>
+                <%if(dataUser[i].quyen=="kh" ){%>
+                    <tr>
+                        <td>
+                            <%= dataUser[i].ma_tk %>
+                        </td>
+                        <td>
+                            <%= dataUser[i].ten_tk %>
+                        </td>
+                        <td>
+                            <%= dataUser[i].mat_khau %>
+                        </td>
+                        <td>
+                            <%= dataUser[i].quyen %>
+                        </td>
+                        <td>
+                            <a href="/detail/user/'<%= dataUser[i].ten_tk %>'" target="_self">Detail</a>
+                            <button type="button">Update</button>
+                            <button type="button">Remove</button>
+                        </td>
+                    </tr>
+                    <% }} %>
+        </table><br><br>
+    </div>
     <!-- end footer -->
     <!-- Javascript files-->
     <script src="js/jquery.min.js"></script>

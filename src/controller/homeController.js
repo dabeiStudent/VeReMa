@@ -21,7 +21,7 @@ let getHome = async (req, res) => {
             }
         )
     } else {
-        return res.render('index.ejs', { token: null })
+        return res.render('index.ejs', { token: null, role: null })
     }
 }
 let getAbout = async (req, res) => {
@@ -105,24 +105,35 @@ let getFurni = async (req, res) => {
         return res.render('furnitures.ejs', { token: null })
     }
 }
-let getTesti = async (req, res) => {
+let getMana = async (req, res) => {
     var token = req.cookies["token"];
-    if (token != null) {
-        const rs = jwt.verify(token, 'mk');
+    const rs = jwt.verify(token, 'mk');
+    if (token != null && rs.role == "admin") {
+        let dataUser;
+        connection.query(
+            'SELECT * FROM ds_tai_khoan',
+            function (err, results, fields) {
+                //console.log(results);
+                //for mobile
+                //return res.json(results)
+                dataUser = results;
+                //console.log(dataUser)
+            }
+        );
         connection.query(
             'Select ten_tk, quyen from ds_tai_khoan where ma_tk = ?', [rs.id],
             function (err, results, fields) {
                 if (results) {
                     var name = results[0].ten_tk;
                     var role = results[0].quyen;
-                    return res.render('testimonial.ejs', { token: token, name: name, role: role });
+                    return res.render('manager.ejs', { token: token, name: name, role: role, dataUser: dataUser });
                 } else {
                     return res.send(err);
                 }
             }
         )
     } else {
-        return res.render('testimonial.ejs', { token: null })
+        return res.send('AI CHO XEM');
     }
 }
 let accountProfile = async (req, res) => {
@@ -130,13 +141,13 @@ let accountProfile = async (req, res) => {
     if (token) {
         const rs = jwt.verify(token, 'mk');
         const role = rs.role;
-        console.log('role: ', role);
+        //console.log('role: ', role);
         if (role == "kh") {
             connection.query(
                 'Select * from khach_hang where khach_hang.ten_tk = ?', [rs.name],
                 function (err, results, fields) {
                     if (results) {
-                        return res.render('detail.ejs', { detailUser: results });
+                        return res.render('detail.ejs', { detailUser: results, role: role });
                     }
                     else {
                         return res.render('detail.ejs', { detailUser: null });
@@ -145,26 +156,58 @@ let accountProfile = async (req, res) => {
             )
         }
         if (role == "admin") {
-            return res.redirect('/index.ejs');
+            connection.query(
+                'Select * from nhan_vien where nhan_vien.ten_tk = ?', [rs.name],
+                function (err, results, fields) {
+                    if (results) {
+                        return res.render('detail.ejs', { detailUser: results, role: role });
+                    }
+                    else {
+                        return res.render('detail.ejs', { detailUser: null });
+                    }
+                }
+            )
         }
     } else {
         return res.send('Da DN dau ma doi xem profile');
     }
 }
 let getProfile = async (req, res) => {
-    const id = req.params.userid;
-    connection.query(
-        `SELECT * FROM nhan_vien WHERE ma_nv=  ${id}`,
-        function (err, results, fields) {
-            if (results) {
-                return res.render('detail.ejs', { detailUser: results });
+    const name = req.params.username;
+    var token = req.cookies["token"];
+    const rs = jwt.verify(token, 'mk');
+    if (rs.role == "admin") {
+        connection.query(
+            `SELECT * FROM nhan_vien WHERE ten_tk=  ${name}`,
+            function (err, results, fields) {
+                if (results.length > 0) {
+                    console.log('admin')
+                    console.log(results);
+                    return res.render('profile.ejs', { detailUser: results, type: "admin" });
+                }
+                else {
+                    connection.query(
+                        `SELECT * FROM khach_hang WHERE ten_tk=  ${name}`,
+                        function (err, results, fields) {
+                            if (results) {
+                                console.log('kh')
+                                console.log(results);
+                                return res.render('profile.ejs', { detailUser: results, type: "kh" });
+                            }
+                            else {
+                                return res.send(err);
+                            }
+                        }
+                    )
+                }
             }
-            else {
-                return res.send(err);
-            }
-        }
-    )
+        )
+    } else {
+        return res.send('AI CHO XEM MA XEM');
+    }
 }
+
+
 let getSignup = async (req, res) => {
     connection.query(
         `SELECT * FROM ds_tai_khoan`,
@@ -238,7 +281,7 @@ let postSignin = async (req, res, next) => {
                         const rs = jwt.verify(token, 'mk')
                         console.log(rs.name, rs.id, rs.role);
                         res.cookie("token", token, {
-                            httpOnly: true, expires: new Date(Date.now() + 1000 * 60 * 15)
+                            httpOnly: true, expires: new Date(Date.now() + 1000 * 36000)
                         })
                         //return res.json("dn thanh cong")
                         return res.redirect('/index.ejs');
@@ -258,8 +301,11 @@ let postLogout = async (req, res, next) => {
     res.clearCookie("token");
     //res.end();
     //return res.re("log out thanh cong");
-    return res.render('index.ejs', { token: null });
+    return res.render('index.ejs', { token: null, role: null });
+}
+let chatApp = async (req, res, next) => {
+    return res.render('chat.ejs');
 }
 module.exports = {
-    getHome, getAbout, getContact, getFurni, getTesti, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile
+    getHome, getAbout, getContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp
 }
