@@ -993,7 +993,7 @@ ul.social_icon li a:hover {
      font-family: Arial, Helvetica, sans-serif;
      border-collapse: collapse;
      padding-top: 30px;
-     margin-left: 400px;
+     margin-left: auto;
      margin-right: auto;
 }
 
@@ -1100,11 +1100,12 @@ body {
      border-radius: 18px;
      box-shadow: 1px 1px 8px 0 grey;
      width: 760px;
-     height: 420px;
+     height: 480px;
      margin-top: 20px;
      margin-bottom: 20px;
      padding: 20px 0 20px 50px;
 }
+
 
 .main .card table {
      border: none;
@@ -1112,6 +1113,51 @@ body {
      height: 270px;
      width: 80%;
 }
+
+.main .card img {
+     display: block;
+     margin-left: 270px;
+     margin-right: auto;
+     width: 100px;
+     height: 100px;
+     border-radius: 10%;
+}
+
+.main .card1 {
+     background-color: #fff;
+     border-radius: 18px;
+     box-shadow: 1px 1px 8px 0 grey;
+     width: 760px;
+     height: 420px;
+     margin-top: 20px;
+     margin-bottom: 20px;
+     padding: 20px 0 20px 50px;
+}
+
+.main .card1 table {
+     border: none;
+     font-size: 16px;
+     height: 270px;
+     width: 80%;
+}
+
+.main .card1 form input[type="submit"] {
+     text-align: center;
+     width: 100px;
+     height: 50px;
+     margin-top: 50px;
+     margin-left: 520px;
+}
+
+.main .card1 td {
+     width: 270px;
+}
+
+.main .card1 form input[type="text"] {
+     width: 350px;
+     padding-left: 10px;
+}
+
 
 .edit {
      position: absolute;

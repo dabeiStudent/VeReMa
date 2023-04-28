@@ -49,6 +49,7 @@
         <div class="card">
             <div class="card-body">
                 <%if(role=="kh" ) {%>
+                    <img src="<%= img[0].image %>" height="100px" width="100px" alt="Avatar">
                     <table>
                         <tbody>
                             <tr>
@@ -89,6 +90,7 @@
                         </tbody>
                     </table>
                     <%} else if(role=="admin" ){%>
+                        <img src="<%= img[0].image %>" height="100px" width="100px" alt="Avatar">
                         <table>
                             <tbody>
                                 <tr>
@@ -134,7 +136,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Ngày gia nhập công ty</td>
+                                    <td>Ngày gia nhập</td>
                                     <td>:</td>
                                     <td>
                                         <%= detailUser[0].ngay_gianhap %>
@@ -157,6 +159,11 @@
                             </tbody>
                         </table>
                         <%}%>
+                            <form method="post" enctype="multipart/form-data" action="/upload.ejs">
+                                <input type="file" name="img">
+                                <input type="text" value="<%= detailUser[0].ten_tk %>" name="tenTk" readonly>
+                                <input type="submit">
+                            </form>
             </div>
         </div>
     </div>

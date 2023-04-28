@@ -1,6 +1,9 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
-import { getHome, getAbout, getContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate } from '../controller/homeController';
+//upload anh
+const multer = require('multer');
+const upload = multer({ dest: './src/public/images/' });
+import { getHome, getAbout, getContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg } from '../controller/homeController';
 let router = express.Router();
 router.use(cookieParser());
 const initWebRoute = (app) => {
@@ -13,6 +16,7 @@ const initWebRoute = (app) => {
     router.get('/detail/user/:username', getProfile);
     router.get('/update/user/:username', updateProfile);
     router.post('/update.ejs', postUpdate);
+    router.post('/upload.ejs', upload.single('img'), uploadImg);
     router.get('/signup.ejs', getSignup);
     router.get('/signin.ejs', getSignin);
     router.get('/logout.ejs', postLogout);

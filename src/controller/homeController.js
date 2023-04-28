@@ -1,7 +1,6 @@
 import connection from "../config/connect2MySQL";
 const argon2 = require('argon2');
-const jwt = require('jsonwebtoken')
-
+const jwt = require('jsonwebtoken');
 //Trang chu
 let getHome = async (req, res) => {
     var token = req.cookies["token"];
@@ -147,7 +146,11 @@ let accountProfile = async (req, res) => {
                 'Select * from khach_hang where khach_hang.ten_tk = ?', [rs.name],
                 function (err, results, fields) {
                     if (results) {
-                        return res.render('detail.ejs', { detailUser: results, role: role });
+                        var detailUser = results
+                        connection.query('Select image from ds_tai_khoan where ten_tk = ?', [rs.name],
+                            function (err, results) {
+                                return res.render('detail.ejs', { detailUser: detailUser, img: results, role: role });
+                            })
                     }
                     else {
                         return res.render('detail.ejs', { detailUser: null });
@@ -160,7 +163,11 @@ let accountProfile = async (req, res) => {
                 'Select * from nhan_vien where nhan_vien.ten_tk = ?', [rs.name],
                 function (err, results, fields) {
                     if (results) {
-                        return res.render('detail.ejs', { detailUser: results, role: role });
+                        var detailUser = results
+                        connection.query('Select image from ds_tai_khoan where ten_tk = ?', [rs.name],
+                            function (err, results) {
+                                return res.render('detail.ejs', { detailUser: detailUser, img: results, role: role });
+                            })
                     }
                     else {
                         return res.render('detail.ejs', { detailUser: null });
@@ -172,6 +179,19 @@ let accountProfile = async (req, res) => {
         return res.send('Da DN dau ma doi xem profile');
     }
 }
+let uploadImg = async (req, res) => {
+    var img = req.file.filename;
+    var tenTk = req.body.tenTk;
+    connection.query(`update ds_tai_khoan set image = "/images/${img}" where ten_tk= "${tenTk}"`,
+        function (err, results) {
+            if (results) {
+                return res.redirect('/yourprofile.ejs');
+            }
+            else {
+                return res.send(err);
+            }
+        })
+}
 let getProfile = async (req, res) => {
     const name = req.params.username;
     var token = req.cookies["token"];
@@ -181,18 +201,23 @@ let getProfile = async (req, res) => {
             `SELECT * FROM nhan_vien WHERE ten_tk=  ${name}`,
             function (err, results, fields) {
                 if (results.length > 0) {
-                    console.log('admin')
-                    console.log(results);
-                    return res.render('profile.ejs', { detailUser: results, type: "admin" });
+                    let detailUser = results;
+                    connection.query(`Select image from ds_tai_khoan where ten_tk = ${name}`,
+                        function (err, results, fields) {
+                            return res.render('profile.ejs', { detailUser: detailUser, img: results, type: "admin" });
+                        })
+                    //return res.render('profile.ejs', { detailUser: results, type: "admin" });
                 }
                 else {
                     connection.query(
                         `SELECT * FROM khach_hang WHERE ten_tk=  ${name}`,
                         function (err, results, fields) {
                             if (results) {
-                                // console.log('kh')
-                                // console.log(results);
-                                return res.render('profile.ejs', { detailUser: results, type: "kh" });
+                                let detailUser = results;
+                                connection.query(`Select image from ds_tai_khoan where ten_tk = ${name}`,
+                                    function (err, results, fields) {
+                                        return res.render('profile.ejs', { detailUser: detailUser, img: results, type: "kh" });
+                                    })
                             }
                             else {
                                 return res.send(err);
@@ -414,5 +439,5 @@ let chatApp = async (req, res, next) => {
 }
 
 module.exports = {
-    getHome, getAbout, getContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate
+    getHome, getAbout, getContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg
 }
