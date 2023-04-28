@@ -45,7 +45,7 @@ let getAbout = async (req, res) => {
                     var role = results[0].quyen;
                     return res.render('about.ejs', { token: token, name: name, role: role, dataUser: dataUser });
                 } else {
-                    return res.send(err);
+                    return res.render('about.ejs', { token: null, role: null });
                 }
             }
         )
@@ -59,7 +59,7 @@ let getAbout = async (req, res) => {
                 //for mobile
                 //return res.json(results)
                 dataUser = results;
-                return res.render('about.ejs', { token: null, dataUser: dataUser });
+                return res.render('about.ejs', { token: null, dataUser: dataUser, role: null });
             }
         );
     }
@@ -81,7 +81,7 @@ let getContact = async (req, res) => {
             }
         )
     } else {
-        return res.render('contact.ejs', { token: null })
+        return res.render('contact.ejs', { token: null, role: null })
     }
 }
 let getFurni = async (req, res) => {
@@ -101,7 +101,7 @@ let getFurni = async (req, res) => {
             }
         )
     } else {
-        return res.render('furnitures.ejs', { token: null })
+        return res.render('furnitures.ejs', { token: null, role: null })
     }
 }
 let getMana = async (req, res) => {
