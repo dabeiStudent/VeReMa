@@ -190,8 +190,8 @@ let getProfile = async (req, res) => {
                         `SELECT * FROM khach_hang WHERE ten_tk=  ${name}`,
                         function (err, results, fields) {
                             if (results) {
-                                console.log('kh')
-                                console.log(results);
+                                // console.log('kh')
+                                // console.log(results);
                                 return res.render('profile.ejs', { detailUser: results, type: "kh" });
                             }
                             else {
@@ -206,8 +206,114 @@ let getProfile = async (req, res) => {
         return res.send('AI CHO XEM MA XEM');
     }
 }
-
-
+let updateProfile = async (req, res, next) => {
+    var token = req.cookies["token"];
+    var name = req.params.username;
+    const rs = jwt.verify(token, 'mk');
+    if (token) {
+        connection.query(
+            `SELECT * FROM nhan_vien WHERE ten_tk=  ${name}`,
+            function (err, results, fields) {
+                if (results.length > 0) {
+                    return res.render('updateprofile.ejs', { detailUser: results, type: "nv" });
+                }
+                else {
+                    connection.query(
+                        `SELECT * FROM khach_hang WHERE ten_tk=  ${name}`,
+                        function (err, results, fields) {
+                            if (results) {
+                                return res.render('updateprofile.ejs', { detailUser: results, type: "kh" });
+                            }
+                            else {
+                                return res.send(err);
+                            }
+                        }
+                    )
+                }
+            }
+        )
+    } else {
+        return res.render('index.ejs', { token: null, role: null });
+    }
+}
+let postUpdate = async (req, res) => {
+    var token = req.cookies["token"];
+    const rs = jwt.verify(token, 'mk');
+    var makh = req.body.maKh;
+    var tenkh = req.body.tenKh;
+    var diachi = req.body.diaChi;
+    var sdt = req.body.soDt;
+    var luong = req.body.luong;
+    var quyen = req.body.chucVu;
+    var tentk = req.body.tenTk;
+    if (quyen == "kh") {
+        connection.query('UPDATE khach_hang SET ten_kh = ?, dia_chi = ?, sdt = ? WHERE ma_kh = ?', [tenkh, diachi, sdt, makh],
+            function (err, results, fields) {
+                if (results) {
+                    let dataUser;
+                    connection.query(
+                        'SELECT * FROM ds_tai_khoan',
+                        function (err, results, fields) {
+                            //console.log(results);
+                            //for mobile
+                            //return res.json(results)
+                            dataUser = results;
+                            //console.log(dataUser)
+                        }
+                    );
+                    connection.query(
+                        'Select ten_tk, quyen from ds_tai_khoan where ma_tk = ?', [rs.id],
+                        function (err, results, fields) {
+                            if (results) {
+                                var name = results[0].ten_tk;
+                                var role = results[0].quyen;
+                                return res.render('manager.ejs', { token: token, name: name, role: role, dataUser: dataUser });
+                            } else {
+                                return res.send(err);
+                            }
+                        }
+                    )
+                }
+                else {
+                    return res.send(err);
+                }
+            }
+        )
+    } else {
+        connection.query('UPDATE nhan_vien SET ten_nv = ?, dia_chi = ?, sdt = ?, luong = ? WHERE ma_nv = ?', [tenkh, diachi, sdt, luong, makh],
+            function (err, results, fields) {
+                if (results) {
+                    let dataUser;
+                    connection.query(
+                        'SELECT * FROM ds_tai_khoan',
+                        function (err, results, fields) {
+                            //console.log(results);
+                            //for mobile
+                            //return res.json(results)
+                            dataUser = results;
+                            //console.log(dataUser)
+                        }
+                    );
+                    connection.query(
+                        'Select ten_tk, quyen from ds_tai_khoan where ma_tk = ?', [rs.id],
+                        function (err, results, fields) {
+                            if (results) {
+                                var name = results[0].ten_tk;
+                                var role = results[0].quyen;
+                                return res.render('manager.ejs', { token: token, name: name, role: role, dataUser: dataUser });
+                            } else {
+                                return res.send(err);
+                            }
+                        }
+                    )
+                }
+                else {
+                    return res.send(err);
+                }
+            }
+        )
+    }
+}
 let getSignup = async (req, res) => {
     connection.query(
         `SELECT * FROM ds_tai_khoan`,
@@ -254,7 +360,7 @@ let postSignup = async (req, res) => {
                     )
                 }
                 else {
-                    return res.send(err);
+                    return res.render('signup.ejs', { err: 'Ten dang nhap da ton tai' });
                 }
             }
         )
@@ -263,12 +369,12 @@ let postSignup = async (req, res) => {
         return res.render("signup.ejs", { err: "Mat khau khong khop" });
     }
 }
-/* xu li signup dien luon thong tin ca nhan cua user luon */
+
 let postSignin = async (req, res, next) => {
     var username = req.body.userName;
     var password = req.body.passWord;
     if (!username || !password)
-        return res.status(400).send({ success: false, message: 'Missing username or password' });
+        return res.render("signin.ejs", { err: "Thieu username/password" });
     try {
         connection.query(
             'Select ma_tk, ten_tk,mat_khau, quyen from ds_tai_khoan where ten_tk = ?', [username],
@@ -281,7 +387,7 @@ let postSignin = async (req, res, next) => {
                         const rs = jwt.verify(token, 'mk')
                         console.log(rs.name, rs.id, rs.role);
                         res.cookie("token", token, {
-                            httpOnly: true, expires: new Date(Date.now() + 1000 * 36000)
+                            httpOnly: true, expires: new Date(Date.now() + 1000 * 3600)
                         })
                         //return res.json("dn thanh cong")
                         return res.redirect('/index.ejs');
@@ -306,6 +412,7 @@ let postLogout = async (req, res, next) => {
 let chatApp = async (req, res, next) => {
     return res.render('chat.ejs');
 }
+
 module.exports = {
-    getHome, getAbout, getContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp
+    getHome, getAbout, getContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate
 }

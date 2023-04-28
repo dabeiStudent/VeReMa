@@ -1,0 +1,130 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="main">
+        <h2>THÔNG TIN CÁ NHÂN</h2>
+        <div class="card">
+            <div class="card-body">
+                <%if(type=="kh" ){%>
+                    <form action="/update.ejs" method="post">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Mã khách hàng</td>
+                                    <td>:</td>
+                                    <td>
+                                        <input type="text" value="<%=detailUser[0].ma_kh %>" name="maKh" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Tên khách hàng</td>
+                                    <td>:</td>
+                                    <td>
+                                        <input type="text" name="tenKh">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Địa chỉ</td>
+                                    <td>:</td>
+                                    <td>
+                                        <input type="text" name="diaChi">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Số điện thoại</td>
+                                    <td>:</td>
+                                    <td>
+                                        <input type="text" name="soDt">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Tên tài khoản</td>
+                                    <td>:</td>
+                                    <td>
+                                        <input type="text" value="<%= detailUser[0].ten_tk %>" name="tenTk" readonly>
+                                    </td>
+                                <tr>
+                                    <td>Chức vụ</td>
+                                    <td>:</td>
+                                    <td>
+                                        <input type="text" value="<%=type %>" name="chucVu" readonly>
+                                    </td>
+                                </tr>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <input type="submit" value="Update">
+                    </form>
+                    <%}else{%>
+                        <form action="/update.ejs" method="post">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>Mã nhân viên</td>
+                                        <td>:</td>
+                                        <td>
+                                            <input type="text" value="<%=detailUser[0].ma_nv %>" name="maKh" readonly>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tên nhân viên</td>
+                                        <td>:</td>
+                                        <td>
+                                            <input type="text" name="tenKh">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Địa chỉ</td>
+                                        <td>:</td>
+                                        <td>
+                                            <input type="text" name="diaChi">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Số điện thoại</td>
+                                        <td>:</td>
+                                        <td>
+                                            <input type="text" name="soDt">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lương</td>
+                                        <td>:</td>
+                                        <td>
+                                            <input type="text" name="luong">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tên tài khoản</td>
+                                        <td>:</td>
+                                        <td>
+                                            <input type="text" value="<%= detailUser[0].ten_tk %>" name="tenTk"
+                                                readonly>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Chức vụ</td>
+                                        <td>:</td>
+                                        <td>
+                                            <input type="text" value="<%=type %>" name="chucVu" readonly>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <input type="submit" value="Update">
+                        </form>
+                        <%}%>
+            </div>
+        </div>
+    </div>
+    <!-- End -->
+</body>
+
+</html>

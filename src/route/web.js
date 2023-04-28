@@ -1,6 +1,6 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
-import { getHome, getAbout, getContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp } from '../controller/homeController';
+import { getHome, getAbout, getContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate } from '../controller/homeController';
 let router = express.Router();
 router.use(cookieParser());
 const initWebRoute = (app) => {
@@ -11,6 +11,8 @@ const initWebRoute = (app) => {
     router.get('/furnitures.ejs', getFurni);
     router.get('/manager.ejs', getMana);
     router.get('/detail/user/:username', getProfile);
+    router.get('/update/user/:username', updateProfile);
+    router.post('/update.ejs', postUpdate);
     router.get('/signup.ejs', getSignup);
     router.get('/signin.ejs', getSignin);
     router.get('/logout.ejs', postLogout);
