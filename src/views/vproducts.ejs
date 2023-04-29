@@ -1,18 +1,11 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- basic -->
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- mobile metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <!-- site metas -->
-    <title>Manager</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+
     <!-- bootstrap css -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- style css -->
@@ -27,14 +20,9 @@
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
         media="screen">
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
-<!-- body -->
 
-<body class="main-layout">
-    <!-- header -->
+<body>
     <header>
         <!-- header inner -->
         <div class="header">
@@ -64,11 +52,11 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="about.ejs">About</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item active">
                                         <a class="nav-link" href="furnitures.ejs">Products</a>
                                     </li>
                                     <%if(role=="admin"){%>
-                                        <li class="nav-item active">
+                                        <li class="nav-item">
                                             <a class="nav-link" href="manager.ejs">Manager</a>
                                         </li>
                                         <%}%>
@@ -104,83 +92,29 @@
     </header>
     <!-- end header inner -->
     <!-- end header -->
-    <!-- All account -->
-    <br>
-    <div class="classify">
-        <h1>TÀI KHOẢN NHÂN VIÊN</h1>
-        <table id="customers">
-            <tr>
-                <th>Mã TK</th>
-                <th>Tên TK</th>
-                <th>Mật Khẩu</th>
-                <th>Quyền</th>
-                <th>Xử Lí</th>
-            </tr>
-            <% for(var i=0; i< dataUser.length;i++) {%>
-                <%if(dataUser[i].quyen=="admin" ){%>
-                    <tr>
-                        <td>
-                            <%= dataUser[i].ma_tk %>
-                        </td>
-                        <td>
-                            <%= dataUser[i].ten_tk %>
-                        </td>
-                        <td>
-                            <%= dataUser[i].mat_khau %>
-                        </td>
-                        <td>
-                            <%= dataUser[i].quyen %>
-                        </td>
-                        <td>
-                            <a href="/detail/user/'<%= dataUser[i].ten_tk %>'" target="_self">Detail</a>
-                            <a href="/update/user/'<%= dataUser[i].ten_tk %>'" target="_self">Update</a>
-                            <button type="button">Remove</button>
-                        </td>
-                    </tr>
-                    <% }} %>
-        </table><br><br>
-        <h1>TÀI KHOẢN KHÁCH</h1>>
-        <table id="customers">
-            <tr>
-                <th>Mã TK</th>
-                <th>Tên TK</th>
-                <th>Mật Khẩu</th>
-                <th>Quyền</th>
-                <th>Xử Lí</th>
-            </tr>
-            <% for(var i=0; i< dataUser.length;i++) {%>
-                <%if(dataUser[i].quyen=="kh" ){%>
-                    <tr>
-                        <td>
-                            <%= dataUser[i].ma_tk %>
-                        </td>
-                        <td>
-                            <%= dataUser[i].ten_tk %>
-                        </td>
-                        <td>
-                            <%= dataUser[i].mat_khau %>
-                        </td>
-                        <td>
-                            <%= dataUser[i].quyen %>
-                        </td>
-                        <td>
-                            <a href="/detail/user/'<%= dataUser[i].ten_tk %>'" target="_self">Detail</a>
-                            <a href="/update/user/'<%= dataUser[i].ten_tk %>'" target="_self">Update</a>
-                            <button type="button">Remove</button>
-                        </td>
-                    </tr>
-                    <% }} %>
-        </table><br><br>
+    <div class="row mb-5">
+        <% for(let i=0; i< detailProduct.length; i++){%>
+            <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+                <div class="block-4 text-center border">
+                    <figure class="block-4-image">
+                        <a href="#"><img src="<%=detailProduct[i].image%>" alt="Image placeholder" class="img-fluid"
+                                width="100px" height="100px"></a>
+                    </figure>
+                    <div class="block-4-text p-4">
+                        <h3>
+                            <a href="#">
+                                <%=detailProduct[i].ten_pt%>
+                            </a>
+                        </h3>
+                        <p class="text-primary font-weight-bold">
+                            <%=detailProduct[i].don_gia%> VND
+                        </p>
+                        <a href="#">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+            <%}%>
     </div>
-    <!-- end footer -->
-    <!-- Javascript files-->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery-3.0.0.min.js"></script>
-    <!-- sidebar -->
-    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="js/custom.js"></script>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 import connection from "../config/connect2MySQL";
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
-//Trang chu
+//Xu li cac trang hien thi
 let getHome = async (req, res) => {
     var token = req.cookies["token"];
     if (token != null) {
@@ -20,7 +20,7 @@ let getHome = async (req, res) => {
             }
         )
     } else {
-        return res.render('index.ejs', { token: null, role: null })
+        return res.render('index.ejs', { token: null, role: null, name: null })
     }
 }
 let getAbout = async (req, res) => {
@@ -45,7 +45,7 @@ let getAbout = async (req, res) => {
                     var role = results[0].quyen;
                     return res.render('about.ejs', { token: token, name: name, role: role, dataUser: dataUser });
                 } else {
-                    return res.render('about.ejs', { token: null, role: null });
+                    return res.render('about.ejs', { token: null, role: null, name: null });
                 }
             }
         )
@@ -81,7 +81,7 @@ let getContact = async (req, res) => {
             }
         )
     } else {
-        return res.render('contact.ejs', { token: null, role: null })
+        return res.render('contact.ejs', { token: null, role: null, name: null })
     }
 }
 let getFurni = async (req, res) => {
@@ -101,7 +101,7 @@ let getFurni = async (req, res) => {
             }
         )
     } else {
-        return res.render('furnitures.ejs', { token: null, role: null })
+        return res.render('furnitures.ejs', { token: null, role: null, name: null })
     }
 }
 let getMana = async (req, res) => {
@@ -135,6 +135,45 @@ let getMana = async (req, res) => {
         return res.send('AI CHO XEM');
     }
 }
+
+let getVproduct = async (req, res) => {
+    var token = req.cookies["token"];
+    const all = [];
+    if (token != null) {
+        const rs = jwt.verify(token, 'mk');
+        connection.query(
+            'Select ten_tk, quyen from ds_tai_khoan where ma_tk = ?', [rs.id],
+            function (err, results, fields) {
+                if (results) {
+                    var name = results[0].ten_tk;
+                    var role = results[0].quyen;
+                    connection.query('Select * from ds_phu_tung', function (err, results, fields) {
+                        if (results) {
+                            for (let i = 0; i < results.length; i++) {
+                                all[i] = results[i];
+                            }
+                            return res.render('vproducts.ejs', { token: token, name: name, role: role, detailProduct: all });
+                        }
+                    })
+                } else {
+                    return res.send(err);
+                }
+            }
+        )
+    } else {
+        connection.query('Select * from ds_phu_tung', function (err, results, fields) {
+            if (results) {
+                for (let i = 0; i < results.length; i++) {
+                    all[i] = results[i];
+                }
+                return res.render('vproducts.ejs', { token: null, name: null, role: null, detailProduct: all });
+            }
+        })
+    }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Xu li cac van de ve tai khoan...
 let accountProfile = async (req, res) => {
     var token = req.cookies["token"];
     if (token) {
@@ -434,10 +473,13 @@ let postLogout = async (req, res, next) => {
     //return res.re("log out thanh cong");
     return res.render('index.ejs', { token: null, role: null });
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 let chatApp = async (req, res, next) => {
     return res.render('chat.ejs');
 }
 
 module.exports = {
-    getHome, getAbout, getContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg
+    getHome, getAbout, getContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
+    getVproduct
 }
