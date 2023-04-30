@@ -160,7 +160,7 @@
                         </table>
                         <%}%>
                             <form method="post" enctype="multipart/form-data" action="/upload.ejs">
-                                <input type="file" name="img">
+                                <input type="file" name="img" required>
                                 <input type="text" value="<%= detailUser[0].ten_tk %>" name="tenTk" readonly>
                                 <input type="submit">
                             </form>

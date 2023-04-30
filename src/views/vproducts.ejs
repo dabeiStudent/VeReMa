@@ -92,6 +92,16 @@
     </header>
     <!-- end header inner -->
     <!-- end header -->
+    <!--  -->
+    <div class="addproduct">
+        <div class="rounded p-4 rounded mb-4">
+            <%if(role=="admin"){%>
+                <div id="addp">
+                    <strong><a href="/addprod.ejs">Add new item</a></strong>
+                </div>
+                <%}%>
+        </div>
+    </div>
     <div class="row mb-5">
         <% for(let i=0; i< detailProduct.length; i++){%>
             <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
@@ -109,12 +119,12 @@
                         <p class="text-primary font-weight-bold">
                             <%=detailProduct[i].don_gia%> VND
                         </p>
-                        <a href="#">Add to cart</a>
                     </div>
                 </div>
             </div>
             <%}%>
     </div>
+
 </body>
 
 </html>

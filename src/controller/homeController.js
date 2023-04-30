@@ -6,19 +6,7 @@ let getHome = async (req, res) => {
     var token = req.cookies["token"];
     if (token != null) {
         const rs = jwt.verify(token, 'mk');
-        connection.query(
-            'Select ten_tk, quyen from ds_tai_khoan where ma_tk = ?', [rs.id],
-            function (err, results, fields) {
-                if (results) {
-                    var name = results[0].ten_tk;
-                    var role = results[0].quyen;
-                    //console.log(role);
-                    return res.render('index.ejs', { token: token, name: name, role: role });
-                } else {
-                    return res.send(err);
-                }
-            }
-        )
+        return res.render('index.ejs', { token: token, name: rs.name, role: rs.role });
     } else {
         return res.render('index.ejs', { token: null, role: null, name: null })
     }
@@ -68,18 +56,7 @@ let getContact = async (req, res) => {
     var token = req.cookies["token"];
     if (token != null) {
         const rs = jwt.verify(token, 'mk');
-        connection.query(
-            'Select ten_tk, quyen from ds_tai_khoan where ma_tk = ?', [rs.id],
-            function (err, results, fields) {
-                if (results) {
-                    var name = results[0].ten_tk;
-                    var role = results[0].quyen;
-                    return res.render('contact.ejs', { token: token, name: name, role: role });
-                } else {
-                    return res.send(err);
-                }
-            }
-        )
+        return res.render('contact.ejs', { token: token, name: rs.name, role: rs.role });
     } else {
         return res.render('contact.ejs', { token: null, role: null, name: null })
     }
@@ -88,18 +65,7 @@ let getFurni = async (req, res) => {
     var token = req.cookies["token"];
     if (token != null) {
         const rs = jwt.verify(token, 'mk');
-        connection.query(
-            'Select ten_tk, quyen from ds_tai_khoan where ma_tk = ?', [rs.id],
-            function (err, results, fields) {
-                if (results) {
-                    var name = results[0].ten_tk;
-                    var role = results[0].quyen;
-                    return res.render('furnitures.ejs', { token: token, name: name, role: role });
-                } else {
-                    return res.send(err);
-                }
-            }
-        )
+        return res.render('furnitures.ejs', { token: token, name: rs.name, role: rs.role });
     } else {
         return res.render('furnitures.ejs', { token: null, role: null, name: null })
     }
@@ -116,19 +82,8 @@ let getMana = async (req, res) => {
                 //for mobile
                 //return res.json(results)
                 dataUser = results;
+                return res.render('manager.ejs', { token: token, name: rs.name, role: rs.role, dataUser: dataUser });
                 //console.log(dataUser)
-            }
-        );
-        connection.query(
-            'Select ten_tk, quyen from ds_tai_khoan where ma_tk = ?', [rs.id],
-            function (err, results, fields) {
-                if (results) {
-                    var name = results[0].ten_tk;
-                    var role = results[0].quyen;
-                    return res.render('manager.ejs', { token: token, name: name, role: role, dataUser: dataUser });
-                } else {
-                    return res.send(err);
-                }
             }
         )
     } else {
@@ -322,19 +277,8 @@ let postUpdate = async (req, res) => {
                             //for mobile
                             //return res.json(results)
                             dataUser = results;
+                            return res.render('manager.ejs', { token: token, name: rs.name, role: rs.role, dataUser: dataUser });
                             //console.log(dataUser)
-                        }
-                    );
-                    connection.query(
-                        'Select ten_tk, quyen from ds_tai_khoan where ma_tk = ?', [rs.id],
-                        function (err, results, fields) {
-                            if (results) {
-                                var name = results[0].ten_tk;
-                                var role = results[0].quyen;
-                                return res.render('manager.ejs', { token: token, name: name, role: role, dataUser: dataUser });
-                            } else {
-                                return res.send(err);
-                            }
                         }
                     )
                 }
@@ -355,19 +299,8 @@ let postUpdate = async (req, res) => {
                             //for mobile
                             //return res.json(results)
                             dataUser = results;
+                            return res.render('manager.ejs', { token: token, name: rs.name, role: rs.role, dataUser: dataUser });
                             //console.log(dataUser)
-                        }
-                    );
-                    connection.query(
-                        'Select ten_tk, quyen from ds_tai_khoan where ma_tk = ?', [rs.id],
-                        function (err, results, fields) {
-                            if (results) {
-                                var name = results[0].ten_tk;
-                                var role = results[0].quyen;
-                                return res.render('manager.ejs', { token: token, name: name, role: role, dataUser: dataUser });
-                            } else {
-                                return res.send(err);
-                            }
                         }
                     )
                 }
@@ -475,11 +408,36 @@ let postLogout = async (req, res, next) => {
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Xử lí các vấn đề về dịch vụ
+let getAddprod = async (req, res, next) => {
+    var token = req.cookies["token"];
+    const rs = jwt.verify(token, 'mk');
+    if (token != null && rs.role == "admin") {
+        return res.render('addprod.ejs', { token: token, name: rs.name, role: rs.role, message: null });
+    } else {
+        return res.redirect('/');
+    }
+}
+let postAddprod = async (req, res, next) => {
+    const ten = req.body.tenPt;
+    const gia = req.body.donGia;
+    const sl = req.body.soLuong;
+    const img = req.file.filename;
+    const uimg = `/images/${img}`;
+    const mt = req.body.mieuTa;
+    connection.query('Insert into ds_phu_tung (ten_pt,don_gia,so_luong,image,description) values (?,?,?,?,?)', [ten, gia, sl, uimg, mt],
+        function (err, results, fields) {
+            if (results) {
+                return res.render('addprod.ejs', { message: 'Thanh Cong', role: 'admin' });
+            }
+        })
+}
+
 let chatApp = async (req, res, next) => {
     return res.render('chat.ejs');
 }
 
 module.exports = {
     getHome, getAbout, getContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
-    getVproduct
+    getVproduct, getAddprod, postAddprod
 }

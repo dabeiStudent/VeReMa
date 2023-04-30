@@ -1385,6 +1385,24 @@ body {
      margin-left: 390px;
 }
 
+#addp a {
+     color: black;
+     text-align: center;
+     background: green;
+     width: 400px;
+     padding: 15px;
+     font-style: normal;
+}
+
+.addproduct {
+     float: right
+}
+
+.main .card1 #mess {
+     font-size: 15px;
+     background: lightgreen;
+}
+
 /* End */
 
 /** end footer **/
