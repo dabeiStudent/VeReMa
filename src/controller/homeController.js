@@ -228,8 +228,8 @@ let getProfile = async (req, res) => {
 let updateProfile = async (req, res, next) => {
     var token = req.cookies["token"];
     var name = req.params.username;
-    const rs = jwt.verify(token, 'mk');
     if (token) {
+        const rs = jwt.verify(token, 'mk');
         connection.query(
             `SELECT * FROM nhan_vien WHERE ten_tk=  ${name}`,
             function (err, results, fields) {
@@ -411,8 +411,11 @@ let postLogout = async (req, res, next) => {
 // Xử lí các vấn đề về dịch vụ
 let getAddprod = async (req, res, next) => {
     var token = req.cookies["token"];
-    const rs = jwt.verify(token, 'mk');
-    if (token != null && rs.role == "admin") {
+    if (token != null) {
+        const rs = jwt.verify(token, 'mk');
+        if (rs.role != "admin") {
+            return res.redirect('/');
+        }
         return res.render('addprod.ejs', { token: token, name: rs.name, role: rs.role, message: null });
     } else {
         return res.redirect('/');
@@ -429,9 +432,41 @@ let postAddprod = async (req, res, next) => {
         function (err, results, fields) {
             if (results) {
                 return res.render('addprod.ejs', { message: 'Thanh Cong', role: 'admin' });
+            } else {
+                return res.render('addprod.ejs', { mess: 'Loi', role: 'admin' });
             }
         })
 }
+let getUpdateprod = async (req, res, next) => {
+    var token = req.cookies["token"];
+    if (token != null) {
+        const rs = jwt.verify(token, 'mk');
+        if (rs.role != "admin") {
+            return res.redirect('/');
+        }
+        return res.render('updateprod.ejs', { token: token, name: rs.name, role: rs.role, mess: null });
+    } else {
+        return res.redirect('/');
+    }
+}
+
+let postUpdateprod = async (req, res, next) => {
+    const ten = req.body.tenPt;
+    const gia = req.body.donGia;
+    const sl = req.body.soLuong;
+    const img = req.file.filename;
+    const uimg = `/images/${img}`;
+    const mt = req.body.mieuTa;
+    connection.query('Update ds_phu_tung set don_gia =?, so_luong =?, image= ?, description =? where ten_pt=?', [gia, sl, uimg, mt, ten],
+        function (err, results, fields) {
+            if (results) {
+                return res.render('updateprod.ejs', { mess: 'Thanh Cong', role: 'admin' });
+            } else {
+                return res.render('updateprod.ejs', { mess: 'Loi', role: 'admin' });
+            }
+        })
+}
+
 
 let chatApp = async (req, res, next) => {
     return res.render('chat.ejs');
@@ -439,5 +474,5 @@ let chatApp = async (req, res, next) => {
 
 module.exports = {
     getHome, getAbout, getContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
-    getVproduct, getAddprod, postAddprod
+    getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod
 }

@@ -101,6 +101,13 @@
                 </div>
                 <%}%>
         </div>
+        <div class="rounded p-4 rounded mb-4">
+            <%if(role=="admin"){%>
+                <div id="addp">
+                    <strong><a href="/updateprod.ejs">Update item</a></strong>
+                </div>
+                <%}%>
+        </div>
     </div>
     <div class="row mb-5">
         <% for(let i=0; i< detailProduct.length; i++){%>

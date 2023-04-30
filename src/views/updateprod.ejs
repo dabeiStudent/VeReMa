@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Product</title>
+    <title>Update item</title>
+
     <!-- Custom Css -->
     <link rel="stylesheet" href="/css/style.css">
 
@@ -16,7 +17,7 @@
     <!-- Navbar top -->
     <div class="navbar-top">
         <div class="title">
-            <h1>Add new item</h1>
+            <h1>Update item</h1>
         </div>
         <!-- Navbar -->
         <ul>
@@ -40,17 +41,17 @@
     </div>
     <!-- End -->
     <div class="main">
-        <h2>Thêm sản phẩm mới</h2>
+        <h2>CẬP NHẬT PHỤ TÙNG</h2>
         <div class="card1">
             <div class="card-body">
                 <strong><a id="mess">
-                        <%= message %>
+                        <%= mess %>
                     </a></strong>
-                <form action="/addprod.ejs" method="post" enctype="multipart/form-data">
+                <form action="/updateprod.ejs" method="post" enctype="multipart/form-data">
                     <table>
                         <tbody>
                             <tr>
-                                <td>Tên </td>
+                                <td>Nhập tên phụ tùng cần cập nhật</td>
                                 <td>:</td>
                                 <td>
                                     <input type="text" name="tenPt" required>
@@ -81,12 +82,12 @@
                                 <td>Miêu tả</td>
                                 <td>:</td>
                                 <td>
-                                    <input type=" text" name="mieuTa" required>
+                                    <input type="text" name="mieuTa" required>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <input type="submit" value="Add">
+                    <input type="submit" value="Update">
                 </form>
             </div>
         </div>
