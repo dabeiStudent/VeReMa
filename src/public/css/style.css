@@ -916,7 +916,9 @@ ul.social_icon li a:hover {
 }
 
 .map {
-     padding-top: 60px;
+     padding-top: 10px;
+     padding-left: 290px;
+     padding-bottom: 30px;
 }
 
 .map figure {
@@ -926,6 +928,19 @@ ul.social_icon li a:hover {
 .map figure img {
      width: 100%;
 }
+
+.map1 {
+     padding-top: 10px;
+}
+
+.map1 figure {
+     margin: 0;
+}
+
+.map1 figure img {
+     width: 100%;
+}
+
 
 .bottom_form h3 {
      font-weight: 600;
@@ -1401,6 +1416,47 @@ body {
 .main .card1 #mess {
      font-size: 15px;
      background: lightgreen;
+}
+
+#copyright p {
+     color: #000;
+}
+
+#imap {
+     background-color: whitesmoke;
+     text-align: center;
+}
+
+#imap a {
+     font-size: x-large;
+     font-weight: bold;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#imap h2 {
+     font-family: fantasy;
+     font-size: 60px;
+     font-style: normal;
+}
+
+#footermap a {
+     font-size: 100;
+}
+
+.map iframe {
+     text-align: center;
+}
+
+#contactmess {
+     background-color: #00ff00;
+     background-size: 90px 90px;
+}
+
+#contactmess a {
+     font-size: 20px;
+     font-family: fantasy;
+     border-radius: 5%;
+     color: #000;
 }
 
 /* End */

@@ -58,20 +58,20 @@
                             </button>
                             <div class="collapse navbar-collapse" id="navbarsExample04">
                                 <ul class="navbar-nav mr-auto">
-                                    <li class="nav-item ">
-                                        <a class="nav-link" href="index.ejs"> Home </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="about.ejs">About</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="furnitures.ejs">Products</a>
-                                    </li>
                                     <%if(role=="admin"){%>
                                         <li class="nav-item active">
                                             <a class="nav-link" href="manager.ejs">Manager</a>
                                         </li>
                                         <%}%>
+                                            <li class="nav-item ">
+                                                <a class="nav-link" href="index.ejs"> Home </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="about.ejs">About</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="furnitures.ejs">Products</a>
+                                            </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" href="contact.ejs">Contact Us</a>
                                             </li>
@@ -172,6 +172,19 @@
                     <% }} %>
         </table><br><br>
     </div>
+    <!--  footer -->
+    <footer id="contact">
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12" id="copyright">
+                        <p>Copyright 2023 All Right Reserved By VeReMa</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </footer>
     <!-- end footer -->
     <!-- Javascript files-->
     <script src="js/jquery.min.js"></script>

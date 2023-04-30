@@ -58,20 +58,20 @@
                             </button>
                             <div class="collapse navbar-collapse" id="navbarsExample04">
                                 <ul class="navbar-nav mr-auto">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="index.ejs"> Home </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="about.ejs">About</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="furnitures.ejs">Products</a>
-                                    </li>
                                     <%if(role=="admin"){%>
                                         <li class="nav-item">
                                             <a class="nav-link" href="manager.ejs">Manager</a>
                                         </li>
                                         <%}%>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="index.ejs"> Home </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="about.ejs">About</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="furnitures.ejs">Products</a>
+                                            </li>
                                             <li class="nav-item active">
                                                 <a class="nav-link" href="contact.ejs">Contact Us</a>
                                             </li>
@@ -117,52 +117,46 @@
                     </div>
                     <div class="col-md-8">
                         <ul class="location_icon">
-                            <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a> Locatins</li>
-                            <li><a href="#"><i class="fa fa-volume-control-phone" aria-hidden="true"></i></a> +71
-                                9087654321</li>
-                            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>demo@gmail.com</li>
+                            <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a> Locations</li>
+                            <li><a href="#"><i class="fa fa-volume-control-phone" aria-hidden="true"></i></a> +123456789
+                            </li>
+                            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>verema2023@gmail.com
+                            </li>
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        <form id="request" class="main_form">
+                        <form id="request" class="main_form" method="post" action="/contact.ejs">
                             <div class="row">
                                 <div class="col-md-12 ">
-                                    <input class="contactus" placeholder="Full Name" type="type" name="Full Name">
+                                    <input class="contactus" placeholder="Full Name" type="type" name="ten" required>
                                 </div>
                                 <div class="col-md-12">
-                                    <input class="contactus" placeholder="Email" type="type" name="Email">
+                                    <input class="contactus" placeholder="Email" type="type" name="email" required>
                                 </div>
                                 <div class="col-md-12">
-                                    <input class="contactus" placeholder="Phone Number" type="type" name="Phone Number">
+                                    <input class="contactus" placeholder="Phone Number" type="type" name="sdt" required>
                                 </div>
                                 <div class="col-md-12">
-                                    <textarea class="textarea" placeholder="Message" type="type"
-                                        Message="Name">Message </textarea>
+                                    <input class="contactus" placeholder="Message" type="type" name="mess" required>
+                                </div>
+                                <div class="col-md-12" id="contactmess">
+                                    <a>
+                                        <%= message %>
+                                    </a>
                                 </div>
                                 <div class="col-sm-col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <button class="send_btn">Send</button>
-                                </div>
-                                <div class="col-sm-col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <ul class="social_icon">
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    </ul>
+                                    <button class="send_btn" type="submit">Send</button>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="col-md-6">
-                        <div class="map">
-                            <figure><img src="images/map.jpg" alt="#" /></figure>
+                        <div class="map1">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.4853986111225!2d106.76933817580802!3d10.850637657818902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752763f23816ab%3A0x282f711441b6916f!2sHCMC%20University%20of%20Technology%20and%20Education!5e0!3m2!1sen!2s!4v1682879654397!5m2!1sen!2s"
+                                width="500" height="500" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
-                        <form class="bottom_form">
-                            <h3>Newsletter</h3>
-                            <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
-                            <button class="sub_btn">subscribe</button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -170,8 +164,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <p>Copyright 2019 All Right Reserved By <a href="https://html.design/"> Free html
-                                    Templates</a></p>
+                            <p>Copyright 2023 All Right Reserved By VeReMa</p>
                         </div>
                     </div>
                 </div>

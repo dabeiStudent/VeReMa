@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const upload = multer({ dest: './src/public/images/' });
 import {
-    getHome, getAbout, getContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
+    getHome, getAbout, getContact, postContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
     getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod
 } from '../controller/homeController';
 let router = express.Router();
@@ -14,6 +14,7 @@ const initWebRoute = (app) => {
     router.get('/index.ejs', getHome);
     router.get('/about.ejs', getAbout);
     router.get('/contact.ejs', getContact);
+    router.post('/contact.ejs', postContact);
     router.get('/furnitures.ejs', getFurni);
     router.get('/manager.ejs', getMana);
     router.get('/vproducts.ejs', getVproduct);

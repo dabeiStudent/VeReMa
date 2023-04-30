@@ -63,20 +63,20 @@
                             </button>
                             <div class="collapse navbar-collapse" id="navbarsExample04">
                                 <ul class="navbar-nav mr-auto">
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="index.ejs"> Home </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="about.ejs">About</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="furnitures.ejs">Products</a>
-                                    </li>
                                     <%if(role=="admin"){%>
                                         <li class="nav-item">
                                             <a class="nav-link" href="manager.ejs">Manager</a>
                                         </li>
                                         <%}%>
+                                            <li class="nav-item active">
+                                                <a class="nav-link" href="index.ejs"> Home </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="about.ejs">About</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="furnitures.ejs">Products</a>
+                                            </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" href="contact.ejs">Contact Us</a>
                                             </li>
@@ -125,12 +125,33 @@
                                 <div class="col-md-6">
                                     <div class="text-bg">
                                         <h1>Welcome</h1>
-                                        <span>car repair services</span>
-                                        <p>It is a long established fact that a reader will be distracted by the
-                                            readable content of a page when looking at its layout. The point of using
-                                            Lorem Ipsum is that it has a more-or-less normal distribution of letters,
+                                        <span>Vehicle Repair Service</span>
+                                        <p>We are here to save your car !!!
                                         </p>
-                                        <a href="#">More Info </a> <a href="#">Contact Us</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text_img">
+                                        <figure><img src="images/car.png" alt="#" />
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" carousel-item">
+                    <div class="container-fluid">
+                        <div class="carousel-caption">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="text-bg">
+                                        <h1>Accessories</h1>
+                                        <span>We got you!</span>
+                                        <p>Are you looking for something that could make your
+                                            car better?
+                                        </p>
+                                        <a href="/furnitures.ejs">Go to shop </a>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -148,59 +169,11 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="text-bg">
-                                        <h1>Welcome</h1>
-                                        <span>car repair services</span>
-                                        <p>It is a long established fact that a reader will be distracted by the
-                                            readable content of a page when looking at its layout. The point of using
-                                            Lorem Ipsum is that it has a more-or-less normal distribution of letters,
+                                        <h1>Location</h1>
+                                        <span>To see our workshop </span>
+                                        <p>Click button below to see map
                                         </p>
-                                        <a href="#">More Info </a> <a href="#">Contact Us</a>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="text_img">
-                                        <figure><img src="images/car.png" alt="#" /></figure>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="container-fluid">
-                        <div class="carousel-caption">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="text-bg">
-                                        <h1>Welcome</h1>
-                                        <span>car repair services</span>
-                                        <p>It is a long established fact that a reader will be distracted by the
-                                            readable content of a page when looking at its layout. The point of using
-                                            Lorem Ipsum is that it has a more-or-less normal distribution of letters,
-                                        </p>
-                                        <a href="#">More Info </a> <a href="#">Contact Us</a>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="text_img">
-                                        <figure><img src="images/car.png" alt="#" /></figure>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="container-fluid">
-                        <div class="carousel-caption">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="text-bg">
-                                        <h1>Welcome</h1>
-                                        <span>car repair services</span>
-                                        <p>
-                                        </p>
-                                        <a href="#">More Info </a> <a href="#">Contact Us</a>
+                                        <a href="/about.ejs">Our location </a>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -223,131 +196,16 @@
     </section>
     <!-- end banner -->
     <!-- three_box -->
-    <div class="three_box">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="box_text">
-                        <h3>AUTO DIAGNOSE</h3>
-                        <i><img src="images/thr.png" alt="#" /></i>
-                        <p>ipsum dolor sit amet, consectetur adipiscing elit, sed d veniam, adipiscing elit, sed d
-                            veniam</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="box_text">
-                        <h3>AUTO DIAGNOSE</h3>
-                        <i><img src="images/thr1.png" alt="#" /></i>
-                        <p>ipsum dolor sit amet, consectetur adipiscing elit, sed d veniam, adipiscing elit, sed d
-                            veniam</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="box_text">
-                        <h3>AUTO DIAGNOSE</h3>
-                        <i><img src="images/thr2.png" alt="#" /></i>
-                        <p>ipsum dolor sit amet, consectetur adipiscing elit, sed d veniam, adipiscing elit, sed d
-                            veniam</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- three_box -->
-    <!-- about -->
-    <div class="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="titlepage">
-                        <h2>About Our Car Service </h2>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 offset-md-1">
-                        <div class="about_img">
-                            <div class="about_box">
-                                <h3>Dolor sit amet, consectetur adipiscing elit, </h3>
-                                <p>dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud dolor sit amet,
-                                    consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                    magna aliqua. Ut enim ad minim veniam, quis nostrud dolor sit amet, consectetur
-                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                    Ut enim ad minim veniam, quis nostrud dolor sit amet, consectetur adipiscing elit,
-                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                    veniam, quis nostrud </p>
-                                <a class="read_more">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end about -->
-    <!-- wedo  section -->
-    <div class="wedo ">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="titlepage">
-                        <h2>What We Do</h2>
-                        <p>It is a long established fact that a reader will be distracted by the </p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-10 offset-md-1">
-                    <div class="row">
-                        <div class="col-md-6 margin_bottom">
-                            <div class="work">
-                                <figure><img src="images/img1.png" alt="#" /></figure>
-                            </div>
-                            <div class="work_text">
-                                <h3>Quick repair<br><span class="blu">Total Service</span></h3>
-                            </div>
-                        </div>
-                        <div class="col-md-6 margin_bottom">
-                            <div class="work">
-                                <figure><img src="images/img2.png" alt="#" /></figure>
-                            </div>
-                            <div class="work_text">
-                                <h3>Quick repair<br><span class="blu">Total Service</span></h3>
-                            </div>
-                        </div>
-                        <div class="col-md-6 margin_bottom">
-                            <div class="work">
-                                <figure><img src="images/img3.png" alt="#" /></figure>
-                            </div>
-                            <div class="work_text">
-                                <h3>Quick repair<br> <span class="blu">Total Service</span></h3>
-                            </div>
-                        </div>
-                        <div class="col-md-6 margin_bottom">
-                            <div class="work">
-                                <figure><img src="images/img4.png" alt="#" /></figure>
-                            </div>
-                            <div class="work_text">
-                                <h3>Quick repair<br><span class="blu">Total Service</span></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="read_more" href="#">See More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end wedo  section -->
     <!-- testimonial -->
     <div class="testimonial">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="titlepage">
-                        <h2>Testimonial</h2>
-                        <p>It is a long established fact that a reader will be distracted by the </p>
+                        <h2>Something you must know...</h2>
+                        <p>Its our pleasured to served </p>
                     </div>
                 </div>
             </div>
@@ -357,7 +215,6 @@
                         <ol class="carousel-indicators">
                             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                             <li data-target="#myCarousel" data-slide-to="1"></li>
-                            <li data-target="#myCarousel" data-slide-to="2"></li>
                         </ol>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
@@ -366,24 +223,20 @@
                                         <div class="row">
                                             <div class="col-md-6 margin_boot">
                                                 <div class="test_box">
-                                                    <i><img src="images/tes.jpg" alt="#" /></i>
-                                                    <h4>JCKOLO</h4>
-                                                    <span>(It is a long )</span>
-                                                    <p>It is a long established fact that a reader will be distracted by
-                                                        the readable content of a page when looking at its layout. The
-                                                        point of using Lorem Ipsum is that it has a more-or-less normal
-                                                        distribution of letters, as </p>
+                                                    <i><img src="images/qd.png" alt="#" height="100px"
+                                                            width="100px" /></i>
+                                                    <h4>Le Quang Duong</h4>
+                                                    <span>20110454</span>
+                                                    <p>Nguoi thieu nang </p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 margin_boot">
                                                 <div class="test_box">
-                                                    <i><img src="images/tes1.jpg" alt="#" /></i>
-                                                    <h4>ROCOYO</h4>
-                                                    <span>(It is a long )</span>
-                                                    <p>It is a long established fact that a reader will be distracted by
-                                                        the readable content of a page when looking at its layout. The
-                                                        point of using Lorem Ipsum is that it has a more-or-less normal
-                                                        distribution of letters, as </p>
+                                                    <i><img src="images/dn.png" alt="#" height="50px"
+                                                            width="100px" /></i>
+                                                    <h4>Nguyen Duy Nguyen</h4>
+                                                    <span>20110530</span>
+                                                    <p>Nguoi bi hai </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -396,54 +249,20 @@
                                         <div class="row">
                                             <div class="col-md-6 margin_boot">
                                                 <div class="test_box">
-                                                    <i><img src="images/tes.jpg" alt="#" /></i>
-                                                    <h4>JCKOLO</h4>
-                                                    <span>(It is a long )</span>
-                                                    <p>It is a long established fact that a reader will be distracted by
-                                                        the readable content of a page when looking at its layout. The
-                                                        point of using Lorem Ipsum is that it has a more-or-less normal
-                                                        distribution of letters, as </p>
+                                                    <i><img src="images/dl.jpg" alt="#" height="100px"
+                                                            width="100px" /></i>
+                                                    <h4>Tran Nguyen Duy Lan</h4>
+                                                    <span>20110515</span>
+                                                    <p>Cuu tui voi </p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 margin_boot">
                                                 <div class="test_box">
-                                                    <i><img src="images/tes1.jpg" alt="#" /></i>
-                                                    <h4>ROCOYO</h4>
-                                                    <span>(It is a long )</span>
-                                                    <p>It is a long established fact that a reader will be distracted by
-                                                        the readable content of a page when looking at its layout. The
-                                                        point of using Lorem Ipsum is that it has a more-or-less normal
-                                                        distribution of letters, as </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="container">
-                                    <div class="carousel-caption">
-                                        <div class="row">
-                                            <div class="col-md-6 margin_boot">
-                                                <div class="test_box">
-                                                    <i><img src="images/tes.jpg" alt="#" /></i>
-                                                    <h4>JCKOLO</h4>
-                                                    <span>(It is a long )</span>
-                                                    <p>It is a long established fact that a reader will be distracted by
-                                                        the readable content of a page when looking at its layout. The
-                                                        point of using Lorem Ipsum is that it has a more-or-less normal
-                                                        distribution of letters, as </p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 margin_boot">
-                                                <div class="test_box">
-                                                    <i><img src="images/tes1.jpg" alt="#" /></i>
-                                                    <h4>ROCOYO</h4>
-                                                    <span>(It is a long )</span>
-                                                    <p>It is a long established fact that a reader will be distracted by
-                                                        the readable content of a page when looking at its layout. The
-                                                        point of using Lorem Ipsum is that it has a more-or-less normal
-                                                        distribution of letters, as </p>
+                                                    <i><img src="images/batman.png" alt="#" height="100px"
+                                                            width="100px" /></i>
+                                                    <h4>Mr. Nobody</h4>
+                                                    <span>null</span>
+                                                    <p>@@ </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -470,73 +289,25 @@
     <footer id="contact">
         <div class="footer">
             <div class="container">
+                <div class="col-md-6">
+                    <div class="map">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.4853986111225!2d106.76933817580802!3d10.850637657818902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752763f23816ab%3A0x282f711441b6916f!2sHCMC%20University%20of%20Technology%20and%20Education!5e0!3m2!1sen!2s!4v1682879654397!5m2!1sen!2s"
+                            width="500" height="500" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="titlepage">
-                            <h2>Contact Us</h2>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <ul class="location_icon">
-                            <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a> Locatins</li>
-                            <li><a href="#"><i class="fa fa-volume-control-phone" aria-hidden="true"></i></a> +71
-                                9087654321</li>
-                            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>demo@gmail.com</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <form id="request" class="main_form">
-                            <div class="row">
-                                <div class="col-md-12 ">
-                                    <input class="contactus" placeholder="Full Name" type="type" name="Full Name">
-                                </div>
-                                <div class="col-md-12">
-                                    <input class="contactus" placeholder="Email" type="type" name="Email">
-                                </div>
-                                <div class="col-md-12">
-                                    <input class="contactus" placeholder="Phone Number" type="type" name="Phone Number">
-                                </div>
-                                <div class="col-md-12">
-                                    <textarea class="textarea" placeholder="Message" type="type"
-                                        Message="Name">Message </textarea>
-                                </div>
-                                <div class="col-sm-col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <button class="send_btn">Send</button>
-                                </div>
-                                <div class="col-sm-col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <ul class="social_icon">
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="map">
-                            <figure><img src="images/map.jpg" alt="#" /></figure>
-                        </div>
-                        <form class="bottom_form">
-                            <h3>Newsletter</h3>
-                            <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
-                            <button class="sub_btn">subscribe</button>
-                        </form>
+                    <div class="col-md-12" id="copyright">
+                        <p>Copyright 2023 All Right Reserved By VeReMa</p>
                     </div>
                 </div>
             </div>
-            <div class="copyright">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p>Copyright 2019 All Right Reserved By <a href="https://html.design/"> Free html
-                                    Templates</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
         </div>
     </footer>
     <!-- end footer -->

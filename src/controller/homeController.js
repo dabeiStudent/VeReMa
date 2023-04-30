@@ -56,9 +56,28 @@ let getContact = async (req, res) => {
     var token = req.cookies["token"];
     if (token != null) {
         const rs = jwt.verify(token, 'mk');
-        return res.render('contact.ejs', { token: token, name: rs.name, role: rs.role });
+        return res.render('contact.ejs', { token: token, name: rs.name, role: rs.role, message: null });
     } else {
-        return res.render('contact.ejs', { token: null, role: null, name: null })
+        return res.render('contact.ejs', { token: token, role: null, name: null, message: null })
+    }
+}
+let postContact = async (req, res) => {
+    var token = req.cookies["token"];
+    const ten = req.body.ten;
+    const email = req.body.email;
+    const sdt = req.body.sdt;
+    const mess = req.body.mess;
+    if (token != null) {
+        const rs = jwt.verify(token, 'mk');
+        connection.query('Insert into lien_lac (ten_tk, ten, email, sdt, noi_dung) values (?,?,?,?,?)', [rs.name, ten, email, sdt, mess],
+            function (err, results) {
+                return res.render('contact.ejs', { token: token, name: rs.name, role: rs.role, message: 'Sent' });
+            })
+    } else {
+        connection.query('Insert into lien_lac (ten_tk, ten, email, sdt, noi_dung) values (?,?,?,?,?)', [null, ten, email, sdt, mess],
+            function (err, results) {
+                return res.render('contact.ejs', { token: null, name: null, role: null, message: 'Sent' });
+            })
     }
 }
 let getFurni = async (req, res) => {
@@ -473,6 +492,6 @@ let chatApp = async (req, res, next) => {
 }
 
 module.exports = {
-    getHome, getAbout, getContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
+    getHome, getAbout, getContact, postContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
     getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod
 }
