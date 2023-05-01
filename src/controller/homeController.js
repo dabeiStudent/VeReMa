@@ -463,12 +463,27 @@ let getUpdateprod = async (req, res, next) => {
         if (rs.role != "admin") {
             return res.redirect('/');
         }
-        return res.render('updateprod.ejs', { token: token, name: rs.name, role: rs.role, mess: null });
+        return res.render('updateprod.ejs', { token: token, name: rs.name, role: rs.role, mess: null, ten: null, gia: null, sl: null, des: null });
     } else {
         return res.redirect('/');
     }
 }
-
+let getUpdateOneProd = async (req, res, next) => {
+    const ten = req.params.ten;
+    const gia = req.params.gia;
+    const sl = req.params.sl;
+    const des = req.params.des;
+    var token = req.cookies["token"];
+    if (token != null) {
+        const rs = jwt.verify(token, 'mk');
+        if (rs.role != "admin") {
+            return res.redirect('/');
+        }
+        return res.render('updateprod.ejs', { token: token, name: rs.name, role: rs.role, mess: null, ten: ten, gia: gia, sl: sl, des: des });
+    } else {
+        return res.redirect('/');
+    }
+}
 let postUpdateprod = async (req, res, next) => {
     const ten = req.body.tenPt;
     const gia = req.body.donGia;
@@ -479,9 +494,9 @@ let postUpdateprod = async (req, res, next) => {
     connection.query('Update ds_phu_tung set don_gia =?, so_luong =?, image= ?, description =? where ten_pt=?', [gia, sl, uimg, mt, ten],
         function (err, results, fields) {
             if (results) {
-                return res.render('updateprod.ejs', { mess: 'Thanh Cong', role: 'admin' });
+                return res.render('updateprod.ejs', { mess: 'Thanh Cong', role: 'admin', ten: null, gia: null, sl: null, des: null });
             } else {
-                return res.render('updateprod.ejs', { mess: 'Loi', role: 'admin' });
+                return res.render('updateprod.ejs', { mess: 'Loi', role: 'admin', ten: null, gia: null, sl: null, des: null });
             }
         })
 }
@@ -493,5 +508,5 @@ let chatApp = async (req, res, next) => {
 
 module.exports = {
     getHome, getAbout, getContact, postContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
-    getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod
+    getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd
 }

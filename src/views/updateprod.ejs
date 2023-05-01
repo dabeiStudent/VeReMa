@@ -55,21 +55,25 @@
                                 <td>Nhập tên phụ tùng cần cập nhật</td>
                                 <td>:</td>
                                 <td>
-                                    <input type="text" name="tenPt" required>
+                                    <%if(ten !=null){%>
+                                        <input type="text" name="tenPt" value="<%= ten%>" readonly>
+                                        <%}else{%>
+                                            <input type="text" name="tenPt" required>
+                                            <%}%>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Đơn giá</td>
                                 <td>:</td>
                                 <td>
-                                    <input type="text" name="donGia" required>
+                                    <input type="text" name="donGia" value="<%= gia%>" required>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Số lượng</td>
                                 <td>:</td>
                                 <td>
-                                    <input type="text" name="soLuong" required>
+                                    <input type="text" name="soLuong" value="<%=sl%>" required>
                                 </td>
                             </tr>
                             <tr>
@@ -83,7 +87,7 @@
                                 <td>Miêu tả</td>
                                 <td>:</td>
                                 <td>
-                                    <input type="text" name="mieuTa" required>
+                                    <input type="text" name="mieuTa" value="<%=des%>" required>
                                 </td>
                             </tr>
                         </tbody>

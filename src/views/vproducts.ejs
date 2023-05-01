@@ -46,20 +46,20 @@
                             </button>
                             <div class="collapse navbar-collapse" id="navbarsExample04">
                                 <ul class="navbar-nav mr-auto">
-                                    <li class="nav-item ">
-                                        <a class="nav-link" href="index.ejs"> Home </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="about.ejs">About</a>
-                                    </li>
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="furnitures.ejs">Products</a>
-                                    </li>
                                     <%if(role=="admin"){%>
                                         <li class="nav-item">
                                             <a class="nav-link" href="manager.ejs">Manager</a>
                                         </li>
                                         <%}%>
+                                            <li class="nav-item ">
+                                                <a class="nav-link" href="index.ejs"> Home </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="about.ejs">About</a>
+                                            </li>
+                                            <li class="nav-item active">
+                                                <a class="nav-link" href="furnitures.ejs">Products</a>
+                                            </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" href="contact.ejs">Contact Us</a>
                                             </li>
@@ -109,6 +109,22 @@
                 <%}%>
         </div>
     </div>
+    <div class="addproductleft">
+        <div class="rounded p-4 rounded mb-4">
+            <%if(role=="admin"){%>
+                <div id="addp">
+
+                </div>
+                <%}%>
+        </div>
+        <div class="rounded p-4 rounded mb-4">
+            <%if(role=="admin"){%>
+                <div id="addp">
+
+                </div>
+                <%}%>
+        </div>
+    </div>
     <div class="row mb-5">
         <% for(let i=0; i< detailProduct.length; i++){%>
             <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
@@ -126,6 +142,14 @@
                         <p class="text-primary font-weight-bold">
                             <%=detailProduct[i].don_gia%> VND
                         </p>
+                        <%if(role=="admin"){%>
+                            <div id="upprod">
+                                <strong><a
+                                        href="/updateprod.ejs/<%=detailProduct[i].ten_pt%>/<%=detailProduct[i].don_gia%>/<%=detailProduct[i].so_luong%>/'<%=detailProduct[i].description%>'"
+                                        target="_self">Update
+                                        item</a></strong>
+                            </div>
+                            <%}%>
                     </div>
                 </div>
             </div>

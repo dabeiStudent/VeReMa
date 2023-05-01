@@ -1413,6 +1413,11 @@ body {
      float: right
 }
 
+.addproductleft {
+     float: left;
+     margin-right: 120px;
+}
+
 .main .card1 #mess {
      font-size: 15px;
      background: lightgreen;
@@ -1457,6 +1462,20 @@ body {
      font-family: fantasy;
      border-radius: 5%;
      color: #000;
+}
+
+#upprod a {
+     color: black;
+     text-align: center;
+     background: green;
+     width: 400px;
+     padding: 5px;
+     font-style: normal;
+     margin-top: 10px;
+}
+
+#uponeprod a {
+     font-size: 10px
 }
 
 /* End */
