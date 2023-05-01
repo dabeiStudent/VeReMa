@@ -113,38 +113,82 @@ let getMana = async (req, res) => {
 let getVproduct = async (req, res) => {
     var token = req.cookies["token"];
     const all = [];
+    var page = req.params.page;
+    const limit = 12;
+    var end;
     if (token != null) {
         const rs = jwt.verify(token, 'mk');
-        connection.query(
-            'Select ten_tk, quyen from ds_tai_khoan where ma_tk = ?', [rs.id],
-            function (err, results, fields) {
-                if (results) {
-                    var name = results[0].ten_tk;
-                    var role = results[0].quyen;
-                    connection.query('Select * from ds_phu_tung', function (err, results, fields) {
-                        if (results) {
-                            for (let i = 0; i < results.length; i++) {
-                                all[i] = results[i];
-                            }
-                            return res.render('vproducts.ejs', { token: token, name: name, role: role, detailProduct: all });
-                        }
-                    })
+        connection.query('Select * from ds_phu_tung', function (err, results, fields) {
+            if (results) {
+                const start = (page - 1) * limit;
+                if (results.length % limit == 0) {
+                    end = results.length / limit;
                 } else {
-                    return res.send(err);
+                    end = parseInt(results.length / limit) + 1;
                 }
+                connection.query(`Select * from ds_phu_tung limit ${start},${limit}`, function (err, results, fields) {
+                    if (results) {
+                        for (let i = 0; i < results.length; i++) {
+                            all[i] = results[i];
+                        }
+                        return res.render('vproducts.ejs', {
+                            token: token, name: rs.name, role: rs.role, detailProduct: all, Hello: "Tất cả sản phẩm", cate: null, page: page, endP: end
+                        });
+                    }
+                })
             }
-        )
+        })
+
     } else {
         connection.query('Select * from ds_phu_tung', function (err, results, fields) {
             if (results) {
-                for (let i = 0; i < results.length; i++) {
-                    all[i] = results[i];
+                const start = (page - 1) * limit;
+                if (results.length % limit == 0) {
+                    end = results.length / limit;
+                } else {
+                    end = parseInt(results.length / limit) + 1;
                 }
-                return res.render('vproducts.ejs', { token: null, name: null, role: null, detailProduct: all });
+                connection.query(`Select * from ds_phu_tung limit ${start},${limit}`, function (err, results, fields) {
+                    if (results) {
+                        for (let i = 0; i < results.length; i++) {
+                            all[i] = results[i];
+                        }
+                        return res.render('vproducts.ejs', { token: null, name: null, role: null, detailProduct: all, Hello: "Tất cả sản phẩm", cate: null, endP: end, page: page });
+                    }
+                })
             }
         })
     }
 }
+let getCateprod = async (req, res) => {
+    const cate = req.params.catename;
+    var name;
+    if (cate == 'DauNhot') {
+        name = 'Dầu Nhớt';
+    } else if (cate == 'PhuTung') {
+        name = 'Phụ Tùng';
+    } else if (cate == 'VoXe') {
+        name = 'Vỏ Xe';
+    } else if (cate == 'PhuKien') {
+        name = 'Phụ Kiện';
+    }
+    var token = req.cookies["token"];
+    if (token != null) {
+        const rs = jwt.verify(token, 'mk');
+        connection.query('Select * from ds_phu_tung where loai_pt= ?', [cate], function (err, results, fields) {
+            if (results) {
+                return res.render('vproducts.ejs', { token: token, name: rs.name, role: rs.role, detailProduct: results, Hello: name, cate: cate, endP: null, page: null });
+            }
+        })
+    } else {
+        connection.query('Select * from ds_phu_tung where loai_pt= ?', [cate], function (err, results, fields) {
+            if (results) {
+                return res.render('vproducts.ejs', { token: null, name: null, role: null, detailProduct: results, Hello: name, cate: cate, endP: null, page: null });
+            }
+        })
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Xu li cac van de ve tai khoan...
@@ -208,40 +252,44 @@ let uploadImg = async (req, res) => {
 let getProfile = async (req, res) => {
     const name = req.params.username;
     var token = req.cookies["token"];
-    const rs = jwt.verify(token, 'mk');
-    if (rs.role == "admin") {
-        connection.query(
-            `SELECT * FROM nhan_vien WHERE ten_tk=  ${name}`,
-            function (err, results, fields) {
-                if (results.length > 0) {
-                    let detailUser = results;
-                    connection.query(`Select image from ds_tai_khoan where ten_tk = ${name}`,
-                        function (err, results, fields) {
-                            return res.render('profile.ejs', { detailUser: detailUser, img: results, type: "admin" });
-                        })
-                    //return res.render('profile.ejs', { detailUser: results, type: "admin" });
-                }
-                else {
-                    connection.query(
-                        `SELECT * FROM khach_hang WHERE ten_tk=  ${name}`,
-                        function (err, results, fields) {
-                            if (results) {
-                                let detailUser = results;
-                                connection.query(`Select image from ds_tai_khoan where ten_tk = ${name}`,
-                                    function (err, results, fields) {
-                                        return res.render('profile.ejs', { detailUser: detailUser, img: results, type: "kh" });
-                                    })
+    if (token) {
+        const rs = jwt.verify(token, 'mk');
+        if (rs.role == "admin") {
+            connection.query(
+                `SELECT * FROM nhan_vien WHERE ten_tk=  ${name}`,
+                function (err, results, fields) {
+                    if (results.length > 0) {
+                        let detailUser = results;
+                        connection.query(`Select image from ds_tai_khoan where ten_tk = ${name}`,
+                            function (err, results, fields) {
+                                return res.render('profile.ejs', { detailUser: detailUser, img: results, type: "admin" });
+                            })
+                        //return res.render('profile.ejs', { detailUser: results, type: "admin" });
+                    }
+                    else {
+                        connection.query(
+                            `SELECT * FROM khach_hang WHERE ten_tk=  ${name}`,
+                            function (err, results, fields) {
+                                if (results) {
+                                    let detailUser = results;
+                                    connection.query(`Select image from ds_tai_khoan where ten_tk = ${name}`,
+                                        function (err, results, fields) {
+                                            return res.render('profile.ejs', { detailUser: detailUser, img: results, type: "kh" });
+                                        })
+                                }
+                                else {
+                                    return res.send(err);
+                                }
                             }
-                            else {
-                                return res.send(err);
-                            }
-                        }
-                    )
+                        )
+                    }
                 }
-            }
-        )
+            )
+        } else {
+            return res.redirect('/');
+        }
     } else {
-        return res.send('AI CHO XEM MA XEM');
+        return res.redirect('/');
     }
 }
 let updateProfile = async (req, res, next) => {
@@ -249,6 +297,9 @@ let updateProfile = async (req, res, next) => {
     var name = req.params.username;
     if (token) {
         const rs = jwt.verify(token, 'mk');
+        if (rs.role != "admin") {
+            return res.redirect('/');
+        }
         connection.query(
             `SELECT * FROM nhan_vien WHERE ten_tk=  ${name}`,
             function (err, results, fields) {
@@ -447,7 +498,8 @@ let postAddprod = async (req, res, next) => {
     const img = req.file.filename;
     const uimg = `/images/${img}`;
     const mt = req.body.mieuTa;
-    connection.query('Insert into ds_phu_tung (ten_pt,don_gia,so_luong,image,description) values (?,?,?,?,?)', [ten, gia, sl, uimg, mt],
+    const pl = req.body.phanLoai;
+    connection.query('Insert into ds_phu_tung (ten_pt,don_gia,so_luong,image,description, loai_pt) values (?,?,?,?,?,?)', [ten, gia, sl, uimg, mt, pl],
         function (err, results, fields) {
             if (results) {
                 return res.render('addprod.ejs', { message: 'Thanh Cong', role: 'admin' });
@@ -508,5 +560,5 @@ let chatApp = async (req, res, next) => {
 
 module.exports = {
     getHome, getAbout, getContact, postContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
-    getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd
+    getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod
 }

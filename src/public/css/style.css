@@ -1407,15 +1407,20 @@ body {
      width: 400px;
      padding: 15px;
      font-style: normal;
+     border: 2px solid black;
 }
 
+
 .addproduct {
-     float: right
+     float: right;
+     margin-left: 120px
 }
 
 .addproductleft {
      float: left;
-     margin-right: 120px;
+     margin-right: 60px;
+     margin-left: 40px;
+     margin-top: 30px;
 }
 
 .main .card1 #mess {
@@ -1472,10 +1477,90 @@ body {
      padding: 5px;
      font-style: normal;
      margin-top: 10px;
+     border: 1px solid black;
+     border-radius: 20%;
+     font-weight: bold;
 }
 
 #uponeprod a {
      font-size: 10px
+}
+
+#pchange img {
+     object-fit: cover;
+     width: 100px;
+     height: 100px;
+}
+
+#cateprod {
+     background-color: rgb(238, 241, 20);
+     font-family: fantasy;
+     border: 1px solid black
+}
+
+#cateprod h1 {
+     padding-top: 5px;
+     padding-right: 10px;
+     padding-left: 5px;
+}
+
+#cateprod a {
+     font-family: Arial, Helvetica, sans-serif;
+     font-weight: bold;
+     font-style: normal;
+     text-align: left;
+     margin-left: 10px;
+}
+
+.messcate h1 {
+     font-size: x-large;
+     margin-top: 15px;
+     margin-left: 294px;
+     margin-bottom: 10px;
+     font-family: Arial, Helvetica, sans-serif;
+     width: fit-content;
+     border-bottom: 1px solid #000;
+}
+
+#pagination {
+     display: inline-block;
+     margin: auto;
+}
+
+#pagination a {
+     color: black;
+     float: left;
+     padding: 8px 16px;
+     text-decoration: none;
+}
+
+#paging a.active {
+     background-color: #4CAF50;
+     color: white;
+}
+
+#paging a:hover:not(.active) {
+     background-color: #ddd;
+}
+
+#paging {
+     text-align: center;
+     padding-bottom: 50px;
+     padding-top: 10px;
+}
+
+#paging a {
+     text-align: center;
+     color: black;
+     float: left;
+     padding: 8px 16px;
+     text-decoration: none;
+     border: 1px solid black;
+}
+
+#paging h2 {
+     padding-top: 5px;
+     font-size: medium;
 }
 
 /* End */

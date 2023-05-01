@@ -7,11 +7,11 @@
     <title>Products</title>
 
     <!-- bootstrap css -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <!-- style css -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <!-- Responsive-->
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="/css/responsive.css">
     <!-- fevicon -->
     <link rel="icon" href="/icon/batman-icon.png" type="image/gif" />
     <!-- Scrollbar Custom CSS -->
@@ -32,7 +32,7 @@
                         <div class="full">
                             <div class="center-desk">
                                 <div class="logo">
-                                    <a href="index.ejs"><img src="images/logo.png" alt="#" /></a>
+                                    <a href="/index.ejs"><img src="/images/logo.png" alt="#" /></a>
                                 </div>
                             </div>
                         </div>
@@ -48,32 +48,32 @@
                                 <ul class="navbar-nav mr-auto">
                                     <%if(role=="admin"){%>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="manager.ejs">Manager</a>
+                                            <a class="nav-link" href="/manager.ejs">Manager</a>
                                         </li>
                                         <%}%>
                                             <li class="nav-item ">
-                                                <a class="nav-link" href="index.ejs"> Home </a>
+                                                <a class="nav-link" href="/index.ejs"> Home </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="about.ejs">About</a>
+                                                <a class="nav-link" href="/about.ejs">About</a>
                                             </li>
                                             <li class="nav-item active">
-                                                <a class="nav-link" href="furnitures.ejs">Products</a>
+                                                <a class="nav-link" href="/furnitures.ejs">Products</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="contact.ejs">Contact Us</a>
+                                                <a class="nav-link" href="/contact.ejs">Contact Us</a>
                                             </li>
                                             <%if(token !=null ){%>
                                                 <li class="nav-item d_none">
-                                                    <a class="nav-link" href="logout.ejs"><i
+                                                    <a class="nav-link" href="/logout.ejs"><i
                                                             class="fa fa-user-circle padd_right"
                                                             aria-hidden="true"></i>Logout</a>
                                                     <a class="nav-link" href="/yourprofile.ejs"><i>Hello, <%=name%> (
-                                                                <%=role%>)</a>
+                                                                <%=role%> )</a>
                                                 </li>
                                                 <%}else{%>
                                                     <li class="nav-item d_none">
-                                                        <a class="nav-link" href="signin.ejs"><i
+                                                        <a class="nav-link" href="/signin.ejs"><i
                                                                 class="fa fa-user-circle padd_right"
                                                                 aria-hidden="true"></i>Login</a>
                                                     </li>
@@ -97,6 +97,32 @@
         <div class="rounded p-4 rounded mb-4">
             <%if(role=="admin"){%>
                 <div id="addp">
+                    <!-- <strong><a href="/addprod.ejs">Add new item</a></strong> -->
+                </div>
+                <%}%>
+        </div>
+        <div class="rounded p-4 rounded mb-4">
+            <%if(role=="admin"){%>
+                <div id="addp">
+                    <!-- <strong><a href="/updateprod.ejs">Update item</a></strong> -->
+                </div>
+                <%}%>
+        </div>
+    </div>
+    <div class="addproductleft">
+        <div class="rounded p-4 rounded mb-4">
+            <div id="cateprod">
+                <h1>Categories: </h1>
+                <a href="/vproducts.ejs/DauNhot/1">Dầu Nhớt</a><br>
+                <a href="/vproducts.ejs/PhuTung/1">Phụ Tùng</a><br>
+                <a href="/vproducts.ejs/VoXe/1">Vỏ Xe</a><br>
+                <a href="/vproducts.ejs/PhuKien/1">Phụ Kiện</a><br>
+                <a href="/vproducts.ejs/1">Tất cả sản phẩm</a><br>
+            </div>
+        </div>
+        <div class="rounded p-4 rounded mb-4">
+            <%if(role=="admin"){%>
+                <div id="addp">
                     <strong><a href="/addprod.ejs">Add new item</a></strong>
                 </div>
                 <%}%>
@@ -109,53 +135,67 @@
                 <%}%>
         </div>
     </div>
-    <div class="addproductleft">
-        <div class="rounded p-4 rounded mb-4">
-            <%if(role=="admin"){%>
-                <div id="addp">
-
-                </div>
-                <%}%>
-        </div>
-        <div class="rounded p-4 rounded mb-4">
-            <%if(role=="admin"){%>
-                <div id="addp">
-
-                </div>
-                <%}%>
-        </div>
+    <div class="messcate">
+        <h1 style="font-style: normal;">
+            <%=Hello%>
+        </h1>
     </div>
     <div class="row mb-5">
-        <% for(let i=0; i< detailProduct.length; i++){%>
-            <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                <div class="block-4 text-center border">
-                    <figure class="block-4-image">
-                        <a href="#"><img src="<%=detailProduct[i].image%>" alt="Image placeholder" class="img-fluid"
-                                width="100px" height="100px"></a>
-                    </figure>
-                    <div class="block-4-text p-4">
-                        <h3>
-                            <a href="#">
-                                <%=detailProduct[i].ten_pt%>
-                            </a>
-                        </h3>
-                        <p class="text-primary font-weight-bold">
-                            <%=detailProduct[i].don_gia%> VND
-                        </p>
-                        <%if(role=="admin"){%>
-                            <div id="upprod">
-                                <strong><a
-                                        href="/updateprod.ejs/<%=detailProduct[i].ten_pt%>/<%=detailProduct[i].don_gia%>/<%=detailProduct[i].so_luong%>/'<%=detailProduct[i].description%>'"
+        <% if(detailProduct !=null){%>
+            <% for(let i=0; i< detailProduct.length; i++){%>
+                <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+                    <div id="pchange" class="block-4 text-center border">
+                        <figure class="block-4-image">
+                            <img src="<%=detailProduct[i].image%>" alt="Image placeholder" width="100px" height="100px"
+                                class="img-fluid">
+                        </figure>
+                        <div class="block-4-text p-4">
+                            <h3>
+                                <a href="#">
+                                    <%=detailProduct[i].ten_pt%>
+                                </a>
+                            </h3>
+                            <p class="text-primary font-weight-bold">
+                                <%=detailProduct[i].don_gia%> VND
+                            </p><br>
+                            <%if(role=="admin"){%>
+                                <div id="upprod">
+                                    <a href="/updateprod.ejs/<%=detailProduct[i].ten_pt%>/<%=detailProduct[i].don_gia%>/<%=detailProduct[i].so_luong%>/'<%=detailProduct[i].description%>'"
                                         target="_self">Update
-                                        item</a></strong>
-                            </div>
-                            <%}%>
+                                        item</a>
+                                </div>
+                                <%}%>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <%}%>
+                <%}%>
+                    <%}%>
     </div>
-
+    <%if(cate==null){%>
+        <div id="paging">
+            <div id="pagination">
+                <%for(let i=1; i <=endP; i++){%>
+                    <a href="/vproducts.ejs/<%= i %>">
+                        <%= i %>
+                    </a>
+                    <%}%>
+            </div>
+            <h2>Trang: <%= page%>
+            </h2>
+        </div>
+        <%}%>
+            <footer id="contact">
+                <div class="copyright">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12" id="copyright">
+                                <p>Copyright 2023 All Right Reserved By VeReMa</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </footer>
 </body>
 
 </html>
