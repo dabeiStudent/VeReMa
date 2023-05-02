@@ -500,6 +500,7 @@ let postStaffcreate = async (req, res) => {
     const tenTk = req.body.tenTk;
     const matKhau = req.body.matKhau;
     const img = req.file.filename;
+    const uimg = `/images/${img}`;
     const hashpass = await argon2.hash(matKhau);
     const token = req.cookies["token"];
     if (token) {
@@ -507,7 +508,7 @@ let postStaffcreate = async (req, res) => {
         if (rs.role != "admin") {
             return res.render('/');
         }
-        connection.query('Insert into ds_tai_khoan (ten_tk,mat_khau,image, quyen) values (?,?,?,"nv")', [tenTk, hashpass, img], function (err, results) {
+        connection.query('Insert into ds_tai_khoan (ten_tk,mat_khau,image, quyen) values (?,?,?,"nv")', [tenTk, hashpass, uimg], function (err, results) {
             if (results) {
                 connection.query("Insert into nhan_vien (ten_nv, gioi_tinh, dia_chi, sdt, ngay_sinh, ngay_gianhap, luong, ten_tk) values (?,?,?,?,?,?,?,?)", [tenNv, gioiTinh, diaChi, sdt, ngayS, ngayGn, luong, tenTk],
                     function (err, results) {
