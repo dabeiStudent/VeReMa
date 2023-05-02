@@ -258,11 +258,11 @@ let getProfile = async (req, res) => {
             connection.query(
                 `SELECT * FROM nhan_vien WHERE ten_tk=  ${name}`,
                 function (err, results, fields) {
-                    if (results.length > 0) {
+                    if (results != null && results.length > 0) {
                         let detailUser = results;
                         connection.query(`Select image from ds_tai_khoan where ten_tk = ${name}`,
                             function (err, results, fields) {
-                                return res.render('profile.ejs', { detailUser: detailUser, img: results, type: "admin" });
+                                return res.render('profile.ejs', { detailUser: detailUser, img: results, type: "nv" });
                             })
                         //return res.render('profile.ejs', { detailUser: results, type: "admin" });
                     }
@@ -303,7 +303,7 @@ let updateProfile = async (req, res, next) => {
         connection.query(
             `SELECT * FROM nhan_vien WHERE ten_tk=  ${name}`,
             function (err, results, fields) {
-                if (results.length > 0) {
+                if (results != null && results.length > 0) {
                     return res.render('updateprofile.ejs', { detailUser: results, type: "nv" });
                 }
                 else {

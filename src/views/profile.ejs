@@ -47,7 +47,7 @@
         <h2>THÔNG TIN CÁ NHÂN</h2>
         <div class="card">
             <div class="card-body">
-                <%if(type=="admin" ){%>
+                <%if(type=="nv" ){%>
                     <img src="<%= img[0].image %>" height="100px" width="100px" alt="Avatar">
                     <table>
                         <tbody>
@@ -116,7 +116,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <%}else if(type=="kh" ){%>
+                    <%}else{%>
                         <img src="<%= img[0].image %>" height="100px" width="100px" alt="Avatar">
                         <table>
                             <tbody>
