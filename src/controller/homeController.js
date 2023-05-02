@@ -504,7 +504,7 @@ let postAddprod = async (req, res, next) => {
             if (results) {
                 return res.render('addprod.ejs', { message: 'Thanh Cong', role: 'admin' });
             } else {
-                return res.render('addprod.ejs', { mess: 'Loi', role: 'admin' });
+                return res.render('addprod.ejs', { message: 'Da ton tai', role: 'admin' });
             }
         })
 }
@@ -553,12 +553,72 @@ let postUpdateprod = async (req, res, next) => {
         })
 }
 
-
+let getDelprod = async (req, res) => {
+    var token = req.cookies["token"];
+    const ten = [];
+    if (token != null) {
+        const rs = jwt.verify(token, 'mk');
+        if (rs.role != "admin") {
+            return res.redirect('/');
+        }
+        connection.query('Select * from ds_phu_tung', function (err, results) {
+            if (results) {
+                for (let i = 0; i < results.length; i++) {
+                    ten.push(results[i].ten_pt);
+                }
+                return res.render('deleteprod.ejs', { token: token, name: rs.name, role: rs.role, mess: 'Hay can nhac ki', ten: ten });
+            } else {
+                return res.render('deleteprod.ejs', { token: token, name: rs.name, role: rs.role, mess: 'Loi', ten: null });
+            }
+        })
+        //return res.render('deleteprod.ejs', { token: token, name: rs.name, role: rs.role, mess: null, ten: null });
+    } else {
+        return res.redirect('/');
+    }
+}
+let postDelprod = async (req, res) => {
+    const tenpt = req.body.tenPt;
+    const ten = [];
+    var token = req.cookies["token"];
+    const rs = jwt.verify(token, 'mk');
+    connection.query('DELETE from ds_phu_tung where ten_pt =?', [tenpt], function (err, results) {
+        if (results) {
+            connection.query('Select * from ds_phu_tung', function (err, results) {
+                if (results) {
+                    for (let i = 0; i < results.length; i++) {
+                        ten.push(results[i].ten_pt);
+                    }
+                    return res.render('deleteprod.ejs', { token: token, name: rs.name, role: rs.role, mess: 'Xoa thanh cong', ten: ten });
+                } else {
+                    return res.render('deleteprod.ejs', { token: token, name: rs.name, role: rs.role, mess: 'Loi', ten: ten });
+                }
+            })
+        }
+    })
+}
+let getConfirmdel = async (req, res) => {
+    var token = req.cookies["token"];
+    if (token) {
+        const ten = req.params.ten;
+        return res.render('confirmdelete.ejs', { tenPt: ten });
+    }
+    else {
+        return res.render('/');
+    }
+}
+let postConfirmdel = async (req, res) => {
+    const tenPt = req.params.ten;
+    connection.query('Delete from ds_phu_tung where ten_pt = ?', [tenPt], function (err, results) {
+        if (results) {
+            return res.redirect('/vproducts.ejs/1');
+        }
+    })
+}
 let chatApp = async (req, res, next) => {
     return res.render('chat.ejs');
 }
 
 module.exports = {
     getHome, getAbout, getContact, postContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
-    getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod
+    getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod, getDelprod, postDelprod, getConfirmdel, postConfirmdel
 }

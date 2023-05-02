@@ -1,0 +1,77 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update item</title>
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/icon/batman-icon.png" type="image/gif" />
+
+    <!-- FontAwesome 5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navbar top -->
+    <div class="navbar-top">
+        <div class="title">
+            <h1>Update item</h1>
+        </div>
+        <!-- Navbar -->
+        <ul>
+            <li>
+                <a href="/vproducts.ejs/1">
+                    <i class="fas fa-reply-all"></i>
+                </a>
+            </li>
+            <li>
+                <a href="/index.ejs">
+                    <i class="fas fa-warehouse"></i>
+                </a>
+            </li>
+            <li>
+                <a href="/logout.ejs">
+                    <i class="fa fa-sign-out-alt fa-2x"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- End -->
+    </div>
+    <!-- End -->
+    <div class="main">
+        <h2>Xóa sản phẩm</h2>
+        <div class="card1">
+            <div class="card-body">
+                <strong><a id="mess">
+                        <%= mess %>
+                    </a></strong>
+                <form action="/deleteprod.ejs" method="post">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Chọn phụ tùng cần xóa: </td>
+                                <td>:</td>
+                                <td>
+                                    <select name="tenPt" id="cars">
+                                        <%for(let i=0; i < ten.length; i++){%>
+                                            <option value="<%=ten[i]%>">
+                                                <%=ten[i]%>
+                                            </option>
+                                            <%}%>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <input type="submit" value="Drop this item">
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End -->
+</body>
+
+</html>

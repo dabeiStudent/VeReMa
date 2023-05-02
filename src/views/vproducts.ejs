@@ -134,6 +134,13 @@
                 </div>
                 <%}%>
         </div>
+        <div class="rounded p-4 rounded mb-4">
+            <%if(role=="admin"){%>
+                <div id="addp">
+                    <strong><a href="/deleteprod.ejs">Delete item</a></strong>
+                </div>
+                <%}%>
+        </div>
     </div>
     <div class="messcate">
         <h1 style="font-style: normal;">
@@ -163,6 +170,7 @@
                                     <a href="/updateprod.ejs/<%=detailProduct[i].ten_pt%>/<%=detailProduct[i].don_gia%>/<%=detailProduct[i].so_luong%>/'<%=detailProduct[i].description%>'"
                                         target="_self">Update
                                         item</a>
+                                    <a href="/confirmdelete.ejs/<%=detailProduct[i].ten_pt%>"> Delete this </a>
                                 </div>
                                 <%}%>
                         </div>
@@ -171,6 +179,7 @@
                 <%}%>
                     <%}%>
     </div>
+
     <%if(cate==null){%>
         <div id="paging">
             <div id="pagination">
