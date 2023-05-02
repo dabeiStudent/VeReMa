@@ -1173,6 +1173,36 @@ body {
      padding-left: 10px;
 }
 
+.main .card2 {
+     padding-left: 100px;
+     background-color: #fff;
+     border-radius: 18px;
+     box-shadow: 1px 1px 8px 0 grey;
+     width: 760px;
+     height: 500px;
+     margin-top: 20px;
+     margin-bottom: 70px;
+     padding: 20px 0 50px 50px;
+     text-align: center;
+}
+
+
+.main .card2 form {
+     border: none;
+     font-size: 16px;
+     height: 230px;
+     width: 100%;
+     padding-bottom: 30px;
+}
+
+.main .card2 img {
+     display: block;
+     margin-left: 570px;
+     margin-right: auto;
+     width: 100px;
+     height: 100px;
+     border-radius: 10%;
+}
 
 .edit {
      position: absolute;
@@ -1636,6 +1666,22 @@ body {
 
 #cfdelete h2 {
      font-size: x-large;
+}
+
+#createStaff {
+     padding-left: 485px;
+}
+
+#createStaff a {
+     font-size: 20px;
+     color: black;
+     text-align: center;
+     background: gray;
+     width: 100px;
+     height: 50px;
+     font-style: normal;
+     border: 1px solid black;
+     font-weight: bold;
 }
 
 /* End */

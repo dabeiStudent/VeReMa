@@ -215,7 +215,7 @@ let accountProfile = async (req, res) => {
                 }
             )
         }
-        if (role == "admin") {
+        if (role == "admin" || role == "nv") {
             connection.query(
                 'Select * from nhan_vien where nhan_vien.ten_tk = ?', [rs.name],
                 function (err, results, fields) {
@@ -454,7 +454,7 @@ let postSignin = async (req, res, next) => {
                         const rs = jwt.verify(token, 'mk')
                         console.log(rs.name, rs.id, rs.role);
                         res.cookie("token", token, {
-                            httpOnly: true, expires: new Date(Date.now() + 1000 * 3600)
+                            httpOnly: true, expires: new Date(Date.now() + 1000 * 7200)
                         })
                         //return res.json("dn thanh cong")
                         return res.redirect('/index.ejs');
@@ -475,6 +475,56 @@ let postLogout = async (req, res, next) => {
     //res.end();
     //return res.re("log out thanh cong");
     return res.render('index.ejs', { token: null, role: null });
+}
+
+let getStaffcreate = async (req, res) => {
+    var token = req.cookies["token"];
+    if (token) {
+        const rs = jwt.verify(token, "mk");
+        if (rs.role != "admin") {
+            return res.redirect('/');
+        }
+        return res.render('createstaff.ejs', { token: token, role: rs.role, mess: null });
+    } else {
+        return res.redirect('/');
+    }
+}
+let postStaffcreate = async (req, res) => {
+    const tenNv = req.body.tenNv;
+    const gioiTinh = req.body.gioiTinh;
+    const diaChi = req.body.diaChi;
+    const sdt = req.body.sdt;
+    const ngayS = req.body.ngayS;
+    const ngayGn = req.body.ngayGn;
+    const luong = req.body.luong;
+    const tenTk = req.body.tenTk;
+    const matKhau = req.body.matKhau;
+    const img = req.file.filename;
+    const hashpass = await argon2.hash(matKhau);
+    const token = req.cookies["token"];
+    if (token) {
+        const rs = jwt.verify(token, "mk");
+        if (rs.role != "admin") {
+            return res.render('/');
+        }
+        connection.query('Insert into ds_tai_khoan (ten_tk,mat_khau,image, quyen) values (?,?,?,"nv")', [tenTk, hashpass, img], function (err, results) {
+            if (results) {
+                connection.query("Insert into nhan_vien (ten_nv, gioi_tinh, dia_chi, sdt, ngay_sinh, ngay_gianhap, luong, ten_tk) values (?,?,?,?,?,?,?,?)", [tenNv, gioiTinh, diaChi, sdt, ngayS, ngayGn, luong, tenTk],
+                    function (err, results) {
+                        if (results) {
+                            return res.render('createstaff.ejs', { token: token, role: rs.role, mess: "Thanh cong" });
+                        } else {
+                            return res.send(err);
+                        }
+                    })
+            } else {
+                return res.render('createstaff.ejs', { token: token, role: rs.role, mess: "Da ton tai" });
+            }
+        })
+
+    } else {
+        return res.render('/');
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -620,5 +670,5 @@ let chatApp = async (req, res, next) => {
 
 module.exports = {
     getHome, getAbout, getContact, postContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
-    getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod, getDelprod, postDelprod, getConfirmdel, postConfirmdel
+    getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod, getDelprod, postDelprod, getConfirmdel, postConfirmdel, getStaffcreate, postStaffcreate
 }

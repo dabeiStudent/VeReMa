@@ -46,125 +46,89 @@
 
     <!-- Main -->
     <div class="main">
-        <h2>THÔNG TIN CÁ NHÂN</h2>
-        <div class="card">
+        <h2>Tạo tài khoản nhân viên</h2>
+        <div class="card2">
             <div class="card-body">
-                <%if(role=="kh" ) {%>
-                    <img src="<%= img[0].image %>" height="100px" width="100px" alt="Avatar">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>Mã khách hàng</td>
-                                <td>:</td>
-                                <td>
-                                    <%= detailUser[0].ma_kh %>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Tên khách hàng</td>
-                                <td>:</td>
-                                <td>
-                                    <%= detailUser[0].ten_kh %>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Địa chỉ</td>
-                                <td>:</td>
-                                <td>
-                                    <%= detailUser[0].dia_chi %>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Số điện thoại</td>
-                                <td>:</td>
-                                <td>
-                                    <%= detailUser[0].sdt %>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Tên tài khoản</td>
-                                <td>:</td>
-                                <td>
-                                    <%= detailUser[0].ten_tk %>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <%} else if(role=="admin" || role=="nv" ){%>
-                        <img src="<%= img[0].image %>" height="100px" width="100px" alt="Avatar">
+                <form action="/createstaff.ejs" method="post" enctype="multipart/form-data">
+                    <%=mess%>
                         <table>
                             <tbody>
-                                <tr>
-                                    <td>Mã nhân viên</td>
-                                    <td>:</td>
-                                    <td>
-                                        <%= detailUser[0].ma_nv %>
-                                    </td>
-                                </tr>
                                 <tr>
                                     <td>Tên nhân viên</td>
                                     <td>:</td>
                                     <td>
-                                        <%= detailUser[0].ten_nv %>
+                                        <input type="text" name="tenNv">
                                     </td>
-                                </tr>
+                                </tr><br>
                                 <tr>
                                     <td>Giới tính</td>
                                     <td>:</td>
                                     <td>
-                                        <%= detailUser[0].gioi_tinh %>
+                                        <input type="text" name="gioiTinh">
                                     </td>
-                                </tr>
+                                </tr><br>
                                 <tr>
                                     <td>Địa chỉ</td>
                                     <td>:</td>
                                     <td>
-                                        <%= detailUser[0].dia_chi %>
+                                        <input type="text" name="diaChi">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Số điện thoại</td>
                                     <td>:</td>
                                     <td>
-                                        <%= detailUser[0].sdt %>
+                                        <input type="text" name="sdt">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Ngày sinh</td>
                                     <td>:</td>
                                     <td>
-                                        <%= detailUser[0].ngay_sinh %>
+                                        <input type="text" name="ngayS">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Ngày gia nhập</td>
                                     <td>:</td>
                                     <td>
-                                        <%= detailUser[0].ngay_gianhap %>
+                                        <input type="text" name="ngayGn">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Lương</td>
                                     <td>:</td>
                                     <td>
-                                        <%= detailUser[0].luong %>
+                                        <input type="text" name="luong">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Tên tài khoản</td>
                                     <td>:</td>
                                     <td>
-                                        <%= detailUser[0].ten_tk %>
+                                        <input type="text" name="tenTk">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Mật khẩu</td>
+                                    <td>:</td>
+                                    <td>
+                                        <input type="password" name="matKhau">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Hình đại diện</td>
+                                    <td>:</td>
+                                    <td>
+                                        <input type="file" name="img">
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <%}%>
-                            <form method="post" enctype="multipart/form-data" action="/upload.ejs">
-                                <input type="file" name="img" required>
-                                <input type="text" value="<%= detailUser[0].ten_tk %>" name="tenTk" readonly>
-                                <input type="submit">
-                            </form>
+                        <div> <input type="submit"
+                                style="float:right; margin-right: 100px; height: 50px; width: 100px; position:static; margin-left: 500px; margin-top: 30px;">
+                        </div>
+                </form>
             </div>
         </div>
     </div>

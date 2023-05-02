@@ -108,6 +108,9 @@
     <br>
     <div class="classify">
         <h1>TÀI KHOẢN NHÂN VIÊN</h1>
+        <div id="createStaff">
+            <a href="/createstaff.ejs">Tạo mới</a>
+        </div>
         <table id="customers">
             <tr>
                 <th>Mã TK</th>
@@ -117,7 +120,7 @@
                 <th>Xử Lí</th>
             </tr>
             <% for(var i=0; i< dataUser.length;i++) {%>
-                <%if(dataUser[i].quyen=="admin" ){%>
+                <%if(dataUser[i].quyen=="admin" || dataUser[i].quyen=="nv" ){%>
                     <tr>
                         <td>
                             <%= dataUser[i].ma_tk %>
