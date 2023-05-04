@@ -16,7 +16,7 @@ import { Socket } from 'dgram';
 io.on('connection', function (socket) {
     console.log('user connected');
     socket.on('sendmsg', function (msg) {
-        console.log(msg);
+        //console.log(msg);
         io.emit("sendmsg", msg);
     })
     socket.on('sendname', function (msg) {

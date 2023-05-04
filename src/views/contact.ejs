@@ -56,48 +56,61 @@
                                 aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
-                            <div class="collapse navbar-collapse" id="navbarsExample04">
-                                <ul class="navbar-nav mr-auto">
-                                    <%if(role=="admin"){%>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="manager.ejs">Manager</a>
-                                        </li>
-                                        <%}%>
+                            <div class="menu-bar">
+                                <div class="collapse navbar-collapse" id="navbarsExample04">
+                                    <ul class="navbar-nav mr-auto">
+                                        <%if(role=="admin"){%>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="index.ejs"> Home </a>
+                                                <a class="nav-link" href="/manager.ejs">Manager</a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="about.ejs">About</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="furnitures.ejs">Products</a>
-                                            </li>
-                                            <li class="nav-item active">
-                                                <a class="nav-link" href="contact.ejs">Contact Us</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="chat.ejs">Chat here</a>
-                                            </li>
-                                            <%if(token !=null ){%>
-                                                <li class="nav-item d_none">
-                                                    <a class="nav-link" href="/yourprofile.ejs"><i
-                                                            class="fa fa-user-circle padd_right"
-                                                            aria-hidden="true"></i>Hello, <%=name%> (
-                                                            <%=role%> )</a>
-                                                    <a class="nav-link" href="/logout.ejs">Logout</a>
+                                            <%}%>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="/index.ejs"> Home </a>
                                                 </li>
-                                                <%}else{%>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="/about.ejs">About</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="/furnitures.ejs">Products</a>
+                                                    <div class="sub-nav">
+                                                        <ul>
+                                                            <li><a class="nav-link" href="/vproducts.ejs/1">Vehicle
+                                                                    products</a>
+                                                            </li>
+                                                            <li><a class="nav-link" href="/repair.ejs">Repair
+                                                                    Service</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                <li class="nav-item active">
+                                                    <a class="nav-link" href="/contact.ejs">Contact Us</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="/chat.ejs">Chat here</a>
+                                                </li>
+                                                <%if(token !=null ){%>
                                                     <li class="nav-item d_none">
-                                                        <a class="nav-link" href="signin.ejs"><i
+                                                        <a class="nav-link" href="/yourprofile.ejs"><i
                                                                 class="fa fa-user-circle padd_right"
-                                                                aria-hidden="true"></i>Login</a>
+                                                                aria-hidden="true"></i>Hello, <%=name%> (
+                                                                <%=role%> )</a>
+                                                        <a class="nav-link" href="/logout.ejs">Logout</a>
                                                     </li>
-                                                    <%}%>
+                                                    <%}else{%>
                                                         <li class="nav-item d_none">
-                                                            <a class="nav-link" href="#"><i class="fa fa-search"
-                                                                    aria-hidden="true"></i></a>
+                                                            <a class="nav-link" href="/signin.ejs"><i
+                                                                    class="fa fa-user-circle padd_right"
+                                                                    aria-hidden="true"></i>Login</a>
+                                                            <a class="nav-link" href="/signin.ejs">To join us</a>
                                                         </li>
-                                </ul>
+                                                        <%}%>
+                                                            <li class="nav-item d_none">
+                                                                <a class="nav-link" href="#"><i class="fa fa-search"
+                                                                        aria-hidden="true"></i></a>
+                                                            </li>
+                                    </ul>
+                                </div>
                             </div>
                         </nav>
                     </div>

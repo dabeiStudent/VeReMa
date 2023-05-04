@@ -338,6 +338,32 @@ ul.btn li:last-child {
      color: #51fe44;
 }
 
+/*  */
+.sub-nav {
+     display: none;
+}
+
+.menu-bar ul li:hover .sub-nav {
+     display: block;
+     position: absolute;
+     margin-top: 10px;
+     margin-left: -15px
+}
+
+.menu-bar ul li:hover .sub-nav ul {
+     display: block;
+     margin: 10px;
+}
+
+.menu-bar ul li:hover .sub-nav ul li {
+     width: 300px;
+     padding: 10px;
+     border-bottom: 1px dotted #fff;
+     background: transparent;
+     border-radius: 0;
+     text-align: left;
+}
+
 .navbar-expand-md .navbar-nav {
      padding-right: 10px;
 }
@@ -632,6 +658,7 @@ ul.btn li:last-child {
 
 .wedo {
      padding-top: 70px;
+     background-color: rgb(64, 163, 209)
 }
 
 .wedo .titlepage p {
@@ -1437,6 +1464,15 @@ body {
      margin-left: 390px;
 }
 
+.classify {
+     background-color: rgb(64, 163, 209);
+}
+
+.prod {
+     background-color: rgb(173, 209, 226);
+     margin-top: -15px;
+}
+
 #addp a {
      color: black;
      text-align: center;
@@ -1473,7 +1509,7 @@ body {
 }
 
 #imap {
-     background-color: whitesmoke;
+     background-color: rgb(64, 163, 209);
      text-align: center;
 }
 

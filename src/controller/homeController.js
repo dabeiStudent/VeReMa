@@ -14,42 +14,10 @@ let getHome = async (req, res) => {
 let getAbout = async (req, res) => {
     var token = req.cookies["token"];
     if (token != null) {
-        let dataUser;
-        connection.query(
-            'SELECT * FROM nhan_vien',
-            function (err, results, fields) {
-                //console.log(results);
-                //for mobile
-                //return res.json(results)
-                dataUser = results;
-            }
-        );
         const rs = jwt.verify(token, 'mk');
-        connection.query(
-            'Select ten_tk, quyen from ds_tai_khoan where ma_tk = ?', [rs.id],
-            function (err, results, fields) {
-                if (results) {
-                    var name = results[0].ten_tk;
-                    var role = results[0].quyen;
-                    return res.render('about.ejs', { token: token, name: name, role: role, dataUser: dataUser });
-                } else {
-                    return res.render('about.ejs', { token: null, role: null, name: null });
-                }
-            }
-        )
-    }
-    else {
-        let dataUser;
-        connection.query(
-            'SELECT * FROM nhan_vien',
-            function (err, results, fields) {
-                //console.log(results);
-                //for mobile
-                //return res.json(results)
-                dataUser = results;
-                return res.render('about.ejs', { token: null, dataUser: dataUser, role: null });
-            }
-        );
+        return res.render('about.ejs', { token: token, name: rs.name, role: rs.role });
+    } else {
+        return res.render('about.ejs', { token: null, name: null, role: null });
     }
 }
 let getContact = async (req, res) => {
@@ -106,7 +74,7 @@ let getMana = async (req, res) => {
             }
         )
     } else {
-        return res.send('AI CHO XEM');
+        return res.redirect('/');
     }
 }
 
