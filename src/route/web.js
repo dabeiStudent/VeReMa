@@ -5,7 +5,8 @@ const multer = require('multer');
 const upload = multer({ dest: './src/public/images/' });
 import {
     getHome, getAbout, getContact, postContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
-    getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod, getDelprod, postDelprod, getConfirmdel, postConfirmdel, getStaffcreate, postStaffcreate
+    getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod, getDelprod, postDelprod, getConfirmdel, postConfirmdel, getStaffcreate, postStaffcreate,
+    getRepair, deleteAccount, postDeleteaccount
 } from '../controller/homeController';
 let router = express.Router();
 router.use(cookieParser());
@@ -19,7 +20,10 @@ const initWebRoute = (app) => {
     router.get('/manager.ejs', getMana);
     router.get('/vproducts.ejs/:page', getVproduct);
     router.get('/vproducts.ejs/:catename/:page', getCateprod);
+    router.get('/repair.ejs', getRepair);
     router.get('/detail/user/:username', getProfile);
+    router.get('/delete/user/:username/:role', deleteAccount);
+    router.post('/delete/user/:username/:role', postDeleteaccount);
     router.get('/update/user/:username', updateProfile);
     router.post('/update.ejs', postUpdate);
     router.post('/upload.ejs', upload.single('img'), uploadImg);

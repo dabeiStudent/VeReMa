@@ -188,7 +188,15 @@ let getCateprod = async (req, res) => {
         })
     }
 }
-
+let getRepair = async (req, res) => {
+    const token = req.cookies["token"];
+    if (token != null) {
+        const rs = jwt.verify(token, 'mk');
+        return res.render('repair.ejs', { token: token, name: rs.name, role: rs.role });
+    } else {
+        return res.render('repair.ejs', { token: null, name: null, role: null });
+    }
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Xu li cac van de ve tai khoan...
@@ -290,6 +298,44 @@ let getProfile = async (req, res) => {
         }
     } else {
         return res.redirect('/');
+    }
+}
+let deleteAccount = async (req, res) => {
+    var token = req.cookies["token"];
+    var username = req.params.username;
+    const role = req.params.role;
+    if (token) {
+        return res.render('deleteuser.ejs', { tenTk: username, role: role });
+    }
+    else {
+        return res.redirect('/');
+    }
+}
+let postDeleteaccount = async (req, res) => {
+    const username = req.params.username;
+    const role = req.params.role;
+    console.log(role);
+    if (role == "nv") {
+        connection.query('DELETE from nhan_vien where ten_tk =?', [username], function (err, results) {
+            if (results) {
+                connection.query('DELETE from ds_tai_khoan where ten_tk =?', [username], function (err, results) {
+                    if (results) {
+                        return res.redirect('/manager.ejs');
+                    }
+                })
+            }
+        })
+    }
+    else if (role == "kh") {
+        connection.query('DELETE from khach_hang where ten_tk=?', [username], function (err, results) {
+            if (results) {
+                connection.query('DELETE from ds_tai_khoan where ten_tk =?', [username], function (err, results) {
+                    if (results) {
+                        return res.redirect('/manager.ejs');
+                    }
+                })
+            }
+        })
     }
 }
 let updateProfile = async (req, res, next) => {
@@ -671,5 +717,6 @@ let chatApp = async (req, res, next) => {
 
 module.exports = {
     getHome, getAbout, getContact, postContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
-    getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod, getDelprod, postDelprod, getConfirmdel, postConfirmdel, getStaffcreate, postStaffcreate
+    getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod, getDelprod, postDelprod, getConfirmdel, postConfirmdel, getStaffcreate, postStaffcreate,
+    getRepair, deleteAccount, postDeleteaccount
 }
