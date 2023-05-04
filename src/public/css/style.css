@@ -648,7 +648,13 @@ ul.btn li:last-child {
 }
 
 .work figure img {
-     width: 100%;
+     display: block;
+     object-fit: cover;
+     margin-left: auto;
+     margin-right: auto;
+     width: 350px;
+     height: 350px;
+     border-radius: 20px;
 }
 
 .work_text {
@@ -1683,6 +1689,8 @@ body {
      border: 1px solid black;
      font-weight: bold;
 }
+
+
 
 /* End */
 

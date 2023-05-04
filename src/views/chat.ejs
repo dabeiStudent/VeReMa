@@ -1,57 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Chua hoan thien -->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Chat App</title>
-    <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
-    <script defer src="script.js"></script>
-    <style>
-        body {
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
 
-        #message-container {
-            width: 80%;
-            max-width: 1200px;
+        socket.on("sendmsg", function (msg) {
+            document.getElementById("message").innerHTML += msg + '<br>';
+        })
+        function sendmsg() {
+            socket.emit("sendmsg", document.getElementById("chat-mes").value);
+            document.getElementById("chat-mes").innerHTML = null;
         }
-
-        #message-container div {
-            background-color: #CCC;
-            padding: 5px;
+        function getcookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) alert(parts.pop().split(';').shift());
         }
-
-        #message-container div:nth-child(2n) {
-            background-color: #FFF;
-        }
-
-        #send-container {
-            position: fixed;
-            padding-bottom: 30px;
-            bottom: 0;
-            background-color: white;
-            max-width: 1200px;
-            width: 80%;
-            display: flex;
-        }
-
-        #message-input {
-            flex-grow: 1;
-        }
-    </style>
+    </script>
+    <link rel="stylesheet" href="/css/chat.css">
 </head>
 
 <body>
-    <div id="message-container"></div>
-    <form id="send-container">
-        <input type="text" id="message-input">
-        <button type="submit" id="send-button">Send</button>
-    </form>
+    <div><button onclick="getcookie('token')"><i class="fas fa-paper-plane"></i> show cookie</button></a></div>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1><i class="fas fa-smile"></i> ChatCord</h1>
+            <a href="/index.ejs" class="btn">Leave Room</a>
+        </header>
+        <main class="chat-main">
+            <div class="chat-sidebar">
+                <h3><i class="fas fa-comments"></i> Room Name:</h3>
+                <h2 id="room-name">JavaScript</h2>
+                <h3><i class="fas fa-users"></i> Users</h3>
+                <ul id="users">
+                    <li>Brad</li>
+                    <li>John</li>
+                    <li>Mary</li>
+                    <li>Paul</li>
+                    <li>Mike</li>
+                </ul>
+            </div>
+            <div id="message"></div>
+        </main>
+        <div class="chat-form-container">
+            <input id="chat-mes" type="text" placeholder="Enter Message" required autocomplete="off" />
+            <button onclick="sendmsg()"><i class="fas fa-paper-plane"></i> Send</button>
+            <div id="message"></div>
+        </div>
+    </div>
 </body>
 
 </html>
