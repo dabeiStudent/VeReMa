@@ -18,20 +18,21 @@
             socket.emit("sendmsg", document.getElementById("chat-mes").value);
             document.getElementById("chat-mes").innerHTML = null;
         }
-        function getcookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) alert(parts.pop().split(';').shift());
+        function getcookie(token) {
+            alert(token);
         }
     </script>
     <link rel="stylesheet" href="/css/chat.css">
 </head>
 
 <body>
-    <div><button onclick="getcookie('token')"><i class="fas fa-paper-plane"></i> show cookie</button></a></div>
+    <div><button onclick="getcookie(document.cookie)"><i class="fas fa-paper-plane"></i> show
+            cookie</button></a>
+    </div>
     <div class="chat-container">
         <header class="chat-header">
-            <h1><i class="fas fa-smile"></i> VeReMa chat service</h1>
+            <h1><i class="fas fa-smile"></i> VeReMa chat service
+            </h1>
             <a href="/index.ejs" class="btn">Leave Room</a>
         </header>
         <main class="chat-main">

@@ -688,7 +688,13 @@ let postConfirmdel = async (req, res) => {
     })
 }
 let chatApp = async (req, res, next) => {
-    return res.render('chat.ejs');
+    const token = req.cookies["token"];
+    if (token) {
+        return res.render('chat.ejs', { token: token });
+    } else {
+        return res.render('chat.ejs', { token: null });
+    }
+
 }
 
 module.exports = {
