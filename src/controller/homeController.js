@@ -192,9 +192,17 @@ let getRepair = async (req, res) => {
     const token = req.cookies["token"];
     if (token != null) {
         const rs = jwt.verify(token, 'mk');
-        return res.render('repair.ejs', { token: token, name: rs.name, role: rs.role });
+        connection.query('Select * from dich_vu', function (err, results) {
+            if (results) {
+                return res.render('repair.ejs', { token: token, name: rs.name, role: rs.role, service: results });
+            }
+        })
     } else {
-        return res.render('repair.ejs', { token: null, name: null, role: null });
+        connection.query('Select * from dich_vu', function (err, results) {
+            if (results) {
+                return res.render('repair.ejs', { token: null, name: null, role: null, service: results });
+            }
+        })
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -56,10 +56,10 @@
                                             <li class="nav-item ">
                                                 <a class="nav-link" href="index.ejs"> Home </a>
                                             </li>
-                                            <li class="nav-item active">
+                                            <li class="nav-item">
                                                 <a class="nav-link" href="about.ejs">About</a>
                                             </li>
-                                            <li class="nav-item">
+                                            <li class="nav-item active">
                                                 <a class="nav-link" href="furnitures.ejs">Products</a>
                                             </li>
                                             <li class="nav-item">
@@ -95,8 +95,61 @@
             </div>
         </div>
     </header>
+    <div class="addproduct">
+        <div class="rounded p-4 rounded mb-4">
+            <%if(role=="admin"){%>
+                <div id="addp">
+                    <!-- <strong><a href="/addprod.ejs">Add new item</a></strong> -->
+                </div>
+                <%}%>
+        </div>
+        <div class="rounded p-4 rounded mb-4">
+            <%if(role=="admin"){%>
+                <div id="addp">
+                    <!-- <strong><a href="/updateprod.ejs">Update item</a></strong> -->
+                </div>
+                <%}%>
+        </div>
+    </div>
+    <div class="addproductleft">
+        <div class="rounded p-4 rounded mb-4">
+            <div id="cateprod">
+                <h1>Categories: </h1>
+                <% if(service !=null){%>
+                    <% for(let i=0; i< service.length; i++){%>
+                        <a href="#">
+                            <%=service[i].ten%>
+                        </a><br>
+                        <%}}%>
+            </div>
+        </div>
+    </div>
+    <div class="messcate">
+        <h1 style="font-style: normal;">
+            Welcome to our repair service
+        </h1>
+    </div>
+    <div class="row mb-5">
+        <% if(service !=null){%>
+            <% for(let i=0; i< service.length; i++){%>
+                <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+                    <div id="pchange" class="block-4 text-center border">
+                        <figure class="block-4-image">
+                            <img src="images/banner2.jpg" alt="Image placeholder" width="100px" height="100px"
+                                class="img-fluid">
+                        </figure>
+                        <div class="block-4-text p-4">
+                            <p class="text-primary font-weight-bold">
+                                Dịch vụ: <%=service[i].mo_ta%>
+                            </p><br>
+                        </div>
+                    </div>
+                </div>
+                <%}%>
+                    <%}%>
+    </div>
+
     <footer id="contact">
-        Here is repair page
         <div class="copyright">
             <div class="container">
                 <div class="row">
