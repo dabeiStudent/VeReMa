@@ -1466,12 +1466,11 @@ body {
 }
 
 .classify {
-     background-color: rgb(64, 163, 209);
+     background-color: wheat;
 }
 
 .prod {
-     background-color: rgb(173, 209, 226);
-     margin-top: -15px;
+     background-color: wheat;
 }
 
 #addp a {
