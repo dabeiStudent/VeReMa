@@ -552,6 +552,14 @@ let postStaffcreate = async (req, res) => {
         return res.render('/');
     }
 }
+let postDeletemess = async (req, res) => {
+    const id = req.params.idmess;
+    connection.query('delete from lien_lac where ma_ll =?', [id], function (err, results) {
+        if (results) {
+            return res.redirect('/manager.ejs');
+        }
+    })
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Xử lí các vấn đề về dịch vụ
@@ -700,8 +708,9 @@ let chatApp = async (req, res, next) => {
 
 }
 
+
 module.exports = {
     getHome, getAbout, getContact, postContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
     getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod, getDelprod, postDelprod, getConfirmdel, postConfirmdel, getStaffcreate, postStaffcreate,
-    getRepair, deleteAccount, postDeleteaccount
+    getRepair, deleteAccount, postDeleteaccount, postDeletemess
 }
