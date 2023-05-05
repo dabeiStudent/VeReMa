@@ -14,11 +14,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- bootstrap css -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <!-- style css -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <!-- Responsive-->
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="/css/responsive.css">
     <!-- fevicon -->
     <link rel="icon" href="/icon/batman-icon.png" type="image/gif" />
     <!-- Scrollbar Custom CSS -->
@@ -45,7 +45,7 @@
                             <div class="full">
                                 <div class="center-desk">
                                     <div class="logo">
-                                        <a href="index.ejs"><img src="images/logo1.png" style="border-radius: 10%;"
+                                        <a href="/index.ejs"><img src="/images/logo1.png" style="border-radius: 10%;"
                                                 alt="#" /></a>
                                     </div>
                                 </div>
@@ -197,44 +197,46 @@
                     <% }} %>
         </table><br><br>
         <h1>LỜI NHẮN</h1>>
-        <table id="customers">
-            <tr>
-                <th>Mã liên lạc</th>
-                <th>Tên Tk</th>
-                <th>Tên</th>
-                <th>Email</th>
-                <th>Sdt</th>
-                <th>Lời nhắn</th>
-                <th>Xử lí</th>
-            </tr>
-            <% for(var i=0; i< mess.length;i++) {%>
+        <div id="mess">
+            <table id="customers">
                 <tr>
-                    <td>
-                        <%= mess[i].ma_ll %>
-                    </td>
-                    <td>
-                        <%= mess[i].ten_tk %>
-                    </td>
-                    <td>
-                        <%= mess[i].ten %>
-                    </td>
-                    <td>
-                        <%= mess[i].email %>
-                    </td>
-                    <td>
-                        <%= mess[i].sdt %>
-                    </td>
-                    <td>
-                        <%= mess[i].noi_dung %>
-                    </td>
-                    <td>
-                        <form action="/deletemess.ejs/<%=mess[i].ma_ll%>" method="post">
-                            <button type="submit">Xóa</button>
-                        </form>
-                    </td>
+                    <th>Mã liên lạc</th>
+                    <th>Tên Tk</th>
+                    <th>Tên</th>
+                    <th>Email</th>
+                    <th>Sdt</th>
+                    <th>Lời nhắn</th>
+                    <th>Xử lí</th>
                 </tr>
-                <% } %>
-        </table><br><br>
+                <% for(var i=0; i< mess.length;i++) {%>
+                    <tr>
+                        <td>
+                            <%= mess[i].ma_ll %>
+                        </td>
+                        <td>
+                            <%= mess[i].ten_tk %>
+                        </td>
+                        <td>
+                            <%= mess[i].ten %>
+                        </td>
+                        <td>
+                            <%= mess[i].email %>
+                        </td>
+                        <td>
+                            <%= mess[i].sdt %>
+                        </td>
+                        <td>
+                            <%= mess[i].noi_dung %>
+                        </td>
+                        <td>
+                            <form action="/deletemess.ejs/<%=mess[i].ma_ll%>" method="post">
+                                <button type="submit">Xóa</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% } %>
+            </table><br><br>
+        </div>
     </div>
     <!--  footer -->
     <div class="footer">

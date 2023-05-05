@@ -556,7 +556,7 @@ let postDeletemess = async (req, res) => {
     const id = req.params.idmess;
     connection.query('delete from lien_lac where ma_ll =?', [id], function (err, results) {
         if (results) {
-            return res.redirect('/manager.ejs');
+            return res.redirect('/manager.ejs/#mess');
         }
     })
 }
