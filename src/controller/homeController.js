@@ -583,6 +583,9 @@ let postAddprod = async (req, res, next) => {
     const uimg = `/images/${img}`;
     const mt = req.body.mieuTa;
     const pl = req.body.phanLoai;
+    if (gia < 0) {
+        return res.render('addprod.ejs', { message: 'Gia khong hop le', role: 'admin' });
+    }
     connection.query('Insert into ds_phu_tung (ten_pt,don_gia,so_luong,image,description, loai_pt) values (?,?,?,?,?,?)', [ten, gia, sl, uimg, mt, pl],
         function (err, results, fields) {
             if (results) {
