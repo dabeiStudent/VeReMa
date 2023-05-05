@@ -69,10 +69,13 @@ let getMana = async (req, res) => {
                 //for mobile
                 //return res.json(results)
                 dataUser = results;
-                return res.render('manager.ejs', { token: token, name: rs.name, role: rs.role, dataUser: dataUser });
+                // return res.render('manager.ejs', { token: token, name: rs.name, role: rs.role, dataUser: dataUser });
                 //console.log(dataUser)
             }
         )
+        connection.query('Select * from lien_lac', function (err, results) {
+            return res.render('manager.ejs', { token: token, name: rs.name, role: rs.role, dataUser: dataUser, mess: results });
+        })
     } else {
         return res.redirect('/');
     }

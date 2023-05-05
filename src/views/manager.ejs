@@ -196,6 +196,39 @@
                     </tr>
                     <% }} %>
         </table><br><br>
+        <h1>LỜI NHẮN</h1>>
+        <table id="customers">
+            <tr>
+                <th>Mã liên lạc</th>
+                <th>Tên Tk</th>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Sdt</th>
+                <th>Lời nhắn</th>
+            </tr>
+            <% for(var i=0; i< mess.length;i++) {%>
+                <tr>
+                    <td>
+                        <%= mess[i].ma_ll %>
+                    </td>
+                    <td>
+                        <%= mess[i].ten_tk %>
+                    </td>
+                    <td>
+                        <%= mess[i].ten %>
+                    </td>
+                    <td>
+                        <%= mess[i].email %>
+                    </td>
+                    <td>
+                        <%= mess[i].sdt %>
+                    </td>
+                    <td>
+                        <%= mess[i].noi_dung %>
+                    </td>
+                </tr>
+                <% } %>
+        </table><br><br>
     </div>
     <!--  footer -->
     <div class="footer">
