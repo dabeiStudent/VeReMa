@@ -659,7 +659,7 @@ ul.btn li:last-child {
 
 .wedo {
      padding-top: 70px;
-     background-color: rgb(64, 163, 209)
+     background-color: tan;
 }
 
 .wedo .titlepage p {
@@ -1466,11 +1466,12 @@ body {
 }
 
 .classify {
-     background-color: wheat;
+     background-color: white;
 }
 
 .prod {
-     background-color: wheat;
+     background-color: white;
+
 }
 
 #addp a {
@@ -1509,7 +1510,7 @@ body {
 }
 
 #imap {
-     background-color: rgb(64, 163, 209);
+     background-color: white;
      text-align: center;
 }
 
