@@ -341,6 +341,7 @@ ul.btn li:last-child {
 /*  */
 .sub-nav {
      display: none;
+     background-color: #3a7ada;
 }
 
 .menu-bar ul li:hover .sub-nav {
