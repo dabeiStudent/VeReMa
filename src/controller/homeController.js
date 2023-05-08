@@ -98,7 +98,15 @@ let getManage = async (req, res) => {
                         connection.query('Select * from nhan_vien where ten_tk != "admin"', function (err, results, fields) {
                             if (results) {
                                 const staff = results;
-                                return res.render('management.ejs', { admin: admin, accounts: accounts, today: today, staff: staff });
+                                connection.query('Select * from ds_phu_tung', function (err, results) {
+                                    if (results) {
+                                        const pt = results;
+                                        connection.query('Select * from lien_lac', function (err, results) {
+                                            const ll = results;
+                                            return res.render('management.ejs', { admin: admin, accounts: accounts, today: today, staff: staff, pt: pt, ll: ll });
+                                        })
+                                    }
+                                })
                             }
                         })
                     }
@@ -108,6 +116,34 @@ let getManage = async (req, res) => {
     } else {
         return res.redirect('index.ejs');
     }
+}
+let postOrder = async (req, res) => {
+    const fullname = req.body.tenKh;
+    const address = req.body.diaChi;
+    const phonenumber = req.body.soDt;
+    const username = req.body.tenTk;
+    const password = req.body.matKhau;
+    const hashpass = await argon2.hash(password);
+    connection.query(
+        'Insert into ds_tai_khoan (ten_tk, mat_khau, image, quyen) values (?,?,?,?)', [username, hashpass, "", 'kh'],
+        function (err, results, fields) {
+            if (results) {
+                connection.query(
+                    'Insert into khach_hang (ten_kh,dia_chi,sdt, ten_tk) values(?,?,?,?)', [fullname, address, phonenumber, username],
+                    function (err, results, fields) {
+                        if (results) {
+                            return res.redirect('/management.ejs');
+                        } else {
+                            return res.redirect('/management.ejs');
+                        }
+                    }
+                )
+            }
+            else {
+                return res.render('signup.ejs', { err: 'Ten dang nhap da ton tai' });
+            }
+        }
+    )
 }
 let getVproduct = async (req, res) => {
     var token = req.cookies["token"];
@@ -743,5 +779,5 @@ let chatApp = async (req, res, next) => {
 module.exports = {
     getHome, getAbout, getContact, postContact, getFurni, getMana, getManage, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
     getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod, getDelprod, postDelprod, getConfirmdel, postConfirmdel, getStaffcreate, postStaffcreate,
-    getRepair, deleteAccount, postDeleteaccount, postDeletemess
+    getRepair, deleteAccount, postDeleteaccount, postDeletemess, postOrder
 }

@@ -19,7 +19,8 @@
                 </ul>
             </div>
         </header>
-        <div class="left-nav">
+        <button onclick="openNav()" id="admin">Quản lý</button>
+        <div class="left-nav" id="left-nav">
             <h1>
                 <img src="<%=admin[0].image%>" alt="admin"><br>
                 <a>
@@ -28,31 +29,57 @@
             </h1><br>
             <div id="action-nav">
                 <button onclick="location.href = '/management.ejs';">Trang quản lí</button>
-                <button onclick="openOrderForm()">Thêm mới phương tiện</button>
+                <button onclick="openOrderForm()">Thêm phiếu sửa xe</button>
             </div>
+            <button onclick="closeNav()" id="admin-close">Ẩn</button>
         </div>
         <div class="main-page">
             <div class="first-line">
                 <div class="form-new-order" id="order-form">
-                    <form action="/" method="post">
-                        <h1>Phiếu nhận xe</h1>
-                        <label><b>Mã nhân viên</b></label>
-                        <select name="maNv">
-                            <%for(var i=0;i< staff.length; i++){%>
-                                <option value="<%=staff[i].ma_nv%>">
-                                    <%=staff[i].ma_nv%>
-                                </option>
-                                <%}%>
-                        </select><br>
-                        <label><b>Tên xe</b></label>
-                        <input type="text" placeholder="Nhập tên xe" name="tenXe" required><br>
-                        <label><b>Ngày nhận xe</b></label>
-                        <input type="text" name="ngayNhan" value="<%=today%>" required><br>
-
-
-
+                    <div class="menu-form">
+                        <button type="button" class="btn cancel" onclick="closeOrderForm()"><i
+                                class="fas fa-times-circle"></i></button>
+                    </div>
+                    <form action="/management.ejs" method="post">
+                        <h1>Phiếu sửa xe</h1>
+                        <div class="left-form">
+                            <label><b>Mã nhân viên</b></label>
+                            <select name="maNv">
+                                <%for(var i=0;i< staff.length; i++){%>
+                                    <option value="<%=staff[i].ma_nv%>">
+                                        <%=staff[i].ma_nv%>
+                                    </option>
+                                    <%}%>
+                            </select><br>
+                            <label><b>Tên xe</b></label>
+                            <input type="text" placeholder="Nhập tên xe" name="tenXe" required><br>
+                            <label><b>Biển số xe</b></label>
+                            <input type="text" placeholder="Nhập biển số xe" name="soXe" required><br>
+                            <label><b>Mô tả</b></label>
+                            <input type="text" placeholder="Hiện trạng xe" name="moTa" required><br>
+                            <label><b>Ngày nhận xe</b></label>
+                            <input type="text" name="ngayNhan" value="<%=today%>" required><br>
+                            <label><b>Thời gian dự kiến hoàn thành</b></label>
+                            <input type="text" placeholder="Thời gian dự kiến" name="thoiGian" required><br>
+                            <label><b>Dịch vụ</b></label>
+                            <input type="text" placeholder="Dịch vụ" name="dichVu" required><br>
+                        </div>
+                        <div class="right-form">
+                            <label><b>Tên khách hàng</b></label>
+                            <input type="text" placeholder="Nhập tên khách hàng" name="tenKh" required><br>
+                            <label><b>Địa chỉ</b></label>
+                            <input type="text" placeholder="Địa chỉ" name="diaChi" required><br>
+                            <label><b>Số điện thoại</b></label>
+                            <input type="text" placeholder="Số điện thoại" name="soDt" required><br>
+                            <label><b>Tên tài khoản</b></label>
+                            <input type="text" placeholder="Nhập tên tài khoản" name="tenTk" required><br>
+                            <label><b>Mật khẩu</b></label>
+                            <input type="text" placeholder="Nhập mật khẩu" name="matKhau" required><br>
+                            <label><b>Tổng tiền dự kiến</b></label>
+                            <input id="tongTien" placeholder="Chi phí dự kiến" type="text" name="tongTien" required><br>
+                        </div>
+                        <button type="button" class="btn cancel" onclick="checkValid()">Check</button>
                         <button type="submit" class="btn">Thêm</button>
-                        <button type="button" class="btn cancel" onclick="closeOrderForm()">Đóng</button>
                     </form>
                 </div>
                 <div class="all-user-label">
@@ -84,6 +111,84 @@
                         </table>
                     </div>
                 </div>
+                <div class="all-product-label">
+                    <h1>Danh sách phụ tùng</h1>
+                    <div class="all-product">
+                        <table>
+                            <tr>
+                                <th>Mã phụ tùng</th>
+                                <th>Tên phụ tùng</th>
+                                <th>Đơn giá</th>
+                                <th>Số lượng</th>
+                                <th>Hình ảnh</th>
+                                <th>Loại phụ tùng</th>
+                                <th>Mô tả</th>
+                            </tr>
+                            <%for(var i=0; i< pt.length; i++){%>
+                                <tr>
+                                    <td>
+                                        <%=pt[i].ma_pt%>
+                                    </td>
+                                    <td>
+                                        <%=pt[i].ten_pt%>
+                                    </td>
+                                    <td>
+                                        <%=pt[i].don_gia%>
+                                    </td>
+                                    <td>
+                                        <%=pt[i].so_luong%>
+                                    </td>
+                                    <td>
+                                        <img src="<%=pt[i].image%>">
+                                    </td>
+                                    <td>
+                                        <%=pt[i].loai_pt%>
+                                    </td>
+                                    <td>
+                                        <%=pt[i].description%>
+                                    </td>
+                                </tr>
+                                <%}%>
+                        </table>
+                    </div>
+                </div>
+                <div class="all-contact-label">
+                    <h1>Tin nhắn</h1>
+                    <div class="all-contact">
+                        <table>
+                            <tr>
+                                <th>Tên tài khoản</th>
+                                <th>Mã tin nhắn</th>
+                                <th>Tên người gửi</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Nội dung</th>
+                            </tr>
+                            <%for(var i=0; i< ll.length; i++){%>
+                                <tr>
+                                    <td>
+                                        <%=ll[i].ten_tk%>
+                                    </td>
+                                    <td>
+                                        <%=ll[i].ma_ll%>
+                                    </td>
+                                    <td>
+                                        <%=ll[i].ten%>
+                                    </td>
+                                    <td>
+                                        <%=ll[i].email%>
+                                    </td>
+                                    <td>
+                                        <%=ll[i].sdt%>
+                                    </td>
+                                    <td>
+                                        <%=ll[i].noi_dung%>
+                                    </td>
+                                </tr>
+                                <%}%>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -97,6 +202,20 @@
 
         function closeOrderForm() {
             document.getElementById("order-form").style.display = "none";
+        }
+        function openNav() {
+            document.getElementById("left-nav").style.display = "block";
+        }
+        function closeNav() {
+            document.getElementById("left-nav").style.display = "none";
+        }
+        function checkValid() {
+            const v = document.getElementById("tongTien").value;
+            if (v < 0) {
+                alert('So tien khong hop le');
+            } else {
+                alert('Hop le');
+            }
         }
     </script>
 </body>
