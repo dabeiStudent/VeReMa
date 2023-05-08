@@ -170,10 +170,14 @@ header ul li {
     height: 30px;
 }
 
-.menu-form button {
+.menu-form a {
     float: right;
     font-size: 25px;
-    margin-right: 20px;
+    margin-top: 20px;
+    margin-right: 5px;
+    color: red;
+    background-color: black;
+    border-radius: 90%;
 }
 
 /* All account */
