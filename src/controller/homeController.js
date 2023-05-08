@@ -84,9 +84,25 @@ let getManage = async (req, res) => {
     const token = req.cookies["token"];
     if (token) {
         const rs = jwt.verify(token, "mk");
-        connection.query('Select image, ten_tk from ds_tai_khoan where ten_tk="admin"', function (err, results) {
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        const day = date.getDate();
+        const today = `${year}-${month + 1}-${day}`;
+        connection.query('Select * from ds_tai_khoan where ten_tk="admin"', function (err, results) {
             if (results) {
-                return res.render('management.ejs', { admin: results });
+                const admin = results; //admin
+                connection.query('Select * from ds_tai_khoan', function (err, results, fields) {
+                    if (results) {
+                        const accounts = results;
+                        connection.query('Select * from nhan_vien where ten_tk != "admin"', function (err, results, fields) {
+                            if (results) {
+                                const staff = results;
+                                return res.render('management.ejs', { admin: admin, accounts: accounts, today: today, staff: staff });
+                            }
+                        })
+                    }
+                })
             }
         })
     } else {

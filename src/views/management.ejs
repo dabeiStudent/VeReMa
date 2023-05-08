@@ -28,13 +28,77 @@
             </h1><br>
             <div id="action-nav">
                 <button onclick="location.href = '/management.ejs';">Trang quản lí</button>
-                <button onclick="location.href = '/management.ejs';">Thêm mới phương tiện</button>
+                <button onclick="openOrderForm()">Thêm mới phương tiện</button>
             </div>
         </div>
         <div class="main-page">
+            <div class="first-line">
+                <div class="form-new-order" id="order-form">
+                    <form action="/" method="post">
+                        <h1>Phiếu nhận xe</h1>
+                        <label><b>Mã nhân viên</b></label>
+                        <select name="maNv">
+                            <%for(var i=0;i< staff.length; i++){%>
+                                <option value="<%=staff[i].ma_nv%>">
+                                    <%=staff[i].ma_nv%>
+                                </option>
+                                <%}%>
+                        </select><br>
+                        <label><b>Tên xe</b></label>
+                        <input type="text" placeholder="Nhập tên xe" name="tenXe" required><br>
+                        <label><b>Ngày nhận xe</b></label>
+                        <input type="text" name="ngayNhan" value="<%=today%>" required><br>
 
+
+
+                        <button type="submit" class="btn">Thêm</button>
+                        <button type="button" class="btn cancel" onclick="closeOrderForm()">Đóng</button>
+                    </form>
+                </div>
+                <div class="all-user-label">
+                    <h1>Danh sách tài khoản</h1>
+                    <div class="all-user" id="accounts-form">
+                        <table>
+                            <tr>
+                                <th>Mã tài khoản</th>
+                                <th>Tên tài khoản</th>
+                                <th>Hình ảnh</th>
+                                <th>Quyền</th>
+                            </tr>
+                            <%for(var i=0; i< accounts.length; i++){%>
+                                <tr>
+                                    <td>
+                                        <%=accounts[i].ma_tk%>
+                                    </td>
+                                    <td>
+                                        <%=accounts[i].ten_tk%>
+                                    </td>
+                                    <td>
+                                        <img src="<%=accounts[i].image%>">
+                                    </td>
+                                    <td>
+                                        <%=accounts[i].quyen%>
+                                    </td>
+                                </tr>
+                                <%}%>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+
+    <!-- SCRIPTS PLACE -->
+    <script>
+        function openOrderForm() {
+            document.getElementById("order-form").style.display = "block";
+        }
+
+        function closeOrderForm() {
+            document.getElementById("order-form").style.display = "none";
+        }
+    </script>
 </body>
 
 </html>

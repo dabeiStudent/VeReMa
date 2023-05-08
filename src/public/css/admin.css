@@ -1,5 +1,6 @@
+/* Header */
 .admin-home header {
-    background-color: rgb(68, 92, 224);
+    background-color: rgb(32, 91, 255);
     margin: -8px 0 0 -8px;
     height: 50px;
     width: 100%;
@@ -25,6 +26,7 @@ header ul li {
     text-decoration: none;
 }
 
+/*Left navigation bar*/
 .left-nav {
     float: left;
     background-color: rgb(99, 90, 75);
@@ -57,11 +59,90 @@ header ul li {
 
 .left-nav button:hover {
     background-color: black;
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
+/* Main center page */
 .main-page {
     background-color: white;
     height: 100%;
     width: 100%;
+}
+
+.form-new-order {
+    text-align: center;
+    border: 5px groove black;
+    border-radius: 5%;
+    background-color: #a7a7a7;
+    margin: auto;
+    width: 500px;
+    top: 50%;
+    left: 50%;
+    vertical-align: middle;
+    display: none;
+    font-family: Arial, Helvetica, sans-serif;
+    position: fixed;
+    margin-left: -250px;
+    margin-top: -200px;
+}
+
+
+.form-new-order input {
+    background-color: #ddd;
+    outline: none;
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+    text-align: center;
+}
+
+.form-new-order button {
+    width: 80px;
+    height: 40px;
+}
+
+/* All account */
+.first-line {
+    display: inline;
+}
+
+.all-user-label h1 {
+    margin-left: 350px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-bottom: 3px dotted black;
+    width: fit-content;
+}
+
+.all-user {
+    width: 70%;
+    height: 70%;
+    margin: 20px 0 0 350px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.all-user img {
+    height: 40px;
+    width: 40px;
+}
+
+.all-user table {
+    border: 1px solid black;
+}
+
+.all-user table td {
+    border: 1px solid black;
+    width: 600px;
+    text-align: center;
+}
+
+.all-user table th {
+    border: 1px solid black;
+    width: 600px;
+    height: 30px;
+}
+
+.all-user table td:hover {
+    background-color: rgb(68, 228, 129);
 }
