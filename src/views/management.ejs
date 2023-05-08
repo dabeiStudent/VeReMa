@@ -1,0 +1,40 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Management Page</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+
+<body>
+    <div class="admin-home">
+        <header>
+            <div class="menu-bar">
+                <ul>
+                    <li><a href="/logout.ejs"><i class="fas fa-sign-out-alt"></i></a></li>
+                    <li><a href="/"><i class="fas fa-home"></i></a></li>
+                </ul>
+            </div>
+        </header>
+        <div class="left-nav">
+            <h1>
+                <img src="<%=admin[0].image%>" alt="admin"><br>
+                <a>
+                    ADMIN
+                </a>
+            </h1><br>
+            <div id="action-nav">
+                <button onclick="location.href = '/management.ejs';">Trang quản lí</button>
+                <button onclick="location.href = '/management.ejs';">Thêm mới phương tiện</button>
+            </div>
+        </div>
+        <div class="main-page">
+
+        </div>
+    </div>
+</body>
+
+</html>

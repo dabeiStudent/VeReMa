@@ -80,7 +80,19 @@ let getMana = async (req, res) => {
         return res.redirect('/');
     }
 }
-
+let getManage = async (req, res) => {
+    const token = req.cookies["token"];
+    if (token) {
+        const rs = jwt.verify(token, "mk");
+        connection.query('Select image, ten_tk from ds_tai_khoan where ten_tk="admin"', function (err, results) {
+            if (results) {
+                return res.render('management.ejs', { admin: results });
+            }
+        })
+    } else {
+        return res.redirect('index.ejs');
+    }
+}
 let getVproduct = async (req, res) => {
     var token = req.cookies["token"];
     const all = [];
@@ -713,7 +725,7 @@ let chatApp = async (req, res, next) => {
 
 
 module.exports = {
-    getHome, getAbout, getContact, postContact, getFurni, getMana, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
+    getHome, getAbout, getContact, postContact, getFurni, getMana, getManage, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
     getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod, getDelprod, postDelprod, getConfirmdel, postConfirmdel, getStaffcreate, postStaffcreate,
     getRepair, deleteAccount, postDeleteaccount, postDeletemess
 }
