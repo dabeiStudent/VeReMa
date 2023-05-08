@@ -1,6 +1,6 @@
 /* Header */
 .admin-home header {
-    background-color: rgb(32, 91, 255);
+    background-color: rgb(36, 119, 197);
     margin: -8px 0 0 -8px;
     height: 50px;
     width: 100%;
@@ -11,7 +11,7 @@ header a {
     float: right;
     padding-top: 5px;
     text-decoration: none;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 header a:hover {
@@ -27,12 +27,33 @@ header ul li {
 }
 
 /*Left navigation bar*/
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+#myBtn i {
+    font-size: 60;
+    color: rgb(0, 0, 0);
+}
+
 #admin {
     left: 0;
-    bottom: 0;
-    height: 50px;
-    width: 100px;
-    position: fixed;
+    top: 50;
+    height: 30px;
+    width: 298px;
+    position: absolute;
+    display: none;
 }
 
 #admin:hover {
@@ -42,23 +63,24 @@ header ul li {
 
 #admin-close {
     left: 0;
-    bottom: -30;
-    height: 50px;
-    width: 100px;
+    top: 50;
+    height: 30px;
+    width: 298px;
     position: fixed;
     font-size: small;
+    display: block;
 }
 
 .left-nav {
     float: left;
-    background-color: rgb(99, 90, 75);
+    background-color: rgb(90, 90, 90);
     height: 70%;
     width: 300px;
     margin: 0px 0 0 -10px;
     padding: 10px 0 0 0px;
     text-align: center;
     position: fixed;
-    bottom: 0;
+    top: 50;
     display: block;
 }
 
@@ -155,19 +177,48 @@ header ul li {
 }
 
 /* All account */
-.all-user-label h1 {
-    margin-left: 350px;
+.welcome-admin {
+    width: 70%;
+    height: 50%;
+    margin: 0 0 50 350px;
+    background-image: url('/images/banner1.jpg');
+    display: block
+}
+
+.all-user h1 {
+    border: 2px solid black;
     font-family: Arial, Helvetica, sans-serif;
-    border-bottom: 3px dotted black;
     width: fit-content;
+}
+
+.all-user a {
+    float: right;
+    margin-top: -50px;
+    margin-right: 20px;
+    font-size: 40;
+    color: rgb(226, 6, 6);
 }
 
 .all-user {
     width: 70%;
     height: 50%;
-    margin: 20px 0 0 350px;
+    margin: 0 0 50 350px;
     font-family: Arial, Helvetica, sans-serif;
     overflow-y: scroll;
+    display: none;
+}
+
+#remove {
+    float: inline-start;
+    margin-right: 20px;
+    margin-top: 3px;
+    font-size: 15;
+    text-decoration: none;
+    color: black;
+}
+
+#remove:hover {
+    background-color: rgb(100, 255, 178);
 }
 
 .all-user img {
@@ -192,22 +243,30 @@ header ul li {
 }
 
 .all-user table td:hover {
-    background-color: rgb(68, 228, 129);
+    background-color: rgb(255, 189, 189);
 }
 
-.all-product-label h1 {
-    margin-left: 350px;
+.all-product h1 {
     font-family: Arial, Helvetica, sans-serif;
-    border-bottom: 3px dotted black;
     width: fit-content;
+    border: 2px solid black;
+}
+
+.all-product a {
+    float: right;
+    margin-top: -50px;
+    margin-right: 20px;
+    font-size: 40;
+    color: rgb(226, 6, 6);
 }
 
 .all-product {
     width: 70%;
     height: 50%;
-    margin: 0 0 0 350px;
+    margin: 0 0 50px 350px;
     font-family: Arial, Helvetica, sans-serif;
     overflow-y: scroll;
+    display: none;
 }
 
 .all-product img {
@@ -232,23 +291,30 @@ header ul li {
 }
 
 .all-product table td:hover {
-    background-color: rgb(68, 228, 129);
+    background-color: rgb(255, 189, 189);
 }
 
-.all-contact-label h1 {
-    margin-left: 350px;
+.all-contact h1 {
     font-family: Arial, Helvetica, sans-serif;
-    border-bottom: 3px dotted black;
+    border: 2px solid black;
     width: fit-content;
+}
+
+.all-contact a {
+    float: right;
+    margin-top: -50px;
+    margin-right: 20px;
+    font-size: 40;
+    color: rgb(226, 6, 6);
 }
 
 .all-contact {
     width: 70%;
     height: 50%;
-    margin: 0 0 100px 350px;
+    margin: 0 0 50px 350px;
     font-family: Arial, Helvetica, sans-serif;
-    margin-bottom: 100px;
     overflow-y: scroll;
+    display: none;
 }
 
 .all-contact img {
@@ -274,5 +340,224 @@ header ul li {
 }
 
 .all-contact table td:hover {
-    background-color: rgb(68, 228, 129);
+    background-color: rgb(255, 189, 189);
+}
+
+.all-customers h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    border: 2px solid black;
+    width: fit-content;
+}
+
+.all-customers a {
+    float: right;
+    margin-top: -50px;
+    margin-right: 20px;
+    font-size: 40;
+    color: rgb(226, 6, 6);
+}
+
+.all-customers {
+    width: 70%;
+    height: 50%;
+    margin: 0 0 50px 350px;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-y: scroll;
+    display: none;
+}
+
+.all-customers img {
+    height: 40px;
+    width: 40px;
+}
+
+.all-customers table {
+    border: 1px solid black;
+}
+
+.all-customers table td {
+    border: 1px solid black;
+    width: 600px;
+    height: 50px;
+    text-align: center;
+}
+
+.all-customers table th {
+    border: 1px solid black;
+    width: 600px;
+    height: 30px;
+}
+
+.all-customers table td:hover {
+    background-color: rgb(255, 189, 189);
+}
+
+.all-staffs h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    border: 2px solid black;
+    width: fit-content;
+}
+
+.all-staffs a {
+    float: right;
+    margin-top: -50px;
+    margin-right: 20px;
+    font-size: 40;
+    color: rgb(226, 6, 6);
+}
+
+.all-staffs {
+    width: 70%;
+    height: 50%;
+    margin: 0 0 50px 350px;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-y: scroll;
+    display: none;
+}
+
+.all-staffs img {
+    height: 40px;
+    width: 40px;
+}
+
+.all-staffs table {
+    border: 1px solid black;
+}
+
+.all-staffs table td {
+    border: 1px solid black;
+    width: 600px;
+    height: 50px;
+    text-align: center;
+}
+
+.all-staffs table th {
+    border: 1px solid black;
+    width: 600px;
+    height: 30px;
+}
+
+.all-staffs table td:hover {
+    background-color: rgb(255, 189, 189);
+}
+
+/*BOXES*/
+.boxes {
+    background-color: rgb(255, 255, 255);
+    margin-top: 20px;
+    margin-left: 480px;
+    height: 95%;
+    width: 50%;
+}
+
+.boxes-label {
+    margin: 40px 0 0 450px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.first-box {
+    margin: 50px 0 0 60px;
+    height: 27%;
+    width: 40%;
+    background-color: rgb(235, 249, 255);
+    border-radius: 10%;
+}
+
+.first-box:hover {
+    background-color: rgb(186, 194, 186);
+    color: rgb(0, 0, 0);
+}
+
+.first-box i {
+    font-size: 60;
+}
+
+.first-box a {
+    font-size: 20;
+}
+
+.second-box {
+    float: right;
+    height: 27%;
+    width: 40%;
+    margin: 50px 60px 0 0;
+    background-color: rgb(235, 249, 255);
+    border-radius: 10%;
+}
+
+.second-box:hover {
+    background-color: rgb(186, 194, 186);
+    color: rgb(0, 0, 0);
+}
+
+.second-box i {
+    font-size: 60;
+}
+
+.second-box a {
+    font-size: 20;
+}
+
+.third-box {
+    margin: 30px 0 0 60px;
+    height: 27%;
+    width: 40%;
+    background-color: rgb(235, 249, 255);
+    border-radius: 10%;
+}
+
+.third-box:hover {
+    background-color: rgb(186, 194, 186);
+    color: rgb(0, 0, 0);
+}
+
+.third-box i {
+    font-size: 60;
+}
+
+.third-box a {
+    font-size: 20;
+}
+
+.fourth-box {
+    float: right;
+    height: 27%;
+    width: 40%;
+    margin: 30px 60px 0 0;
+    background-color: rgb(235, 249, 255);
+    border-radius: 10%;
+}
+
+.fourth-box:hover {
+    background-color: rgb(186, 194, 186);
+    color: rgb(0, 0, 0);
+}
+
+.fourth-box i {
+    font-size: 60;
+}
+
+.fourth-box a {
+    font-size: 20;
+}
+
+.fith-box {
+    margin: 30px 0 50px 60px;
+    height: 27%;
+    width: 40%;
+    background-color: rgb(235, 249, 255);
+    border-radius: 10%;
+}
+
+.fith-box:hover {
+    background-color: rgb(186, 194, 186);
+    color: rgb(0, 0, 0);
+}
+
+.fith-box i {
+    font-size: 60;
+}
+
+.fith-box a {
+    font-size: 20;
 }

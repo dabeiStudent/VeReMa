@@ -156,8 +156,8 @@
                             <a href="/detail/user/'<%= dataUser[i].ten_tk %>'" target="_self">Detail</a>
                             <a href="/update/user/'<%= dataUser[i].ten_tk %>'" target="_self">Update</a>
                             <%if(dataUser[i].quyen !="admin" ){%>
-                                <a href="/delete/user/<%= dataUser[i].ten_tk %>/<%= dataUser[i].quyen %>"
-                                    target="_self">Remove</a>
+                                <b href="/delete/user/<%= dataUser[i].ten_tk %>/<%= dataUser[i].quyen %>"
+                                    target="_self">Remove</b>
                                 <%}%>
                         </td>
                     </tr>

@@ -57,29 +57,6 @@ let getFurni = async (req, res) => {
         return res.render('furnitures.ejs', { token: null, role: null, name: null })
     }
 }
-let getMana = async (req, res) => {
-    var token = req.cookies["token"];
-    const rs = jwt.verify(token, 'mk');
-    if (token != null && rs.role == "admin") {
-        let dataUser;
-        connection.query(
-            'SELECT * FROM ds_tai_khoan',
-            function (err, results, fields) {
-                //console.log(results);
-                //for mobile
-                //return res.json(results)
-                dataUser = results;
-                // return res.render('manager.ejs', { token: token, name: rs.name, role: rs.role, dataUser: dataUser });
-                //console.log(dataUser)
-            }
-        )
-        connection.query('Select * from lien_lac', function (err, results) {
-            return res.render('manager.ejs', { token: token, name: rs.name, role: rs.role, dataUser: dataUser, mess: results });
-        })
-    } else {
-        return res.redirect('/');
-    }
-}
 let getManage = async (req, res) => {
     const token = req.cookies["token"];
     if (token) {
@@ -102,13 +79,39 @@ let getManage = async (req, res) => {
                                     if (results) {
                                         const pt = results;
                                         connection.query('Select * from lien_lac', function (err, results) {
-                                            const ll = results;
-                                            return res.render('management.ejs', { admin: admin, accounts: accounts, today: today, staff: staff, pt: pt, ll: ll });
+                                            if (results) {
+                                                const ll = results;
+                                                connection.query('Select * from khach_hang', function (err, results) {
+                                                    if (results) {
+                                                        const kh = results;
+                                                        connection.query('Select * from nhan_vien where ma_nv != "admin"', function (err, results) {
+                                                            if (results) {
+                                                                const nv = results;
+                                                                return res.render('management.ejs', { admin: admin, accounts: accounts, today: today, staff: staff, pt: pt, ll: ll, kh: kh, nv: nv });
+                                                            } else {
+                                                                return res.render('management.ejs', { admin: admin, accounts: accounts, today: today, staff: staff, pt: pt, ll: ll, kh: kh, nv: null });
+                                                            }
+                                                        })
+
+                                                    }
+                                                    else {
+                                                        return res.render('management.ejs', { admin: admin, accounts: accounts, today: today, staff: staff, pt: pt, ll: ll, kh: null, nv: null });
+                                                    }
+                                                })
+                                            } else {
+                                                return res.render('management.ejs', { admin: admin, accounts: accounts, today: today, staff: staff, pt: pt, ll: null, kh: null, nv: null });
+                                            }
                                         })
+                                    } else {
+                                        return res.render('management.ejs', { admin: admin, accounts: accounts, today: today, staff: staff, pt: null, ll: null, kh: null, nv: null });
                                     }
                                 })
+                            } else {
+                                return res.render('management.ejs', { admin: admin, accounts: accounts, today: today, staff: null, pt: null, ll: null, kh: null, nv: null });
                             }
                         })
+                    } else {
+                        return res.render('management.ejs', { admin: admin, accounts: null, today: today, staff: null, pt: null, ll: null, kh: null, nv: null });
                     }
                 })
             }
@@ -436,7 +439,7 @@ let postUpdate = async (req, res) => {
                             //for mobile
                             //return res.json(results)
                             dataUser = results;
-                            return res.render('manager.ejs', { token: token, name: rs.name, role: rs.role, dataUser: dataUser });
+                            return res.redirect('/management.ejs');
                             //console.log(dataUser)
                         }
                     )
@@ -458,7 +461,7 @@ let postUpdate = async (req, res) => {
                             //for mobile
                             //return res.json(results)
                             dataUser = results;
-                            return res.render('manager.ejs', { token: token, name: rs.name, role: rs.role, dataUser: dataUser });
+                            return res.redirect('/management.ejs');
                             //console.log(dataUser)
                         }
                     )
@@ -620,7 +623,7 @@ let postDeletemess = async (req, res) => {
     const id = req.params.idmess;
     connection.query('delete from lien_lac where ma_ll =?', [id], function (err, results) {
         if (results) {
-            return res.redirect('/manager.ejs/#mess');
+            return res.redirect('/management.ejs');
         }
     })
 }
@@ -765,6 +768,7 @@ let postConfirmdel = async (req, res) => {
         }
     })
 }
+
 let chatApp = async (req, res, next) => {
     const token = req.cookies["token"];
     if (token) {
@@ -777,7 +781,7 @@ let chatApp = async (req, res, next) => {
 
 
 module.exports = {
-    getHome, getAbout, getContact, postContact, getFurni, getMana, getManage, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
+    getHome, getAbout, getContact, postContact, getFurni, getManage, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
     getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod, getDelprod, postDelprod, getConfirmdel, postConfirmdel, getStaffcreate, postStaffcreate,
     getRepair, deleteAccount, postDeleteaccount, postDeletemess, postOrder
 }
