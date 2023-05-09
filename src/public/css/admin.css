@@ -43,17 +43,17 @@ header ul li {
 }
 
 #myBtn i {
-    font-size: 60;
+    font-size: 40;
     color: rgb(0, 0, 0);
 }
 
 #admin {
     left: 0;
     top: 50;
-    height: 30px;
+    height: 40px;
     width: 298px;
     position: absolute;
-    display: none;
+    display: block;
 }
 
 #admin:hover {
@@ -64,7 +64,7 @@ header ul li {
 #admin-close {
     left: 0;
     top: 50;
-    height: 30px;
+    height: 40px;
     width: 298px;
     position: fixed;
     font-size: small;
@@ -81,7 +81,7 @@ header ul li {
     text-align: center;
     position: fixed;
     top: 50;
-    display: block;
+    display: none;
 }
 
 .left-nav a {
@@ -92,7 +92,7 @@ header ul li {
 .left-nav img {
     height: 80px;
     width: 80px;
-    margin: 10px 0 0 0px;
+    margin: 20px 0 0 0px;
     border-radius: 20%;
 }
 
@@ -116,6 +116,7 @@ header ul li {
     width: 100%;
 }
 
+/* order */
 .form-new-order {
     text-align: center;
     border: 5px groove black;
@@ -152,6 +153,7 @@ header ul li {
     height: 40px;
 }
 
+
 .left-form {
     float: left;
     margin-left: 20px;
@@ -165,7 +167,7 @@ header ul li {
 }
 
 .menu-form {
-    position: fixed;
+    position: absolute;
     margin-left: 500px;
     height: 30px;
 }
@@ -201,6 +203,13 @@ header ul li {
     margin-right: 20px;
     font-size: 40;
     color: rgb(226, 6, 6);
+}
+
+.all-user #add-prod-btn {
+    float: right;
+    margin-top: -50px;
+    margin-right: 100px;
+    color: rgb(8, 161, 8);
 }
 
 .all-user {
@@ -262,6 +271,13 @@ header ul li {
     margin-right: 20px;
     font-size: 40;
     color: rgb(226, 6, 6);
+}
+
+.all-product #add-prod-btn {
+    float: right;
+    margin-top: -50px;
+    margin-right: 100px;
+    color: rgb(8, 161, 8);
 }
 
 .all-product {

@@ -366,7 +366,7 @@ let postDeleteaccount = async (req, res) => {
             if (results) {
                 connection.query('DELETE from ds_tai_khoan where ten_tk =?', [username], function (err, results) {
                     if (results) {
-                        return res.redirect('/manager.ejs');
+                        return res.redirect('/management.ejs');
                     }
                 })
             }
@@ -377,7 +377,7 @@ let postDeleteaccount = async (req, res) => {
             if (results) {
                 connection.query('DELETE from ds_tai_khoan where ten_tk =?', [username], function (err, results) {
                     if (results) {
-                        return res.redirect('/manager.ejs');
+                        return res.redirect('/management.ejs');
                     }
                 })
             }
@@ -764,7 +764,7 @@ let postConfirmdel = async (req, res) => {
     const tenPt = req.params.ten;
     connection.query('Delete from ds_phu_tung where ten_pt = ?', [tenPt], function (err, results) {
         if (results) {
-            return res.redirect('/vproducts.ejs/1');
+            return res.redirect('/management.ejs');
         }
     })
 }

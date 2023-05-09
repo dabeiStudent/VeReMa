@@ -11,7 +11,7 @@
 <body>
     <div id="cfdelete">
         <form method="post" action="/confirmdelete.ejs/<%=tenPt%>">
-            <h1>Are you sure you want to delete:</h1>
+            <h1>Xác nhận xóa:</h1>
             <h2>
                 <%= tenPt %>
             </h2>
@@ -21,7 +21,7 @@
             </div>
         </form>
         <div id="no">
-            <button onclick="location.href = '/vproducts.ejs/1';" id="myButton" class="float-left submit-button">No, Go
+            <button onclick="history.back()" id="myButton" class="float-left submit-button">No, Go
                 home</button>
         </div>
     </div>
