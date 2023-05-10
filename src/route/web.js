@@ -10,7 +10,9 @@ import {
 } from '../controller/homeController';
 
 //Mobile:
-import { signIn } from '../controller/androidController';
+import {
+    signInmb, getAccountmb, getStaffmb, getCusmb, findCusmb, findStaffmb
+} from '../controller/androidController';
 
 let router = express.Router();
 router.use(cookieParser());
@@ -53,7 +55,13 @@ const initWebRoute = (app) => {
     router.get('/chat.ejs', chatApp);
     return app.use('/', router);
 }
+
 const androidRouter = (app) => {
-    router.post('/signinmb', signIn);
+    router.post('/signinmb', signInmb);
+    router.get('/getallaccmb', getAccountmb);
+    router.get('/getallcusmb', getCusmb);
+    router.get('/getallstaffmb', getStaffmb);
+    router.post('/findcusmb', findCusmb);
+    router.post('/findstaffmb', findStaffmb);
 }
 module.exports = { initWebRoute, androidRouter };
