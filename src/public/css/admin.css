@@ -219,7 +219,6 @@ header ul li {
     font-family: Arial, Helvetica, sans-serif;
     overflow-y: scroll;
     display: none;
-    background-image: url('/images/border.png');
 }
 
 #remove {
@@ -245,15 +244,31 @@ header ul li {
 }
 
 .all-user table td {
-    border: 1px solid black;
+    color: #030303;
+    border: 1px solid #ddd;
+    padding: 8px;
     width: 600px;
     text-align: center;
 }
 
 .all-user table th {
-    border: 1px solid black;
+    color: #030303;
+    border: 1px solid #ddd;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
     width: 600px;
     height: 30px;
+}
+
+.all-user tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.all-user tr:hover {
+    background-color: #ddd;
 }
 
 .all-user table td:hover {
@@ -300,15 +315,31 @@ header ul li {
 }
 
 .all-product table td {
-    border: 1px solid black;
+    color: #030303;
+    border: 1px solid #ddd;
+    padding: 8px;
     width: 600px;
     text-align: center;
 }
 
 .all-product table th {
-    border: 1px solid black;
+    color: #030303;
+    border: 1px solid #ddd;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
     width: 600px;
     height: 30px;
+}
+
+.all-product tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.all-product tr:hover {
+    background-color: #ddd;
 }
 
 .all-product table td:hover {
@@ -348,16 +379,31 @@ header ul li {
 }
 
 .all-contact table td {
-    border: 1px solid black;
+    color: #030303;
+    border: 1px solid #ddd;
+    padding: 8px;
     width: 600px;
-    height: 50px;
     text-align: center;
 }
 
 .all-contact table th {
-    border: 1px solid black;
+    color: #030303;
+    border: 1px solid #ddd;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
     width: 600px;
     height: 30px;
+}
+
+.all-contact tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.all-contact tr:hover {
+    background-color: #ddd;
 }
 
 .all-contact table td:hover {
@@ -397,16 +443,31 @@ header ul li {
 }
 
 .all-customers table td {
-    border: 1px solid black;
+    color: #030303;
+    border: 1px solid #ddd;
+    padding: 8px;
     width: 600px;
-    height: 50px;
     text-align: center;
 }
 
 .all-customers table th {
-    border: 1px solid black;
+    color: #030303;
+    border: 1px solid #ddd;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
     width: 600px;
     height: 30px;
+}
+
+.all-customers tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.all-customers tr:hover {
+    background-color: #ddd;
 }
 
 .all-customers table td:hover {
@@ -446,16 +507,31 @@ header ul li {
 }
 
 .all-staffs table td {
-    border: 1px solid black;
+    color: #030303;
+    border: 1px solid #ddd;
+    padding: 8px;
     width: 600px;
-    height: 50px;
     text-align: center;
 }
 
 .all-staffs table th {
-    border: 1px solid black;
+    color: #030303;
+    border: 1px solid #ddd;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
     width: 600px;
     height: 30px;
+}
+
+.all-staffs tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.all-staffs tr:hover {
+    background-color: #ddd;
 }
 
 .all-staffs table td:hover {
