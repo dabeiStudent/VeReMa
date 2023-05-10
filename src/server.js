@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser')
 //socket io
 const io = require('socket.io')(http);
 import configViewengine from './config/viewengine.js';
-import initWebRoute from './route/web.js';
+import { initWebRoute, androidRouter } from './route/web.js';
 //connect2MYSQL
 import connection from './config/connect2MySQL.js';
 import { Socket } from 'dgram';
@@ -38,5 +38,6 @@ app.use(express.static('public'));
 configViewengine(app);
 //Cai dat duong dan cho web
 initWebRoute(app);
+androidRouter(app);
 
 

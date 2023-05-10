@@ -219,6 +219,7 @@ header ul li {
     font-family: Arial, Helvetica, sans-serif;
     overflow-y: scroll;
     display: none;
+    background-image: url('/images/border.png');
 }
 
 #remove {

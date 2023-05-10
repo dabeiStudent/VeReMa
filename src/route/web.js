@@ -8,6 +8,10 @@ import {
     getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod, getDelprod, postDelprod, getConfirmdel, postConfirmdel, getStaffcreate, postStaffcreate,
     getRepair, deleteAccount, postDeleteaccount, postDeletemess, getManage, postOrder
 } from '../controller/homeController';
+
+//Mobile:
+import { signIn } from '../controller/androidController';
+
 let router = express.Router();
 router.use(cookieParser());
 const initWebRoute = (app) => {
@@ -49,5 +53,7 @@ const initWebRoute = (app) => {
     router.get('/chat.ejs', chatApp);
     return app.use('/', router);
 }
-
-module.exports = initWebRoute;
+const androidRouter = (app) => {
+    router.post('/signinmb', signIn);
+}
+module.exports = { initWebRoute, androidRouter };
