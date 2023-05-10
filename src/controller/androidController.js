@@ -60,6 +60,15 @@ const getStaffmb = async (req, res, next) => {
         }
     })
 }
+const getProdmb = async (req, res, next) => {
+    connection.query('Select * from ds_phu_tung', function (err, results) {
+        if (results) {
+            return res.status(200).json({ allProds: results });
+        } else {
+            return res.status(404).json({ err: err });
+        }
+    })
+}
 const findCusmb = async (req, res, next) => {
     const name = req.body.tenKh;
     if (!name) {
@@ -87,5 +96,5 @@ const findStaffmb = async (req, res, next) => {
     })
 }
 module.exports = {
-    signInmb, getAccountmb, getStaffmb, getCusmb, findCusmb, findStaffmb
+    signInmb, getAccountmb, getStaffmb, getCusmb, getProdmb, findCusmb, findStaffmb
 }
