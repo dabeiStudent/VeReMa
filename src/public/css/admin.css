@@ -48,12 +48,13 @@ header ul li {
 }
 
 #admin {
-    left: 0;
-    top: 50;
+    left: -30;
+    top: 80;
     height: 40px;
-    width: 298px;
-    position: absolute;
+    width: 100px;
+    position: fixed;
     display: block;
+    transform: rotate(90deg);
 }
 
 #admin:hover {
