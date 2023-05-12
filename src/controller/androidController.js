@@ -19,7 +19,12 @@ const signInmb = async (req, res, next) => {
                         //check token co luu id tk chua
                         const rs = jwt.verify(token, 'mk')
                         console.log(rs.name, rs.id, rs.role);
-                        return res.status(200).json({ success: true, message: 'Logged in', token: token, user: results })
+                        //Doi type tu array sang object de doc trong android
+                        const user = Object.assign({}, results);
+                        Object.assign(user, { user: user['0'] });
+                        delete user['0'];
+                        console.log(user);
+                        return res.status(200).json({ success: true, message: 'Logged in', token: token, listuser: user })
                     } else {
                         return res.status(404).json({ success: false, message: 'Incorrect username or password' });
                     }
