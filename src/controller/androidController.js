@@ -40,7 +40,7 @@ const signInmb = async (req, res, next) => {
 const getAccountmb = async (req, res, next) => {
     connection.query('Select * from ds_tai_khoan', function (err, results) {
         if (results) {
-            return res.status(200).json({ allAccounts: results });
+            return res.status(200).json({ success: true, allAccounts: results });
         } else {
             return res.status(404).json({ err: err });
         }
