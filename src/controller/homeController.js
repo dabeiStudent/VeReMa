@@ -594,7 +594,7 @@ let postStaffcreate = async (req, res) => {
     const tenTk = req.body.tenTk;
     const matKhau = req.body.matKhau;
     const img = req.file.filename;
-    const uimg = `/images/${img}`;
+    const uimg = `http://verema.herokuapp.com/images/${img}`;
     const hashpass = await argon2.hash(matKhau);
     const token = req.cookies["token"];
     if (token) {
@@ -649,7 +649,7 @@ let postAddprod = async (req, res, next) => {
     const gia = req.body.donGia;
     const sl = req.body.soLuong;
     const img = req.file.filename;
-    const uimg = `/images/${img}`;
+    const uimg = `http://verema.herokuapp.com/images/${img}`;
     const mt = req.body.mieuTa;
     const pl = req.body.phanLoai;
     if (gia < 0) {
@@ -697,7 +697,7 @@ let postUpdateprod = async (req, res, next) => {
     const gia = req.body.donGia;
     const sl = req.body.soLuong;
     const img = req.file.filename;
-    const uimg = `/images/${img}`;
+    const uimg = `http://verema.herokuapp.com/images/${img}`;
     const mt = req.body.mieuTa;
     connection.query('Update ds_phu_tung set don_gia =?, so_luong =?, image= ?, description =? where ten_pt=?', [gia, sl, uimg, mt, ten],
         function (err, results, fields) {
