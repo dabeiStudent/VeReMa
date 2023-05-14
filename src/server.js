@@ -38,6 +38,7 @@ app.use(express.static('public'));
 configViewengine(app);
 //Cai dat duong dan cho web
 initWebRoute(app);
+//Cai dat duong dan cho mobile
 androidRouter(app);
 
 

@@ -10,7 +10,7 @@ const signInmb = async (req, res, next) => {
         return res.status(400).json({ success: false, message: 'Missing username or password' });
     try {
         connection.query(
-            'Select ma_tk, ten_tk,mat_khau, quyen from ds_tai_khoan where ten_tk = ?', [username],
+            'Select * from ds_tai_khoan where ten_tk = ?', [username],
             async function (err, results, fields) {
                 if (results.length > 0) {
                     const validPassword = await argon2.verify(results[0].mat_khau, password);

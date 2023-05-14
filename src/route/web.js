@@ -56,6 +56,8 @@ const initWebRoute = (app) => {
     return app.use('/', router);
 }
 
+
+//android
 const androidRouter = (app) => {
     router.post('/signinmb', signInmb);
     router.get('/getallaccmb', getAccountmb);
