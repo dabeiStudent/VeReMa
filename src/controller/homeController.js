@@ -291,9 +291,11 @@ let accountProfile = async (req, res) => {
     }
 }
 let uploadImg = async (req, res) => {
+    var image = req.file;
+    console.log(image);
     var img = req.file.filename;
     var tenTk = req.body.tenTk;
-    connection.query(`update ds_tai_khoan set image = "/images/${img}" where ten_tk= "${tenTk}"`,
+    connection.query(`update ds_tai_khoan set image = "http://verema.herokuapp.com/images/${img}" where ten_tk= "${tenTk}"`,
         function (err, results) {
             if (results) {
                 return res.redirect('/yourprofile.ejs');
