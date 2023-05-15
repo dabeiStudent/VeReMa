@@ -11,7 +11,7 @@ import {
 
 //Mobile:
 import {
-    signInmb, getAccountmb, getStaffmb, getCusmb, getProdmb, findCusmb, findStaffmb
+    signInmb, getAccountmb, getStaffmb, getCusmb, getProdmb, findCusmb, findStaffmb, editStaffProfile, editCustomerProfile
 } from '../controller/androidController';
 
 let router = express.Router();
@@ -66,5 +66,7 @@ const androidRouter = (app) => {
     router.get('/getallprodmb', getProdmb);
     router.post('/findcusmb', findCusmb);
     router.post('/findstaffmb', findStaffmb);
+    router.post('/updateprofilestaff', editStaffProfile);
+    router.post('/updateprofilecustomer', editCustomerProfile);
 }
 module.exports = { initWebRoute, androidRouter };

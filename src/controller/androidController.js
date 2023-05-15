@@ -23,7 +23,6 @@ const signInmb = async (req, res, next) => {
                         if (results[0].quyen == "admin" || results[0].quyen == "nv") {
                             connection.query('Select ten, dia_chi, sdt from nhan_vien where ten_tk=?', [nameacc], function (err, results) {
                                 if (results.length > 0) {
-
                                     return res.status(200).json({ success: true, message: 'Logged in', token: token, user: user, detail: results });
                                 }
                             })
@@ -88,7 +87,7 @@ const getProdmb = async (req, res, next) => {
     })
 }
 const findCusmb = async (req, res, next) => {
-    const name = req.body.tenKh;
+    const name = req.body.ten;
     if (!name) {
         return res.status(400).json({ err: 'Vui lòng nhập tên' });
     }
@@ -101,7 +100,7 @@ const findCusmb = async (req, res, next) => {
     })
 }
 const findStaffmb = async (req, res, next) => {
-    const name = req.body.tenNv;
+    const name = req.body.ten;
     if (!name) {
         return res.status(400).json({ err: 'Vui lòng nhập tên' });
     }
@@ -113,6 +112,37 @@ const findStaffmb = async (req, res, next) => {
         }
     })
 }
+
+const editStaffProfile = async (req, res, next) => {
+    const name = req.body.ten;
+    const username = req.body.username;
+    const phone = req.body.sdt;
+    const address = req.body.dia_chi;
+    connection.query('Select ma_nv from nhan_vien where ten_tk =?', [username], function (err, results, fields) {
+        if (results) {
+            connection.query('UPDATE nhan_vien SET ten = ?, sdt = ?, dia_chi = ? WHERE ma_nv = ?', [name, phone, address, results[0].ma_nv], function (err, results) {
+                if (results) {
+                    return res.status(200).json({ message: "success" });
+                }
+            })
+        }
+    })
+}
+const editCustomerProfile = async (req, res, next) => {
+    const name = req.body.ten;
+    const username = req.body.username;
+    const phone = req.body.sdt;
+    const address = req.body.dia_chi;
+    connection.query('Select ma_kh from khach_hang where ten_tk =?', [username], function (err, results, fields) {
+        if (results) {
+            connection.query('UPDATE khach_hang SET ten = ?, sdt = ?, dia_chi = ? WHERE ma_kh = ?', [name, phone, address, results[0].ma_kh], function (err, results) {
+                if (results) {
+                    return res.status(200).json({ message: "success" });
+                }
+            })
+        }
+    })
+}
 module.exports = {
-    signInmb, getAccountmb, getStaffmb, getCusmb, getProdmb, findCusmb, findStaffmb
+    signInmb, getAccountmb, getStaffmb, getCusmb, getProdmb, findCusmb, findStaffmb, editStaffProfile, editCustomerProfile
 }
