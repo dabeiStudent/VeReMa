@@ -132,7 +132,7 @@ let postOrder = async (req, res) => {
         function (err, results, fields) {
             if (results) {
                 connection.query(
-                    'Insert into khach_hang (ten_kh,dia_chi,sdt, ten_tk) values(?,?,?,?)', [fullname, address, phonenumber, username],
+                    'Insert into khach_hang (ten,dia_chi,sdt, ten_tk) values(?,?,?,?)', [fullname, address, phonenumber, username],
                     function (err, results, fields) {
                         if (results) {
                             return res.redirect('/management.ejs');
@@ -430,7 +430,7 @@ let postUpdate = async (req, res) => {
     var quyen = req.body.chucVu;
     var tentk = req.body.tenTk;
     if (quyen == "kh") {
-        connection.query('UPDATE khach_hang SET ten_kh = ?, dia_chi = ?, sdt = ? WHERE ma_kh = ?', [tenkh, diachi, sdt, makh],
+        connection.query('UPDATE khach_hang SET ten = ?, dia_chi = ?, sdt = ? WHERE ma_kh = ?', [tenkh, diachi, sdt, makh],
             function (err, results, fields) {
                 if (results) {
                     let dataUser;
@@ -452,7 +452,7 @@ let postUpdate = async (req, res) => {
             }
         )
     } else {
-        connection.query('UPDATE nhan_vien SET ten_nv = ?, dia_chi = ?, sdt = ?, luong = ? WHERE ma_nv = ?', [tenkh, diachi, sdt, luong, makh],
+        connection.query('UPDATE nhan_vien SET ten = ?, dia_chi = ?, sdt = ?, luong = ? WHERE ma_nv = ?', [tenkh, diachi, sdt, luong, makh],
             function (err, results, fields) {
                 if (results) {
                     let dataUser;
@@ -510,7 +510,7 @@ let postSignup = async (req, res) => {
             function (err, results, fields) {
                 if (results) {
                     connection.query(
-                        'Insert into khach_hang (ten_kh,dia_chi,sdt, ten_tk) values(?,?,?,?)', [fullname, address, phonenumber, username],
+                        'Insert into khach_hang (ten,dia_chi,sdt, ten_tk) values(?,?,?,?)', [fullname, address, phonenumber, username],
                         function (err, results, fields) {
                             if (results) {
                                 return res.redirect('/signin.ejs');
@@ -604,7 +604,7 @@ let postStaffcreate = async (req, res) => {
         }
         connection.query('Insert into ds_tai_khoan (ten_tk,mat_khau,image, quyen) values (?,?,?,"nv")', [tenTk, hashpass, uimg], function (err, results) {
             if (results) {
-                connection.query("Insert into nhan_vien (ten_nv, gioi_tinh, dia_chi, sdt, ngay_sinh, ngay_gianhap, luong, ten_tk) values (?,?,?,?,?,?,?,?)", [tenNv, gioiTinh, diaChi, sdt, ngayS, ngayGn, luong, tenTk],
+                connection.query("Insert into nhan_vien (ten, gioi_tinh, dia_chi, sdt, ngay_sinh, ngay_gianhap, luong, ten_tk) values (?,?,?,?,?,?,?,?)", [tenNv, gioiTinh, diaChi, sdt, ngayS, ngayGn, luong, tenTk],
                     function (err, results) {
                         if (results) {
                             return res.render('createstaff.ejs', { token: token, role: rs.role, mess: "Thanh cong" });

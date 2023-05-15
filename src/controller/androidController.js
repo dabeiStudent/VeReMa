@@ -1,9 +1,11 @@
+import { name } from "ejs";
 import connection from "../config/connect2MySQL";
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 
 //Xu li dang nhap
 const signInmb = async (req, res, next) => {
+    var user;
     var username = req.body.userName;
     var password = req.body.passWord;
     if (!username || !password)
@@ -11,19 +13,31 @@ const signInmb = async (req, res, next) => {
     try {
         connection.query(
             'Select * from ds_tai_khoan where ten_tk = ?', [username],
-            async function (err, results, fields) {
+            function (err, results, fields) {
                 if (results.length > 0) {
-                    const validPassword = await argon2.verify(results[0].mat_khau, password);
+                    const validPassword = argon2.verify(results[0].mat_khau, password);
                     if (validPassword) {
                         const token = jwt.sign({ id: results[0].ma_tk, name: results[0].ten_tk, role: results[0].quyen }, 'mk');
-                        //check token co luu id tk chua
-                        const rs = jwt.verify(token, 'mk')
-                        console.log(rs.name, rs.id, rs.role);
+                        user = results;
+                        var nameacc = user[0].ten_tk;
+                        if (results[0].quyen == "admin" || results[0].quyen == "nv") {
+                            connection.query('Select ten, dia_chi, sdt from nhan_vien where ten_tk=?', [nameacc], function (err, results) {
+                                if (results.length > 0) {
+
+                                    return res.status(200).json({ success: true, message: 'Logged in', token: token, user: user, detail: results });
+                                }
+                            })
+                        } else {
+                            connection.query('Select ten, dia_chi, sdt from khach_hang where ten_tk=?', [nameacc], function (err, results) {
+                                if (results.length > 0) {
+                                    return res.status(200).json({ success: true, message: 'Logged in', token: token, user: user, detail: results });
+                                }
+                            })
+                        }
                         // //Doi type tu array sang object de doc trong android
                         // const user = Object.assign({}, results);
                         // Object.assign(user, { user: user['0'] });
                         // delete user['0'];
-                        return res.status(200).json({ success: true, message: 'Logged in', token: token, user: results })
                     } else {
                         return res.status(404).json({ success: false, message: 'Incorrect username or password' });
                     }
