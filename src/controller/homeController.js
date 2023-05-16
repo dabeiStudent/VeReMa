@@ -126,6 +126,14 @@ let postOrder = async (req, res) => {
     const phonenumber = req.body.soDt;
     const username = req.body.tenTk;
     const password = req.body.matKhau;
+    const vehiname = req.body.tenXe;
+    const vehiid = req.body.soXe;
+    const desc = req.body.moTa;
+    const idstaff = req.body.maNv;
+    const creatDate = req.body.ngayNhan;
+    const expectedTime = req.body.thoiGian;
+    const idService = req.body.dichVu;
+    const cost = req.body.tongTien;
     const hashpass = await argon2.hash(password);
     connection.query(
         'Insert into ds_tai_khoan (ten_tk, mat_khau, image, quyen) values (?,?,?,?)', [username, hashpass, "", 'kh'],
@@ -135,9 +143,22 @@ let postOrder = async (req, res) => {
                     'Insert into khach_hang (ten,dia_chi,sdt, ten_tk) values(?,?,?,?)', [fullname, address, phonenumber, username],
                     function (err, results, fields) {
                         if (results) {
-                            return res.redirect('/management.ejs');
+                            connection.query('Insert into ds_xe (ten_xe,bien_so,ten_kh,sdt,mo_ta) values (?,?,?,?,?)', [vehiname, vehiid, fullname, phonenumber, desc], function (err, results) {
+                                if (results) {
+                                    connection.query('Insert into phieu_sua_chua (ma_nv, ten_xe, bien_so, ten_kh, ngay_nhan, tg_du_kien, id_dv, tong_tien) values (?,?,?,?,?,?,?,?)', [idstaff, vehiname, vehiid, fullname, creatDate, expectedTime, idService, cost],
+                                        function (err, results) {
+                                            if (results) {
+                                                return res.redirect('/management.ejs');
+                                            } else {
+                                                return res.send(err);
+                                            }
+                                        })
+                                } else {
+                                    return res.send(err);
+                                }
+                            })
                         } else {
-                            return res.redirect('/management.ejs');
+                            return res.send(err);
                         }
                     }
                 )
