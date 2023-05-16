@@ -169,7 +169,7 @@ let newOrder = async (req, res) => {
                         if (results) {
                             connection.query('Insert into ds_xe (ten_xe,bien_so,ten_kh,sdt,mo_ta) values (?,?,?,?,?)', [vehiname, vehiid, fullname, phonenumber, desc], function (err, results) {
                                 if (results) {
-                                    connection.query('Insert into phieu_sua_chua (ma_nv, ten_xe, bien_so, ten_kh, ngay_nhan, tg_du_kien, id_dv, tong_tien) values (?,?,?,?,?,?,?,?)', [idstaff, vehiname, vehiid, fullname, creatDate, expectedTime, idService, cost],
+                                    connection.query('Insert into phieu_sua_chua (ma_nv, ten_xe, bien_so, ten_kh, ngay_nhan, tg_du_kien, id_dv, tong_tien, trang_thai) values (?,?,?,?,?,?,?,?,"ChuaSua")', [idstaff, vehiname, vehiid, fullname, creatDate, expectedTime, idService, cost],
                                         function (err, results) {
                                             if (results) {
                                                 return res.status(200).json({ message: "success" });
