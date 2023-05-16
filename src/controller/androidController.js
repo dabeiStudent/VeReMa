@@ -46,7 +46,7 @@ let signInmb = async (req, res, next) => {
             }
         )
     } catch (err) {
-        return res.status(500).json({ success: false, message: err.message });
+        return res.status(500).json({ success: false, message: 'Incorrect username or password' });
     }
 }
 //Xu li cac van de ve GET
