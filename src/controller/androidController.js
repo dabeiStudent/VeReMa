@@ -200,6 +200,21 @@ let allOrder = async (req, res, next) => {
         }
     })
 }
+let getOrderbystaff = async (req, res, next) => {
+    const username = req.body.username;
+    connection.query('Select ma_nv from nhan_vien where ten_tk =?', [username], function (err, results) {
+        if (results) {
+            connection.query('Select * from phieu_sua_chua where ma_nv = ?', [results[0].ma_nv], function (err, results) {
+                if (results) {
+                    return res.status(200).json({ message: "success", orders: results });
+                } else {
+                    return res.status(404).json({ message: "Không thấy", orders: null });
+                }
+            })
+        }
+    })
+}
+
 module.exports = {
-    signInmb, getAccountmb, getStaffmb, getCusmb, getProdmb, findCusmb, findStaffmb, editStaffProfile, editCustomerProfile, newOrder, allOrder
+    signInmb, getAccountmb, getStaffmb, getCusmb, getProdmb, findCusmb, findStaffmb, editStaffProfile, editCustomerProfile, newOrder, allOrder, getOrderbystaff
 }
