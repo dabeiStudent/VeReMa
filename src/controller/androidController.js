@@ -214,7 +214,15 @@ let getOrderbystaff = async (req, res, next) => {
         }
     })
 }
-
+let finishOrder = async (req, res, next) => {
+    const idorder = req.body.idorder;
+    const finishdate = req.body.date;
+    connection.query('Update phieu_sua_chua set ngay_sua =?, trang_thai=? where ma_psc =?', [finishdate, "DaSua", idorder], function (err, results) {
+        if (results) {
+            return res.status(200).json({ message: "thank you" });
+        }
+    })
+}
 module.exports = {
-    signInmb, getAccountmb, getStaffmb, getCusmb, getProdmb, findCusmb, findStaffmb, editStaffProfile, editCustomerProfile, newOrder, allOrder, getOrderbystaff
+    signInmb, getAccountmb, getStaffmb, getCusmb, getProdmb, findCusmb, findStaffmb, editStaffProfile, editCustomerProfile, newOrder, allOrder, getOrderbystaff, finishOrder
 }
