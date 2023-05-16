@@ -193,7 +193,13 @@ let newOrder = async (req, res) => {
         }
     )
 }
-
+let allOrder = async (req, res, next) => {
+    connection.query('Select * from phieu_sua_chua', function (err, results) {
+        if (results) {
+            return res.status(200).json({ allOrders: results });
+        }
+    })
+}
 module.exports = {
-    signInmb, getAccountmb, getStaffmb, getCusmb, getProdmb, findCusmb, findStaffmb, editStaffProfile, editCustomerProfile, newOrder
+    signInmb, getAccountmb, getStaffmb, getCusmb, getProdmb, findCusmb, findStaffmb, editStaffProfile, editCustomerProfile, newOrder, allOrder
 }
