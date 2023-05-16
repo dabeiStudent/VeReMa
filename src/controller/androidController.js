@@ -4,7 +4,7 @@ const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 
 //Xu li dang nhap
-const signInmb = async (req, res, next) => {
+let signInmb = async (req, res, next) => {
     var user;
     var username = req.body.userName;
     var password = req.body.passWord;
@@ -13,9 +13,9 @@ const signInmb = async (req, res, next) => {
     try {
         connection.query(
             'Select * from ds_tai_khoan where ten_tk = ?', [username],
-            function (err, results, fields) {
+            async function (err, results, fields) {
                 if (results.length > 0) {
-                    const validPassword = argon2.verify(results[0].mat_khau, password);
+                    const validPassword = await argon2.verify(results[0].mat_khau, password);
                     if (validPassword) {
                         const token = jwt.sign({ id: results[0].ma_tk, name: results[0].ten_tk, role: results[0].quyen }, 'mk');
                         user = results;
