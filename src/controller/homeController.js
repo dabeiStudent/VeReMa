@@ -134,6 +134,8 @@ let postOrder = async (req, res) => {
     const expectedTime = req.body.thoiGian;
     const idService = req.body.dichVu;
     const cost = req.body.tongTien;
+    const img = req.file.filename;
+    const fimg = `http://verema.herokuapp.com/images/${img}`
     const hashpass = await argon2.hash(password);
     connection.query(
         'Insert into ds_tai_khoan (ten_tk, mat_khau, image, quyen) values (?,?,?,?)', [username, hashpass, "", 'kh'],
@@ -145,7 +147,7 @@ let postOrder = async (req, res) => {
                         if (results) {
                             connection.query('Insert into ds_xe (ten_xe,bien_so,ten_kh,sdt,mo_ta) values (?,?,?,?,?)', [vehiname, vehiid, fullname, phonenumber, desc], function (err, results) {
                                 if (results) {
-                                    connection.query('Insert into phieu_sua_chua (ma_nv, ten_xe, bien_so, ten_kh, ngay_nhan, tg_du_kien, id_dv, tong_tien) values (?,?,?,?,?,?,?,?)', [idstaff, vehiname, vehiid, fullname, creatDate, expectedTime, idService, cost],
+                                    connection.query('Insert into phieu_sua_chua (ma_nv, ten_xe, bien_so, ten_kh, ngay_nhan, tg_du_kien, id_dv, tong_tien, img) values (?,?,?,?,?,?,?,?,?)', [idstaff, vehiname, vehiid, fullname, creatDate, expectedTime, idService, cost, fimg],
                                         function (err, results) {
                                             if (results) {
                                                 return res.redirect('/management.ejs');

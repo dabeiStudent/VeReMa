@@ -24,7 +24,7 @@ const initWebRoute = (app) => {
     router.post('/contact.ejs', postContact);
     router.get('/furnitures.ejs', getFurni);
     router.get('/management.ejs', getManage);
-    router.post('/management.ejs', postOrder);
+    router.post('/management.ejs', upload.single('img'), postOrder);
     router.post('/deletemess.ejs/:idmess', postDeletemess);
     router.get('/vproducts.ejs/:page', getVproduct);
     router.get('/vproducts.ejs/:catename/:page', getCateprod);

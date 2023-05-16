@@ -40,7 +40,7 @@
                 <div class="menu-form">
                     <a href="javascript:closeOrderForm()"><i class="fas fa-times-circle"></i></a>
                 </div>
-                <form action="/management.ejs" method="post">
+                <form action="/management.ejs" enctype="multipart/form-data" method="post">
                     <h1>Phiếu sửa xe</h1>
                     <div class="left-form">
                         <label><b>Mã nhân viên</b></label>
@@ -63,6 +63,8 @@
                         <input type="text" placeholder="Thời gian dự kiến" name="thoiGian" required><br>
                         <label><b>Dịch vụ</b></label>
                         <input type="text" placeholder="Dịch vụ" name="dichVu" required><br>
+                        <label><b>Hình ảnh phương tiện:</b></label>
+                        <input type="file" name="img" required>
                     </div>
                     <div class="right-form">
                         <label><b>Tên khách hàng</b></label>
