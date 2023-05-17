@@ -37,7 +37,7 @@ app.use(express.static('public'));
 //Thiet lap view
 configViewengine(app);
 //Cai dat duong dan cho web
-initWebRoute(app);
+//initWebRoute(app);
 //Cai dat duong dan cho mobile
 androidRouter(app);
 

@@ -72,5 +72,6 @@ const androidRouter = (app) => {
     router.post('/addneworder', newOrder);
     router.post('/getorderbystaff', getOrderbystaff);
     router.post('/finishorder', finishOrder);
+    return app.use('/', router);
 }
 module.exports = { initWebRoute, androidRouter };
