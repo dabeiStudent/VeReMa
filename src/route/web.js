@@ -6,7 +6,7 @@ const upload = multer({ dest: './src/public/images/' });
 import {
     getHome, getAbout, getContact, postContact, getFurni, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
     getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod, getDelprod, postDelprod, getConfirmdel, postConfirmdel, getStaffcreate, postStaffcreate,
-    getRepair, deleteAccount, postDeleteaccount, postDeletemess, getManage, postOrder
+    getRepair, deleteAccount, postDeleteaccount, postDeletemess, getManage, postOrder, postOrder2, getDetailorder
 } from '../controller/homeController';
 
 //Mobile:
@@ -25,6 +25,7 @@ const initWebRoute = (app) => {
     router.get('/furnitures.ejs', getFurni);
     router.get('/management.ejs', getManage);
     router.post('/management.ejs', upload.single('img'), postOrder);
+    router.post('/management2.ejs', upload.single('img'), postOrder2);
     router.post('/deletemess.ejs/:idmess', postDeletemess);
     router.get('/vproducts.ejs/:page', getVproduct);
     router.get('/vproducts.ejs/:catename/:page', getCateprod);
@@ -52,6 +53,7 @@ const initWebRoute = (app) => {
     router.post('/deleteprod.ejs', postDelprod);
     router.get('/confirmdelete.ejs/:ten', getConfirmdel);
     router.post('/confirmdelete.ejs/:ten', postConfirmdel);
+    router.get('/detailorder/:id', getDetailorder);
     router.get('/chat.ejs', chatApp);
     return app.use('/', router);
 }

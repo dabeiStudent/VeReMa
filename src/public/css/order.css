@@ -1,0 +1,73 @@
+header {
+    background-color: rgb(36, 119, 197);
+    margin: -8px 0 0 -8px;
+    height: 50px;
+    width: 100%;
+    font-size: 25px;
+}
+
+header a {
+    float: right;
+    padding-top: 5px;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+header a:hover {
+    color: rgb(16, 223, 43);
+}
+
+header ul li {
+    display: inline;
+    float: right;
+    padding-top: 5px;
+    padding-right: 35px;
+    text-decoration: none;
+}
+
+.main-box {
+    margin-top: 1%;
+    background-color: rgb(226, 230, 230);
+    border: 1px solid;
+    border-radius: 5px;
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    top: 50%;
+    left: 50%;
+    vertical-align: middle;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+}
+
+.img-holder {
+    float: left;
+    margin: 8% 0 0 1%;
+    height: 50%;
+    width: 20%;
+}
+
+.img-holder {
+    text-align: center;
+}
+
+.left-side {
+    float: left;
+    background-color: rgb(168, 179, 180);
+    margin: 4% 0 0 4%;
+    height: 80%;
+    width: 35%;
+}
+
+.left-side p {
+    font-size: 20;
+    text-indent: 10px;
+    line-height: 1.8;
+}
+
+.tool {
+    float: right;
+    margin-right: 10%;
+    margin-top: 2%;
+    font-size: 50;
+}

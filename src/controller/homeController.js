@@ -171,6 +171,34 @@ let postOrder = async (req, res) => {
         }
     )
 }
+let postOrder2 = async (req, res) => {
+    const fullname = req.body.tenKh;
+    const phonenumber = req.body.soDt;
+    const vehiname = req.body.tenXe;
+    const vehiid = req.body.soXe;
+    const desc = req.body.moTa;
+    const idstaff = req.body.maNv;
+    const creatDate = req.body.ngayNhan;
+    const expectedTime = req.body.thoiGian;
+    const idService = req.body.dichVu;
+    const cost = req.body.tongTien;
+    const img = req.file.filename;
+    const fimg = `http://verema.herokuapp.com/images/${img}`
+    connection.query('Insert into ds_xe (ten_xe,bien_so,ten_kh,sdt,mo_ta) values (?,?,?,?,?)', [vehiname, vehiid, fullname, phonenumber, desc], function (err, results) {
+        if (results) {
+            connection.query('Insert into phieu_sua_chua (ma_nv, ten_xe, bien_so, ten_kh, ngay_nhan, tg_du_kien, id_dv, tong_tien, img, trang_thai) values (?,?,?,?,?,?,?,?,?,"ChuaSua")', [idstaff, vehiname, vehiid, fullname, creatDate, expectedTime, idService, cost, fimg],
+                function (err, results) {
+                    if (results) {
+                        return res.redirect('/management.ejs');
+                    } else {
+                        return res.send(err);
+                    }
+                })
+        } else {
+            return res.send(err);
+        }
+    })
+}
 let getVproduct = async (req, res) => {
     var token = req.cookies["token"];
     const all = [];
@@ -253,17 +281,40 @@ let getRepair = async (req, res) => {
     const token = req.cookies["token"];
     if (token != null) {
         const rs = jwt.verify(token, 'mk');
-        connection.query('Select * from dich_vu', function (err, results) {
-            if (results) {
-                return res.render('repair.ejs', { token: token, name: rs.name, role: rs.role, service: results });
-            }
-        })
+        if (rs.role == "kh") {
+            connection.query('Select * from dich_vu', function (err, results) {
+                if (results) {
+                    console.log(results)
+                    return res.render('repair.ejs', { token: token, name: rs.name, role: rs.role, service: results });
+                }
+            })
+        }
+        if (rs.role == "nv") {
+            connection.query('Select ma_nv from nhan_vien where ten_tk = ?', [rs.name], function (err, results) {
+                if (results) {
+                    connection.query('Select * from phieu_sua_chua where ma_nv = ?', [results[0].ma_nv], function (err, results2) {
+                        if (results2) {
+                            return res.render('repair.ejs', { token: token, name: rs.name, role: rs.role, order: results2 });
+                        }
+                    });
+                }
+            })
+        }
     } else {
         connection.query('Select * from dich_vu', function (err, results) {
             if (results) {
                 return res.render('repair.ejs', { token: null, name: null, role: null, service: results });
             }
         })
+    }
+}
+let getDetailorder = async (req, res, next) => {
+    const token = req.cookies["token"];
+    if (token != null) {
+        const rs = jwt.verify(token, 'mk');
+        return res.render('orderdetail.ejs', { token: token, role: rs.role, name: rs.name });
+    } else {
+        return res.redirect('/');
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -456,18 +507,7 @@ let postUpdate = async (req, res) => {
         connection.query('UPDATE khach_hang SET ten = ?, dia_chi = ?, sdt = ? WHERE ma_kh = ?', [tenkh, diachi, sdt, makh],
             function (err, results, fields) {
                 if (results) {
-                    let dataUser;
-                    connection.query(
-                        'SELECT * FROM ds_tai_khoan',
-                        function (err, results, fields) {
-                            //console.log(results);
-                            //for mobile
-                            //return res.json(results)
-                            dataUser = results;
-                            return res.redirect('/management.ejs');
-                            //console.log(dataUser)
-                        }
-                    )
+                    return res.redirect('/management.ejs');
                 }
                 else {
                     return res.send(err);
@@ -808,5 +848,5 @@ let chatApp = async (req, res, next) => {
 module.exports = {
     getHome, getAbout, getContact, postContact, getFurni, getManage, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
     getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod, getDelprod, postDelprod, getConfirmdel, postConfirmdel, getStaffcreate, postStaffcreate,
-    getRepair, deleteAccount, postDeleteaccount, postDeletemess, postOrder
+    getRepair, deleteAccount, postDeleteaccount, postDeletemess, postOrder, postOrder2, getDetailorder
 }

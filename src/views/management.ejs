@@ -7,6 +7,7 @@
     <title>Admin Management Page</title>
     <link rel="stylesheet" href="/css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="icon" href="/icon/batman-icon.png" type="image/gif" />
 </head>
 
 <body>
@@ -35,7 +36,7 @@
         </div>
         <div class="main-page">
             <button onclick="topFunction()" id="myBtn"><i class="fas fa-arrow-alt-circle-up"></i></button>
-            <!-- FORM THÊM XE SỬA -->
+            <!-- FORM THÊM XE SỬA CHƯA CÓ TÀI KHOẢN KH-->
             <div class="form-new-order" id="order-form">
                 <div class="menu-form">
                     <a href="javascript:closeOrderForm()"><i class="fas fa-times-circle"></i></a>
@@ -79,6 +80,49 @@
                         <input type="text" placeholder="Nhập mật khẩu" name="matKhau" required><br>
                         <label><b>Tổng tiền dự kiến</b></label>
                         <input id="tongTien" placeholder="Chi phí dự kiến" type="text" name="tongTien" required><br>
+                    </div>
+                    <button type="button" class="btn cancel" onclick="checkValid()">Check</button>
+                    <button type="submit" class="btn">Thêm</button>
+                </form>
+            </div>
+            <!-- FORM THÊ XE SỬA ĐÃ CÓ TÀI KHOẢN KH -->
+            <div class="form-new-order-2" id="order-form-2">
+                <div class="menu-form">
+                    <a href="javascript:closeOrderForm2()"><i class="fas fa-times-circle"></i></a>
+                </div>
+                <form action="/management2.ejs" enctype="multipart/form-data" method="post">
+                    <h1>Phiếu sửa xe</h1>
+                    <div class="left-form">
+                        <label><b>Mã nhân viên</b></label>
+                        <select name="maNv">
+                            <%for(var i=0;i< staff.length; i++){%>
+                                <option value="<%=staff[i].ma_nv%>">
+                                    <%=staff[i].ma_nv%>
+                                </option>
+                                <%}%>
+                        </select><br>
+                        <label><b>Tên xe</b></label>
+                        <input type="text" placeholder="Nhập tên xe" name="tenXe" required><br>
+                        <label><b>Biển số xe</b></label>
+                        <input type="text" placeholder="Nhập biển số xe" name="soXe" required><br>
+                        <label><b>Mô tả</b></label>
+                        <input type="text" placeholder="Hiện trạng xe" name="moTa" required><br>
+                        <label><b>Ngày nhận xe</b></label>
+                        <input type="text" name="ngayNhan" value="<%=today%>" required><br>
+                        <label><b>Thời gian dự kiến hoàn thành</b></label>
+                        <input type="text" placeholder="Thời gian dự kiến" name="thoiGian" required><br>
+                    </div>
+                    <div class="right-form">
+                        <label><b>Tên khách hàng</b></label>
+                        <input type="text" placeholder="Nhập tên khách hàng" name="tenKh" required><br>
+                        <label><b>Số điện thoại</b></label>
+                        <input type="text" placeholder="Số điện thoại" name="soDt" id="sdt" readonly required><br>
+                        <label><b>Tổng tiền dự kiến</b></label>
+                        <input id="tongTien" placeholder="Chi phí dự kiến" type="text" name="tongTien" required><br>
+                        <label><b>Dịch vụ</b></label>
+                        <input type="text" placeholder="Dịch vụ" name="dichVu" required><br>
+                        <label><b>Hình ảnh phương tiện:</b></label>
+                        <input type="file" name="img" required>
                     </div>
                     <button type="button" class="btn cancel" onclick="checkValid()">Check</button>
                     <button type="submit" class="btn">Thêm</button>
@@ -228,6 +272,7 @@
                         <th>Địa chỉ</th>
                         <th>Số điện thoại</th>
                         <th>Tên tài khoản</th>
+                        <th>Tác vụ</th>
                     </tr>
                     <%for(var i=0; i< kh.length; i++){%>
                         <tr>
@@ -245,6 +290,12 @@
                             </td>
                             <td>
                                 <%=kh[i].ten_tk%>
+                            </td>
+                            <td>
+                                <a id="new-order" href="javascript:newOrderform2(<%=kh[i].sdt%>)" target="_self">Thêm
+                                    phiếu
+                                    sửa
+                                    chữa</a>
                             </td>
                         </tr>
                         <%}%>
@@ -396,11 +447,20 @@
             document.getElementById("welcome-admin").style.display = "block";
         }
         //////////////////////////////////////////////////////////////////////////////
+        function newOrderform2(sdt) {
+            document.getElementById("sdt").value = '0' + sdt;
+            document.getElementById("order-form-2").style.display = "block";
+            document.getElementById("order-form").style.display = "none";
+        }
         function openOrderForm() {
             document.getElementById("order-form").style.display = "block";
+            document.getElementById("order-form-2").style.display = "none";
         }
         function closeOrderForm() {
             document.getElementById("order-form").style.display = "none";
+        }
+        function closeOrderForm2() {
+            document.getElementById("order-form-2").style.display = "none";
         }
         function openNav() {
             document.getElementById("left-nav").style.display = "block";
