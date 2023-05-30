@@ -20,81 +20,97 @@
             </ul>
         </div>
     </header>
-    <%if(order[0].trang_thai=="ChuaSua" ){%>
+    <%if(order[0].trang_thai=="ChuaSua" && role=="nv" ){%>
         <div class="tool">
             <a href="/updateorder/<%=order[0].ma_psc%>"><i class="fas fa-tools"></i></a>
         </div>
         <%}%>
             <div class="main-box">
-                <%if(order[0].trang_thai=="DangSua" ){%>
+                <%if(order[0].trang_thai=="DangSua" && role=="nv" ){%>
                     <div class="check">
                         <form method="post" action="/finishorder/<%=order[0].ma_psc%>">
-                            <input type="submit" value="Hoàn tất"> </i>
+                            <input type="submit" value="Hoàn tất">
                         </form>
                     </div>
                     <%}%>
-                        <div class="img-holder">
-                            <a>Mã phiếu: <%=order[0].ma_psc%></a><br>
-                            <img src="<%=order[0].img%>" width="100%" height="80%" alt="picture">
-                            <a>Tên xe: <%=order[0].ten_xe%></a><br>
-                            <a>Biển số: <%=order[0].bien_so%></a>
-                        </div>
-                        <div class="left-side">
-                            <table>
-                                <tr>
-                                    <td>Mã nv:</td>
-                                    <td><a href="/getstaff/8">
-                                            <%=order[0].ma_nv%>
-                                        </a></td>
-                                </tr>
-                                <tr>
-                                    <td>Tên khách:</td>
-                                    <td>
-                                        <%=order[0].ten_kh%>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ngày nhận xe:</td>
-                                    <td>
-                                        <%=order[0].ngay_nhan%>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Thời gian dự kiến:</td>
-                                    <td>
-                                        <%=order[0].tg_du_kien%>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="left-side">
-                            <table>
-                                <tr>
-                                    <td>Ngày sửa:</td>
-                                    <td>
-                                        <%=order[0].ngay_sua%>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Dịch vụ:</td>
-                                    <td>
-                                        <%=order[0].id_dv%>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Tổng tiền dự kiến:</td>
-                                    <td>
-                                        <%=order[0].tong_tien%> VNĐ
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Trạng thái:</td>
-                                    <td>
-                                        <%=order[0].trang_thai%>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+                        <%if(order[0].trang_thai=="DaSua" && role=="kh" ){%>
+                            <div class="check">
+                                <form method="post" action="/rateorder/<%=order[0].ma_psc%>">
+                                    <select name="rate">
+                                        <option value="0"></option>
+                                        <option value="1">1 sao</option>
+                                        <option value="2">2 sao</option>
+                                        <option value="3">3 sao</option>
+                                        <option value="4">4 sao</option>
+                                        <option value="5">5 sao</option>
+                                    </select>
+                                    <input type="submit" value="Đánh giá" name="Rating">
+                                </form>
+                            </div>
+                            <%}%>
+                                <div class="img-holder">
+                                    <a>Mã phiếu: <%=order[0].ma_psc%></a><br>
+                                    <img src="<%=order[0].img%>" width="100%" height="80%" alt="picture">
+                                    <a>Tên xe: <%=order[0].ten_xe%></a><br>
+                                    <a>Biển số: <%=order[0].bien_so%></a><br>
+                                    <a>Đánh giá: <%=order[0].danh_gia%> sao</a>
+                                </div>
+                                <div class="left-side">
+                                    <table>
+                                        <tr>
+                                            <td>Mã nv:</td>
+                                            <td><a href="/getstaff/8">
+                                                    <%=order[0].ma_nv%>
+                                                </a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tên khách:</td>
+                                            <td>
+                                                <%=order[0].ten_kh%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ngày nhận xe:</td>
+                                            <td>
+                                                <%=order[0].ngay_nhan%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Thời gian dự kiến:</td>
+                                            <td>
+                                                <%=order[0].tg_du_kien%>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="left-side">
+                                    <table>
+                                        <tr>
+                                            <td>Ngày sửa:</td>
+                                            <td>
+                                                <%=order[0].ngay_sua%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Dịch vụ:</td>
+                                            <td>
+                                                <%=order[0].id_dv%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tổng tiền dự kiến:</td>
+                                            <td>
+                                                <%=order[0].tong_tien%> VNĐ
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Trạng thái:</td>
+                                            <td>
+                                                <%=order[0].trang_thai%>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
             </div>
 </body>
 

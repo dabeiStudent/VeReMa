@@ -127,13 +127,7 @@
         <div class="addproductleft">
             <div class="rounded p-4 rounded mb-4">
                 <div id="cateprod">
-                    <% if(role=="kh" ){%>
-                        <h1>Categories: </h1>
-                        <% for(let i=0; i< service.length; i++){%>
-                            <a href="#">
-                                <%=service[i].ten%>
-                            </a><br>
-                            <%}}%>
+
                 </div>
             </div>
         </div>
@@ -144,68 +138,90 @@
         </div>
         <%if(role=="kh" ){%>
             <div class="row mb-5">
-                <% if(service !=null){%>
-                    <% for(let i=0; i< service.length; i++){%>
-                        <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                            <div id="pchange" class="block-4 text-center border">
-                                <figure class="block-4-image">
-                                    <img src="images/banner2.jpg" alt="Image placeholder" width="100px" height="100px"
-                                        class="img-fluid">
-                                </figure>
-                                <div class="block-4-text p-4">
-                                    <p class="text-primary font-weight-bold">
-                                        Dịch vụ: <%=service[i].mo_ta%>
-                                    </p><br>
+                <% if(order !=null){%>
+                    <% for(let i=0; i< order.length; i++){%>
+                        <a href="/detailorder/<%=order[i].ma_psc%>">
+                            <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+                                <div id="pchange" class="block-4 text-center border">
+                                    <figure class="block-4-image">
+                                        <img src="<%=order[i].img%>" alt="Hình ảnh phương tiện" width="100px"
+                                            height="100px" class="img-fluid">
+                                    </figure>
+                                    <div class="block-4-text p-4">
+                                        <a href="/detailorder/<%=order[i].ma_psc%>"
+                                            class="text-primary font-weight-bold">
+                                            Mã psc: <%=order[i].ma_psc%>
+                                        </a><br>
+                                        <a href="/detailorder/<%=order[i].ma_psc%>"
+                                            class="text-primary font-weight-bold"> Tên xe:
+                                            <%=order[i].ten_xe%>
+                                        </a><br>
+                                        <a href="/detailorder/<%=order[i].ma_psc%>"
+                                            class="text-primary font-weight-bold">Biển số:
+                                            <%=order[i].bien_so%>
+                                        </a><br>
+                                        <a href="/detailorder/<%=order[i].ma_psc%>"
+                                            class="text-primary font-weight-bold">Trạng thái:
+                                            <%=order[i].trang_thai%>
+                                        </a><br>
+                                        <a class="text-primary font-weight-bold">Đánh giá:
+                                            <%=order[i].danh_gia%>
+                                        </a><br>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                         <%}%>
-                            <%}}else if(role=="nv" ){%>
-                                <div class="row mb-5">
-                                    <% if(order !=null){%>
-                                        <% for(let i=0; i< order.length; i++){%>
-                                            <a href="/detailorder/<%=order[i].ma_psc%>">
-                                                <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                                                    <div id="pchange" class="block-4 text-center border">
-                                                        <figure class="block-4-image">
-                                                            <img src="<%=order[i].img%>" alt="Hình ảnh phương tiện"
-                                                                width="100px" height="100px" class="img-fluid">
-                                                        </figure>
-                                                        <div class="block-4-text p-4">
-                                                            <a href="/detailorder/<%=order[i].ma_psc%>"
-                                                                class="text-primary font-weight-bold">
-                                                                Mã psc: <%=order[i].ma_psc%>
-                                                            </a><br>
-                                                            <a href="/detailorder/<%=order[i].ma_psc%>"
-                                                                class="text-primary font-weight-bold"> Tên xe:
-                                                                <%=order[i].ten_xe%>
-                                                            </a><br>
-                                                            <a href="/detailorder/<%=order[i].ma_psc%>"
-                                                                class="text-primary font-weight-bold">Biển số:
-                                                                <%=order[i].bien_so%>
-                                                            </a><br>
-                                                            <a href="/detailorder/<%=order[i].ma_psc%>"
-                                                                class="text-primary font-weight-bold">Trạng thái:
-                                                                <%=order[i].trang_thai%>
-                                                            </a><br>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <%}}}%>
-                                </div>
             </div>
-            <footer id="contact">
-                <div class="copyright">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12" id="copyright">
-                                <p>Copyright 2023 All Right Reserved By VeReMa</p>
-                            </div>
-                        </div>
-                    </div>
+            <%}}else if(role=="nv" ){%>
+                <div class="row mb-5">
+                    <% if(order !=null){%>
+                        <% for(let i=0; i< order.length; i++){%>
+                            <a href="/detailorder/<%=order[i].ma_psc%>">
+                                <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+                                    <div id="pchange" class="block-4 text-center border">
+                                        <figure class="block-4-image">
+                                            <img src="<%=order[i].img%>" alt="Hình ảnh phương tiện" width="100px"
+                                                height="100px" class="img-fluid">
+                                        </figure>
+                                        <div class="block-4-text p-4">
+                                            <a href="/detailorder/<%=order[i].ma_psc%>"
+                                                class="text-primary font-weight-bold">
+                                                Mã psc: <%=order[i].ma_psc%>
+                                            </a><br>
+                                            <a href="/detailorder/<%=order[i].ma_psc%>"
+                                                class="text-primary font-weight-bold"> Tên xe:
+                                                <%=order[i].ten_xe%>
+                                            </a><br>
+                                            <a href="/detailorder/<%=order[i].ma_psc%>"
+                                                class="text-primary font-weight-bold">Biển số:
+                                                <%=order[i].bien_so%>
+                                            </a><br>
+                                            <a href="/detailorder/<%=order[i].ma_psc%>"
+                                                class="text-primary font-weight-bold">Trạng thái:
+                                                <%=order[i].trang_thai%>
+                                            </a><br>
+                                            <a class="text-primary font-weight-bold">Đánh giá:
+                                                <%=order[i].danh_gia%>
+                                            </a><br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <%}}}%>
                 </div>
     </div>
+    <footer id="contact">
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12" id="copyright">
+                        <p>Copyright 2023 All Right Reserved By VeReMa</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
     </footer>
     <!-- Javascript files-->
     <script src="js/jquery.min.js"></script>

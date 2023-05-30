@@ -440,6 +440,7 @@
                         <th>Dự kiến</th>
                         <th>Dịch vụ</th>
                         <th>Tổng tiền</th>
+                        <th>Số điện thoại</th>
                         <th>Trạng thái</th>
                         <th>Tác vụ</th>
                     </tr>
@@ -477,6 +478,9 @@
                             </td>
                             <td>
                                 <%=od[i].tong_tien%>
+                            </td>
+                            <td>
+                                <%=od[i].sdt%>
                             </td>
                             <form method="post" action="/updateorderadmin/<%=od[i].ma_psc%>">
                                 <td>
