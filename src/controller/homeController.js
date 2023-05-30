@@ -326,6 +326,58 @@ let getDetailorder = async (req, res, next) => {
         return res.redirect('/');
     }
 }
+let getUpdateorder = async (req, res, next) => {
+    const id = req.params.id;
+    const token = req.cookies["token"];
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDate();
+    const today = `${year}-${month + 1}-${day}`;
+    if (token != null) {
+        const rs = jwt.verify(token, 'mk');
+        if (rs.role = "nv") {
+            connection.query('Select * from phieu_sua_chua where ma_psc = ?', [id], function (err, result) {
+                if (result) {
+                    return res.render('updateorder.ejs', { token: token, role: rs.role, name: rs.name, order: result, today: today });
+                }
+            })
+        } else {
+            return res.redirect('/');
+        }
+    } else {
+        return res.redirect('/');
+    }
+}
+let postUpdateorder = async (req, res, next) => {
+    const id = req.params.id;
+    const token = req.cookies["token"];
+    const rs = jwt.verify(token, 'mk');
+    const ngaySua = req.body.ngaySua;
+    connection.query('UPDATE phieu_sua_chua set ngay_sua = ?, trang_thai = "DangSua" where ma_psc = ? ', [ngaySua, id], function (err, results) {
+        if (results) {
+            connection.query('Select * from phieu_sua_chua where ma_psc = ?', [id], function (err, result) {
+                if (result) {
+                    return res.render('orderdetail.ejs', { token: token, role: rs.role, name: rs.name, order: result });
+                }
+            })
+        }
+    })
+}
+let finishOrderpc = async (req, res, next) => {
+    const id = req.params.id
+    const token = req.cookies["token"];
+    const rs = jwt.verify(token, 'mk');
+    connection.query('UPDATE phieu_sua_chua set trang_thai = "DaSua" where ma_psc = ? ', [id], function (err, results) {
+        if (results) {
+            connection.query('Select * from phieu_sua_chua where ma_psc = ?', [id], function (err, result) {
+                if (result) {
+                    return res.render('orderdetail.ejs', { token: token, role: rs.role, name: rs.name, order: result });
+                }
+            })
+        }
+    })
+}
 let getStaff = async (req, res, next) => {
     const id = req.params.id;
     const token = req.cookies["token"];
@@ -877,5 +929,5 @@ let chatApp = async (req, res, next) => {
 module.exports = {
     getHome, getAbout, getContact, postContact, getFurni, getManage, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
     getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod, getDelprod, postDelprod, getConfirmdel, postConfirmdel, getStaffcreate, postStaffcreate,
-    getRepair, deleteAccount, postDeleteaccount, postDeletemess, postOrder, postOrder2, getDetailorder, getStaff
+    getRepair, deleteAccount, postDeleteaccount, postDeletemess, postOrder, postOrder2, getDetailorder, getStaff, getUpdateorder, postUpdateorder, finishOrderpc
 }

@@ -1,0 +1,92 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service</title>
+    <link rel="stylesheet" href="/css/order.css">
+    <link rel="icon" href="/icon/batman-icon.png" type="image/gif" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+
+<body>
+    <header>
+        <div class="menu-bar">
+            <ul>
+                <li><a href="/logout.ejs"><i class="fas fa-sign-out-alt"></i></a></li>
+                <li><a href="/"><i class="fas fa-home"></i></a></li>
+                <li><a href="/detailorder/<%=order[0].ma_psc%>"><i class="fas fa-backward"></i></a></li>
+            </ul>
+        </div>
+    </header>
+    <form method="post" action="/updateorder/<%=order[0].ma_psc%>">
+        <div class="main-box">
+            <div class="img-holder">
+                <a>Mã phiếu: <%=order[0].ma_psc%></a><br>
+                <img src="<%=order[0].img%>" width="100%" height="80%" alt="picture">
+                <a>Tên xe: <%=order[0].ten_xe%></a><br>
+                <a>Biển số: <%=order[0].bien_so%></a>
+            </div>
+            <div class="left-side">
+                <table>
+                    <tr>
+                        <td>Mã nv:</td>
+                        <td><a href="/getstaff/8">
+                                <%=order[0].ma_nv%>
+                            </a></td>
+                    </tr>
+                    <tr>
+                        <td>Tên khách:</td>
+                        <td>
+                            <%=order[0].ten_kh%>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ngày nhận xe:</td>
+                        <td>
+                            <%=order[0].ngay_nhan%>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Thời gian dự kiến:</td>
+                        <td>
+                            <%=order[0].tg_du_kien%>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="left-side">
+                <table>
+                    <tr>
+                        <td>Ngày sửa:</td>
+                        <td>
+                            <input type="text" name="ngaySua" value="<%=today%>" required>
+                        </td>
+                        <td><input type="submit" value="cập nhật"></td>
+                    </tr>
+                    <tr>
+                        <td>Dịch vụ:</td>
+                        <td>
+                            <%=order[0].id_dv%>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tổng tiền dự kiến:</td>
+                        <td>
+                            <%=order[0].tong_tien%> VNĐ
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Trạng thái:</td>
+                        <td>
+                            <%=order[0].trang_thai%>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>
