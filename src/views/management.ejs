@@ -86,7 +86,6 @@
                         <label><b>Tổng tiền dự kiến</b></label>
                         <input id="tongTien" placeholder="Chi phí dự kiến" type="text" name="tongTien" required><br>
                     </div>
-                    <button type="button" class="btn cancel" onclick="checkValid()">Check</button>
                     <button type="submit" class="btn">Thêm</button>
                 </form>
             </div>
@@ -132,7 +131,6 @@
                         <label><b>Hình ảnh phương tiện:</b></label>
                         <input type="file" name="img" required>
                     </div>
-                    <button type="button" class="btn cancel" onclick="checkValid()">Check</button>
                     <button type="submit" class="btn">Thêm</button>
                 </form>
             </div>
@@ -421,7 +419,6 @@
                         <label><b>Tổng tiền dự kiến</b></label>
                         <input id="tongTien" placeholder="Chi phí dự kiến" type="text" name="tongTien" required><br>
                     </div>
-                    <button type="button" class="btn cancel" onclick="checkValid()">Check</button>
                     <button type="submit" class="btn">Thêm</button>
                 </form>
             </div>
@@ -441,6 +438,7 @@
                         <th>Dịch vụ</th>
                         <th>Tổng tiền</th>
                         <th>Số điện thoại</th>
+                        <th>Đánh giá</th>
                         <th>Trạng thái</th>
                         <th>Tác vụ</th>
                     </tr>
@@ -481,6 +479,9 @@
                             </td>
                             <td>
                                 <%=od[i].sdt%>
+                            </td>
+                            <td>
+                                <%=od[i].danh_gia%>
                             </td>
                             <form method="post" action="/updateorderadmin/<%=od[i].ma_psc%>">
                                 <td>
