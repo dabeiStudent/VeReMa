@@ -309,14 +309,43 @@ let getRepair = async (req, res) => {
     }
 }
 let getDetailorder = async (req, res, next) => {
+    const id = req.params.id;
     const token = req.cookies["token"];
     if (token != null) {
         const rs = jwt.verify(token, 'mk');
-        return res.render('orderdetail.ejs', { token: token, role: rs.role, name: rs.name });
+        if (rs.role = "nv") {
+            connection.query('Select * from phieu_sua_chua where ma_psc = ?', [id], function (err, result) {
+                if (result) {
+                    return res.render('orderdetail.ejs', { token: token, role: rs.role, name: rs.name, order: result });
+                }
+            })
+        } else {
+            return res.redirect('/');
+        }
     } else {
         return res.redirect('/');
     }
 }
+let getStaff = async (req, res, next) => {
+    const id = req.params.id;
+    const token = req.cookies["token"];
+    let detailUser;
+    if (token != null) {
+        connection.query('Select * from nhan_vien where ma_nv = ?', [id], function (err, results) {
+            if (results) {
+                detailUser = results;
+                connection.query('Select image from ds_tai_khoan where ten_tk = ?', [results[0].ten_tk], function (err, results) {
+                    if (results) {
+                        return res.render('profile.ejs', { detailUser: detailUser, img: results, type: "nv" })
+                    }
+                })
+            }
+        })
+    } else {
+        return res.redirect('/');
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Xu li cac van de ve tai khoan...
@@ -848,5 +877,5 @@ let chatApp = async (req, res, next) => {
 module.exports = {
     getHome, getAbout, getContact, postContact, getFurni, getManage, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
     getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod, getDelprod, postDelprod, getConfirmdel, postConfirmdel, getStaffcreate, postStaffcreate,
-    getRepair, deleteAccount, postDeleteaccount, postDeletemess, postOrder, postOrder2, getDetailorder
+    getRepair, deleteAccount, postDeleteaccount, postDeletemess, postOrder, postOrder2, getDetailorder, getStaff
 }
