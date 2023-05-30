@@ -90,7 +90,14 @@ let getManage = async (req, res) => {
                                                                 connection.query('Select * from phieu_sua_chua', function (err, results) {
                                                                     if (results) {
                                                                         const od = results;
-                                                                        return res.render('management.ejs', { admin: admin, accounts: accounts, today: today, staff: staff, pt: pt, ll: ll, kh: kh, nv: nv, od: od });
+                                                                        connection.query('SELECT * from khach_hang join ds_xe on khach_hang.sdt = ds_xe.sdt', function (err, results) {
+                                                                            if (results) {
+                                                                                const ve = results;
+                                                                                return res.render('management.ejs', { admin: admin, accounts: accounts, today: today, staff: staff, pt: pt, ll: ll, kh: kh, nv: nv, od: od, ve: ve });
+                                                                            } else {
+                                                                                return res.render('management.ejs', { admin: admin, accounts: accounts, today: today, staff: staff, pt: pt, ll: ll, kh: kh, nv: nv, od: od, ve: null });
+                                                                            }
+                                                                        })
                                                                     } else {
                                                                         return res.render('management.ejs', { admin: admin, accounts: accounts, today: today, staff: staff, pt: pt, ll: ll, kh: kh, nv: nv, od: null });
                                                                     }

@@ -497,134 +497,195 @@
                         <%}%>
                 </table>
             </div>
+            <div class="all-vehicles" id="vehicle-form">
+                <h1>Danh sách xe</h1>
+                <table>
+                    <tr>
+                        <th>Mã xe</th>
+                        <th>Sdt (chủ xe)</th>
+                        <th>Tên xe</th>
+                        <th>Biển số</th>
+                        <th>Tên tk</th>
+                        <th>Mã kh</th>
+                        <th>Tên kh</th>
+                        <th>Địa chỉ</th>
+                        <th>Mô tả</th>
+                    </tr>
+                    <%for(var i=0; i< ve.length; i++){%>
+                        <tr>
+                            <td>
+                                <%=ve[i].ma_xe%>
+                            </td>
+                            <td>
+                                <%=ve[i].sdt%>
+                            </td>
+                            <td>
+                                <%=ve[i].ten_xe%>
+                            </td>
+                            <td>
+                                <%=ve[i].bien_so%>
+                            </td>
+                            <td>
+                                <%=ve[i].ten_tk%>
+                            </td>
+                            <td>
+                                <%=ve[i].ma_kh%>
+                            </td>
+                            <td>
+                                <%=ve[i].ten%>
+                            </td>
+                            <td>
+                                <%=ve[i].dia_chi%>
+                            </td>
+                            <td>
+                                <%=ve[i].mo_ta%>
+                            </td>
+                        </tr>
+                        <%}%>
+                </table>
+            </div>
+            <div class="boxes-service" id="box">
+                <button class="first-box" onclick="openService()"><i class="fas fa-list-ul"></i><br><a>repair
+                        list</a></button>
+                <button class="second-box" onclick="openVehicle()"><i
+                        class="fas fa-truck-pickup"></i><br><a>vehicles</a></button>
+            </div>
         </div>
-        </button>
-    </div>
-    <!-- SCRIPTS PLACE -->
-    <script>
-        let mybutton = document.getElementById("myBtn");
-        window.onscroll = function () { scrollFunction() };
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                mybutton.style.display = "block";
-            } else {
-                mybutton.style.display = "none";
+        <!-- SCRIPTS PLACE -->
+        <script>
+            let mybutton = document.getElementById("myBtn");
+            window.onscroll = function () { scrollFunction() };
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    mybutton.style.display = "block";
+                } else {
+                    mybutton.style.display = "none";
+                }
             }
-        }
-        function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
-        function openAdminpage() {
-            document.getElementById("main-page").style.display = "block";
-            document.getElementById("allorder-form").style.display = "none"
-            document.getElementById("service-page").style.display = "none"
-        }
-        function openService() {
-            document.getElementById("service-page").style.display = "block"
-            document.getElementById("allorder-form").style.display = "block"
-            document.getElementById("main-page").style.display = "none";
-        }
-        function openAccount() {
-            document.getElementById("accounts-form").style.display = "block";
-            document.getElementById("staffs-form").style.display = "none";
-            document.getElementById("products-form").style.display = "none";
-            document.getElementById("contacts-form").style.display = "none";
-            document.getElementById("welcome-admin").style.display = "none";
-            document.getElementById("customers-form").style.display = "none";
-        }
-
-        function closeAccount() {
-            document.getElementById("accounts-form").style.display = "none";
-            document.getElementById("welcome-admin").style.display = "block";
-        }
-        function openProduct() {
-            document.getElementById("products-form").style.display = "block";
-            document.getElementById("staffs-form").style.display = "none";
-            document.getElementById("accounts-form").style.display = "none";
-            document.getElementById("contacts-form").style.display = "none";
-            document.getElementById("welcome-admin").style.display = "none";
-            document.getElementById("customers-form").style.display = "none";
-        }
-
-        function closeProduct() {
-            document.getElementById("products-form").style.display = "none";
-            document.getElementById("welcome-admin").style.display = "block";
-        }
-        function openContact() {
-            document.getElementById("contacts-form").style.display = "block";
-            document.getElementById("staffs-form").style.display = "none";
-            document.getElementById("products-form").style.display = "none";
-            document.getElementById("accounts-form").style.display = "none";
-            document.getElementById("welcome-admin").style.display = "none";
-            document.getElementById("customers-form").style.display = "none";
-        }
-
-        function closeContact() {
-            document.getElementById("contacts-form").style.display = "none";
-            document.getElementById("welcome-admin").style.display = "block";
-        }
-        function openCustomer() {
-            document.getElementById("customers-form").style.display = "block";
-            document.getElementById("staffs-form").style.display = "none";
-            document.getElementById("accounts-form").style.display = "none";
-            document.getElementById("contacts-form").style.display = "none";
-            document.getElementById("welcome-admin").style.display = "none";
-            document.getElementById("products-form").style.display = "none";
-        }
-
-        function closeCustomer() {
-            document.getElementById("customers-form").style.display = "none";
-            document.getElementById("welcome-admin").style.display = "block";
-        }
-        function openStaff() {
-            document.getElementById("staffs-form").style.display = "block";
-            document.getElementById("customers-form").style.display = "none";
-            document.getElementById("accounts-form").style.display = "none";
-            document.getElementById("contacts-form").style.display = "none";
-            document.getElementById("welcome-admin").style.display = "none";
-            document.getElementById("products-form").style.display = "none";
-        }
-
-        function closeStaff() {
-            document.getElementById("staffs-form").style.display = "none";
-            document.getElementById("welcome-admin").style.display = "block";
-        }
-        //////////////////////////////////////////////////////////////////////////////
-        function newOrderform2(sdt) {
-            document.getElementById("sdt").value = '0' + sdt;
-            document.getElementById("order-form-2").style.display = "block";
-            document.getElementById("order-form").style.display = "none";
-        }
-        function openOrderForm() {
-            document.getElementById("order-form").style.display = "block";
-            document.getElementById("order-form2").style.display = "block";
-            document.getElementById("order-form-2").style.display = "none";
-        }
-        function closeOrderForm() {
-            document.getElementById("order-form").style.display = "none";
-            document.getElementById("order-form2").style.display = "none";
-        }
-        function closeOrderForm2() {
-            document.getElementById("order-form-2").style.display = "none";
-        }
-        function openNav() {
-            document.getElementById("left-nav").style.display = "block";
-            document.getElementById("admin").style.display = "none";
-        }
-        function closeNav() {
-            document.getElementById("left-nav").style.display = "none";
-            document.getElementById("admin").style.display = "block";
-        }
-        function checkValid() {
-            const v = document.getElementById("tongTien").value;
-            if (v < 0) {
-                alert('So tien khong hop le');
-            } else {
-                alert('Hop le');
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
             }
-        }
-    </script>
+            function openAdminpage() {
+                document.getElementById("main-page").style.display = "block";
+                document.getElementById("allorder-form").style.display = "none"
+                document.getElementById("vehicle-form").style.display = "none"
+                document.getElementById("service-page").style.display = "none"
+            }
+            function openVehicle() {
+                document.getElementById("box").style.display = "block"
+                document.getElementById("service-page").style.display = "block"
+                document.getElementById("vehicle-form").style.display = "block"
+                document.getElementById("allorder-form").style.display = "none"
+                document.getElementById("main-page").style.display = "none";
+            }
+            function openService() {
+                document.getElementById("box").style.display = "block"
+                document.getElementById("service-page").style.display = "block"
+                document.getElementById("vehicle-form").style.display = "none"
+                document.getElementById("allorder-form").style.display = "block"
+                document.getElementById("main-page").style.display = "none";
+            }
+            function openAccount() {
+                document.getElementById("accounts-form").style.display = "block";
+                document.getElementById("staffs-form").style.display = "none";
+                document.getElementById("products-form").style.display = "none";
+                document.getElementById("contacts-form").style.display = "none";
+                document.getElementById("welcome-admin").style.display = "none";
+                document.getElementById("customers-form").style.display = "none";
+            }
+
+            function closeAccount() {
+                document.getElementById("accounts-form").style.display = "none";
+                document.getElementById("welcome-admin").style.display = "block";
+            }
+            function openProduct() {
+                document.getElementById("products-form").style.display = "block";
+                document.getElementById("staffs-form").style.display = "none";
+                document.getElementById("accounts-form").style.display = "none";
+                document.getElementById("contacts-form").style.display = "none";
+                document.getElementById("welcome-admin").style.display = "none";
+                document.getElementById("customers-form").style.display = "none";
+            }
+
+            function closeProduct() {
+                document.getElementById("products-form").style.display = "none";
+                document.getElementById("welcome-admin").style.display = "block";
+            }
+            function openContact() {
+                document.getElementById("contacts-form").style.display = "block";
+                document.getElementById("staffs-form").style.display = "none";
+                document.getElementById("products-form").style.display = "none";
+                document.getElementById("accounts-form").style.display = "none";
+                document.getElementById("welcome-admin").style.display = "none";
+                document.getElementById("customers-form").style.display = "none";
+            }
+
+            function closeContact() {
+                document.getElementById("contacts-form").style.display = "none";
+                document.getElementById("welcome-admin").style.display = "block";
+            }
+            function openCustomer() {
+                document.getElementById("customers-form").style.display = "block";
+                document.getElementById("staffs-form").style.display = "none";
+                document.getElementById("accounts-form").style.display = "none";
+                document.getElementById("contacts-form").style.display = "none";
+                document.getElementById("welcome-admin").style.display = "none";
+                document.getElementById("products-form").style.display = "none";
+            }
+
+            function closeCustomer() {
+                document.getElementById("customers-form").style.display = "none";
+                document.getElementById("welcome-admin").style.display = "block";
+            }
+            function openStaff() {
+                document.getElementById("staffs-form").style.display = "block";
+                document.getElementById("customers-form").style.display = "none";
+                document.getElementById("accounts-form").style.display = "none";
+                document.getElementById("contacts-form").style.display = "none";
+                document.getElementById("welcome-admin").style.display = "none";
+                document.getElementById("products-form").style.display = "none";
+            }
+
+            function closeStaff() {
+                document.getElementById("staffs-form").style.display = "none";
+                document.getElementById("welcome-admin").style.display = "block";
+            }
+            //////////////////////////////////////////////////////////////////////////////
+            function newOrderform2(sdt) {
+                document.getElementById("sdt").value = '0' + sdt;
+                document.getElementById("order-form-2").style.display = "block";
+                document.getElementById("order-form").style.display = "none";
+            }
+            function openOrderForm() {
+                document.getElementById("order-form").style.display = "block";
+                document.getElementById("order-form2").style.display = "block";
+                document.getElementById("order-form-2").style.display = "none";
+            }
+            function closeOrderForm() {
+                document.getElementById("order-form").style.display = "none";
+                document.getElementById("order-form2").style.display = "none";
+            }
+            function closeOrderForm2() {
+                document.getElementById("order-form-2").style.display = "none";
+            }
+            function openNav() {
+                document.getElementById("left-nav").style.display = "block";
+                document.getElementById("admin").style.display = "none";
+            }
+            function closeNav() {
+                document.getElementById("left-nav").style.display = "none";
+                document.getElementById("admin").style.display = "block";
+            }
+            function checkValid() {
+                const v = document.getElementById("tongTien").value;
+                if (v < 0) {
+                    alert('So tien khong hop le');
+                } else {
+                    alert('Hop le');
+                }
+            }
+        </script>
 </body>
 
 </html>
