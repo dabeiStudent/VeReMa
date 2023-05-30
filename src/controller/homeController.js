@@ -87,7 +87,14 @@ let getManage = async (req, res) => {
                                                         connection.query('Select * from nhan_vien where ma_nv != "admin"', function (err, results) {
                                                             if (results) {
                                                                 const nv = results;
-                                                                return res.render('management.ejs', { admin: admin, accounts: accounts, today: today, staff: staff, pt: pt, ll: ll, kh: kh, nv: nv });
+                                                                connection.query('Select * from phieu_sua_chua', function (err, results) {
+                                                                    if (results) {
+                                                                        const od = results;
+                                                                        return res.render('management.ejs', { admin: admin, accounts: accounts, today: today, staff: staff, pt: pt, ll: ll, kh: kh, nv: nv, od: od });
+                                                                    } else {
+                                                                        return res.render('management.ejs', { admin: admin, accounts: accounts, today: today, staff: staff, pt: pt, ll: ll, kh: kh, nv: nv, od: null });
+                                                                    }
+                                                                })
                                                             } else {
                                                                 return res.render('management.ejs', { admin: admin, accounts: accounts, today: today, staff: staff, pt: pt, ll: ll, kh: kh, nv: null });
                                                             }
@@ -375,6 +382,15 @@ let finishOrderpc = async (req, res, next) => {
                     return res.render('orderdetail.ejs', { token: token, role: rs.role, name: rs.name, order: result });
                 }
             })
+        }
+    })
+}
+let updateOrderadmin = async (req, res, next) => {
+    const id = req.params.id;
+    const trangThai = req.body.trangThai;
+    connection.query('Update phieu_sua_chua set trang_thai = ? where ma_psc =?', [trangThai, id], function (err, result) {
+        if (result) {
+            return res.redirect('/management.ejs');
         }
     })
 }
@@ -929,5 +945,5 @@ let chatApp = async (req, res, next) => {
 module.exports = {
     getHome, getAbout, getContact, postContact, getFurni, getManage, getProfile, getSignup, postSignup, postSignin, getSignin, postLogout, accountProfile, chatApp, updateProfile, postUpdate, uploadImg,
     getVproduct, getAddprod, postAddprod, getUpdateprod, postUpdateprod, getUpdateOneProd, getCateprod, getDelprod, postDelprod, getConfirmdel, postConfirmdel, getStaffcreate, postStaffcreate,
-    getRepair, deleteAccount, postDeleteaccount, postDeletemess, postOrder, postOrder2, getDetailorder, getStaff, getUpdateorder, postUpdateorder, finishOrderpc
+    getRepair, deleteAccount, postDeleteaccount, postDeletemess, postOrder, postOrder2, getDetailorder, getStaff, getUpdateorder, postUpdateorder, finishOrderpc, updateOrderadmin
 }

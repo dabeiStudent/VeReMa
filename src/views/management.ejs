@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Management Page</title>
     <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/service.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="icon" href="/icon/batman-icon.png" type="image/gif" />
 </head>
@@ -29,12 +30,13 @@
                 </a>
             </h1><br>
             <div id="action-nav">
-                <button onclick="location.href = '/management.ejs';">Trang quản lí</button>
+                <button onclick="openAdminpage()">Tổng quan</button>
                 <button onclick="openOrderForm()">Thêm phiếu sửa xe</button>
+                <button onclick="openService()">Quản lý dịch vụ</button>
             </div>
             <button onclick="closeNav()" id="admin-close">Ẩn</button>
         </div>
-        <div class="main-page">
+        <div class="main-page" id="main-page">
             <button onclick="topFunction()" id="myBtn"><i class="fas fa-arrow-alt-circle-up"></i></button>
             <!-- FORM THÊM XE SỬA CHƯA CÓ TÀI KHOẢN KH-->
             <div class="form-new-order" id="order-form">
@@ -63,7 +65,10 @@
                         <label><b>Thời gian dự kiến hoàn thành</b></label>
                         <input type="text" placeholder="Thời gian dự kiến" name="thoiGian" required><br>
                         <label><b>Dịch vụ</b></label>
-                        <input type="text" placeholder="Dịch vụ" name="dichVu" required><br>
+                        <select name="dichVu">
+                            <option value="1">Bảo trì</option>
+                            <option value="2">Thay thế phụ tùng</option>
+                        </select><br>
                         <label><b>Hình ảnh phương tiện:</b></label>
                         <input type="file" name="img" required>
                     </div>
@@ -116,11 +121,14 @@
                         <label><b>Tên khách hàng</b></label>
                         <input type="text" placeholder="Nhập tên khách hàng" name="tenKh" required><br>
                         <label><b>Số điện thoại</b></label>
-                        <input type="text" placeholder="Số điện thoại" name="soDt" id="sdt" readonly required><br>
+                        <input type="text" placeholder="Số điện thoại" name="soDt" id="sdt" required><br>
                         <label><b>Tổng tiền dự kiến</b></label>
                         <input id="tongTien" placeholder="Chi phí dự kiến" type="text" name="tongTien" required><br>
                         <label><b>Dịch vụ</b></label>
-                        <input type="text" placeholder="Dịch vụ" name="dichVu" required><br>
+                        <select name="dichVu">
+                            <option value="1">Bảo trì</option>
+                            <option value="2">Thay thế phụ tùng</option>
+                        </select><br>
                         <label><b>Hình ảnh phương tiện:</b></label>
                         <input type="file" name="img" required>
                     </div>
@@ -363,8 +371,134 @@
                 <button class="fith-box" onclick="openStaff()"><i class="fas fa-users"></i><br><a>staffs</a></button>
             </div>
         </div>
+        <div class="service-page" id="service-page">
+            <!-- FORM THÊM XE SỬA -->
+            <div class="form-new-order2" id="order-form2">
+                <div class="menu-form">
+                    <a href="javascript:closeOrderForm()"><i class="fas fa-times-circle"></i></a>
+                </div>
+                <form action="/management.ejs" enctype="multipart/form-data" method="post">
+                    <h1>Phiếu sửa xe</h1>
+                    <div class="left-form">
+                        <label><b>Mã nhân viên</b></label>
+                        <select name="maNv">
+                            <%for(var i=0;i< staff.length; i++){%>
+                                <option value="<%=staff[i].ma_nv%>">
+                                    <%=staff[i].ma_nv%>
+                                </option>
+                                <%}%>
+                        </select><br>
+                        <label><b>Tên xe</b></label>
+                        <input type="text" placeholder="Nhập tên xe" name="tenXe" required><br>
+                        <label><b>Biển số xe</b></label>
+                        <input type="text" placeholder="Nhập biển số xe" name="soXe" required><br>
+                        <label><b>Mô tả</b></label>
+                        <input type="text" placeholder="Hiện trạng xe" name="moTa" required><br>
+                        <label><b>Ngày nhận xe</b></label>
+                        <input type="text" name="ngayNhan" value="<%=today%>" required><br>
+                        <label><b>Thời gian dự kiến hoàn thành</b></label>
+                        <input type="text" placeholder="Thời gian dự kiến" name="thoiGian" required><br>
+                        <label><b>Dịch vụ</b></label>
+                        <!-- <input type="text" placeholder="Dịch vụ" name="dichVu" required><br> -->
+                        <select name="dichVu">
+                            <option value="1">Bảo trì</option>
+                            <option value="2">Thay thế phụ tùng</option>
+                        </select><br>
+                        <label><b>Hình ảnh phương tiện:</b></label>
+                        <input type="file" name="img" required>
+                    </div>
+                    <div class="right-form">
+                        <label><b>Tên khách hàng</b></label>
+                        <input type="text" placeholder="Nhập tên khách hàng" name="tenKh" required><br>
+                        <label><b>Địa chỉ</b></label>
+                        <input type="text" placeholder="Địa chỉ" name="diaChi" required><br>
+                        <label><b>Số điện thoại</b></label>
+                        <input type="text" placeholder="Số điện thoại" name="soDt" required><br>
+                        <label><b>Tên tài khoản</b></label>
+                        <input type="text" placeholder="Nhập tên tài khoản" name="tenTk" required><br>
+                        <label><b>Mật khẩu</b></label>
+                        <input type="text" placeholder="Nhập mật khẩu" name="matKhau" required><br>
+                        <label><b>Tổng tiền dự kiến</b></label>
+                        <input id="tongTien" placeholder="Chi phí dự kiến" type="text" name="tongTien" required><br>
+                    </div>
+                    <button type="button" class="btn cancel" onclick="checkValid()">Check</button>
+                    <button type="submit" class="btn">Thêm</button>
+                </form>
+            </div>
+            <div class="all-orders" id="allorder-form">
+                <h1>Danh sách các phiếu sửa xe</h1>
+                <table>
+                    <tr>
+                        <th>Hình ảnh</th>
+                        <th>Mã psc</th>
+                        <th>Mã nv</th>
+                        <th>Tên kh</th>
+                        <th>Tên xe</th>
+                        <th>Biển số</th>
+                        <th>Ngày nhận</th>
+                        <th>Ngày sửa</th>
+                        <th>Dự kiến</th>
+                        <th>Dịch vụ</th>
+                        <th>Tổng tiền</th>
+                        <th>Trạng thái</th>
+                        <th>Tác vụ</th>
+                    </tr>
+                    <%for(var i=0; i< od.length; i++){%>
+                        <tr>
+                            <td>
+                                <img src="<%=od[i].img%>">
+                            </td>
+                            <td>
+                                <%=od[i].ma_psc%>
+                            </td>
+                            <td>
+                                <%=od[i].ma_nv%>
+                            </td>
+                            <td>
+                                <%=od[i].ten_kh%>
+                            </td>
+                            <td>
+                                <%=od[i].ten_xe%>
+                            </td>
+                            <td>
+                                <%=od[i].bien_so%>
+                            </td>
+                            <td>
+                                <%=od[i].ngay_nhan%>
+                            </td>
+                            <td>
+                                <%=od[i].ngay_sua%>
+                            </td>
+                            <td>
+                                <%=od[i].tg_du_kien%>
+                            </td>
+                            <td>
+                                <%=od[i].id_dv%>
+                            </td>
+                            <td>
+                                <%=od[i].tong_tien%>
+                            </td>
+                            <form method="post" action="/updateorderadmin/<%=od[i].ma_psc%>">
+                                <td>
+                                    <select name="trangThai">
+                                        <option value="<%=od[i].trang_thai%>">
+                                            <%=od[i].trang_thai%>
+                                        </option>
+                                        <option value="ChuaSua">ChuaSua</option>
+                                        <option value="DangSua">DangSua</option>
+                                        <option value="DaSua">DaSua</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="submit" value="Cập nhật">
+                                </td>
+                            </form>
+                        </tr>
+                        <%}%>
+                </table>
+            </div>
+        </div>
         </button>
-    </div>
     </div>
     <!-- SCRIPTS PLACE -->
     <script>
@@ -380,6 +514,16 @@
         function topFunction() {
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
+        }
+        function openAdminpage() {
+            document.getElementById("main-page").style.display = "block";
+            document.getElementById("allorder-form").style.display = "none"
+            document.getElementById("service-page").style.display = "none"
+        }
+        function openService() {
+            document.getElementById("service-page").style.display = "block"
+            document.getElementById("allorder-form").style.display = "block"
+            document.getElementById("main-page").style.display = "none";
         }
         function openAccount() {
             document.getElementById("accounts-form").style.display = "block";
@@ -454,10 +598,12 @@
         }
         function openOrderForm() {
             document.getElementById("order-form").style.display = "block";
+            document.getElementById("order-form2").style.display = "block";
             document.getElementById("order-form-2").style.display = "none";
         }
         function closeOrderForm() {
             document.getElementById("order-form").style.display = "none";
+            document.getElementById("order-form2").style.display = "none";
         }
         function closeOrderForm2() {
             document.getElementById("order-form-2").style.display = "none";
