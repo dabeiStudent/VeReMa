@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
     <link rel="icon" href="/icon/batman-icon.png" type="image/gif" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -13,37 +13,11 @@
 </head>
 
 <body>
-    <div class="signin-box">
-        <a class="fa fa-home" href="/index.ejs"></a>
-        <h1>Sign in</h1>
-        <div class="error">
-            <% if(err !=null) {%>
-                <%= err %>
-                    <%}%>
-        </div>
-        <form action="/signin.ejs" method="post">
-            <div>
-                <h4><strong>Enter your username</strong></h4>
-            </div>
-            <div class="input-box">
-                <input type="text" name="userName" required>
-            </div><br>
-            <div>
-                <h4><strong>Enter your password</strong></h4>
-            </div>
-            <div class="input-box">
-                <input type="password" name="passWord" required>
-            </div><br><br><br><br>
-            <br><br>
-            <div class="input-box-signin">
-                <input type="submit" value="Login">
-            </div><br>
-            <div class="text">
-                <h3>Dont have account?</h3>
-                <strong><a href="/signup.ejs">Signup now</a></strong>
-            </div>
-        </form>
-    </div>
+    <form class="login" action="/signin.ejs" method="post">
+        <input type="text" placeholder="Username" name="userName">
+        <input type="password" placeholder="Password" name="passWord">
+        <button>Login</button>
+    </form>
 </body>
 
 </html>
