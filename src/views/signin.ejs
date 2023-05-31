@@ -13,11 +13,17 @@
 </head>
 
 <body>
-    <form class="login" action="/signin.ejs" method="post">
-        <input type="text" placeholder="Username" name="userName">
-        <input type="password" placeholder="Password" name="passWord">
-        <button>Login</button>
-    </form>
+    <div class="login-new">
+        <a>Lỗi ở đây</a>
+        <form class="login" action="/signin.ejs" method="post">
+            <h1>
+                <%=err%>
+            </h1>
+            <input type="text" placeholder="Username" name="userName">
+            <input type="password" placeholder="Password" name="passWord">
+            <button>Login</button>
+        </form>
+    </div>
 </body>
 
 </html>

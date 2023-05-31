@@ -134,3 +134,13 @@ a {
     bottom: 10px;
     font-size: 12px;
 }
+
+h1 {
+    text-decoration: none;
+    color: rgba(31, 30, 30, 0.6);
+    position: absolute;
+    right: 30px;
+    bottom: 10px;
+    font-size: 25px;
+    background-color: aquamarine;
+}
