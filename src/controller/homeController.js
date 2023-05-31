@@ -726,7 +726,7 @@ let postSignin = async (req, res, next) => {
     var username = req.body.userName;
     var password = req.body.passWord;
     if (!username || !password)
-        return res.render("signin.ejs", { err: "Thieu username/password" });
+        return res.render("signin.ejs", { err: "Thiếu username/password" });
     try {
         connection.query(
             'Select ma_tk, ten_tk,mat_khau, quyen from ds_tai_khoan where ten_tk = ?', [username],
@@ -747,7 +747,7 @@ let postSignin = async (req, res, next) => {
                         return res.render("signin.ejs", { err: "Password sai" });
                     }
                 } else {
-                    return res.render("signin.ejs", { err: "Tai khoan khong ton tai" });
+                    return res.render("signin.ejs", { err: "Tài khoản không tồn tại" });
                 }
             }
         )
